@@ -104,11 +104,10 @@
         <div class="ion-padding ion-text-center">
       <ion-button *ngIf = "!form.get('nombres').hasError('pattern') && 
       !form.get('cedula').hasError('required') && 
-      !form.get('email').hasError('required') && 
       !form.get('convencional').hasError('required') && 
       !form.get('celular').hasError('required') && 
       !form.get('principal').hasError('required') && 
-      !form.get('referencia').hasError('required') "  
+      !form.get('referencia').hasError('required') && validador && valido"  
       color="danger" expand="block" (click)="crear()">
         Guardar
       </ion-button>

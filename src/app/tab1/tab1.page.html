@@ -14,8 +14,8 @@
     <ion-card-header >
       <ion-card-title >{{char.cliente.nombre}}</ion-card-title>
     </ion-card-header>
-  
-    <ion-card-content (click)="actualizar(char.id)" >
+    <ion-card class="ion" [disabled]='deshabilitarTexto'> 
+    <ion-card-content [routerLink]="['/visita',char.id]" (click)="actualizar(char.id)" >
 
       <ion-label>Dirección:</ion-label>
       <ion-item>
@@ -23,11 +23,11 @@
       </ion-item>
 
       <ion-item>
-        <ion-label>{{char.cliente.direccionSecundaria}}</ion-label>
+        <ion-label>{{char.cliente.direccionReferencia}}</ion-label>
       </ion-item>
 
     </ion-card-content>
-
+  </ion-card>
     <ion-card *ngIf="char.realizado" name="trabajo" color="danger" >
       <ion-item >
         <ion-label  *ngIf="char.realizado">Realizado</ion-label>

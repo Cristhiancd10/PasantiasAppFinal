@@ -45,6 +45,8 @@ export class Tab2Page {
   instalacion:Instalacion;
 
 
+  deshabilitarTexto=false;
+
   datos:any=[];
   public realizado:boolean = true;
 
@@ -72,8 +74,18 @@ export class Tab2Page {
           console.log("user.id "+this.user.id);
         })
      });
-     
+     this.textoEnable();
    } 
+
+   textoDisable() {
+    console.log("deshabilitad "+this.deshabilitarTexto)
+    this.deshabilitarTexto = true;
+  }
+
+  textoEnable() {
+    console.log(this.deshabilitarTexto)
+    this.deshabilitarTexto = false;
+  }
 
   public lista(){
     this.service.todasI().subscribe(response => {
@@ -132,9 +144,6 @@ export class Tab2Page {
       console.log(response);
 
     });
-
+    this.textoDisable();
   }
-
-  
-
 }

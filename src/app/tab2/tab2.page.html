@@ -6,27 +6,27 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" >
   <!--routerLink llama al metodo 'datos' para mostar atributos -->
   <ion-card *ngFor="let char of clientes">
     <ion-card-header >
       <ion-card-title>{{char.nombre}}</ion-card-title>
     </ion-card-header>
-  
-    <ion-card-content [routerLink]="['/instalacion',char.id]" (click)="actualizar(char.id)">
+  <ion-card class="ion" [disabled]='deshabilitarTexto'> 
+    <ion-card-content [routerLink]="['/instalacion',char.id]" (click)="actualizar(char.id)"   >
 
-      <ion-label>Dirección:</ion-label>
+      <ion-label >Dirección:</ion-label>
       <ion-item>
-        <ion-label>{{char.direccion}}</ion-label>
+        <ion-label >{{char.direccion}}</ion-label>
       </ion-item>
 
       <ion-item>
-        <ion-label>{{char.coordenadas}}</ion-label>
+        <ion-label  >{{char.coordenadas}}</ion-label>
       </ion-item>
 
     </ion-card-content>
-
-    <ion-card *ngIf="char.realizado" name="trabajo" color="danger" >
+  </ion-card>
+    <ion-card *ngIf="char.realizado" name="trabajo" color="danger"   >
       <ion-item >
         <ion-label  *ngIf="char.realizado">Realizado</ion-label>
 

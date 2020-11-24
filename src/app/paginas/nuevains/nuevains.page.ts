@@ -86,7 +86,7 @@ export class NuevainsPage implements OnInit, OnDestroy {
       convencional: new FormControl(this.cliente.convencional, [Validators.required]),
       celular: new FormControl(this.cliente.celular, [Validators.required]),
       principal: new FormControl(this.cliente.direccionPrincipal, [Validators.required]),
-      secundaria: new FormControl(this.cliente.direccionSecundaria ),
+      secundaria: new FormControl(),
       referencia: new FormControl(this.cliente.direccionReferencia, [Validators.required]),
       contrato: new FormControl( ),
       plan: new FormControl( ),

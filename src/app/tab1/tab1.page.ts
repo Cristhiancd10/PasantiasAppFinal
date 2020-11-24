@@ -45,6 +45,8 @@ export class Tab1Page implements OnInit {
   datos:any=[];
   visita:Registro;
 
+  deshabilitarTexto=false;
+
   constructor(private router: Router, private route: ActivatedRoute, public httpCliente:HttpClient, private service: ClientesService,  public storage:StorageService) {
     this.lista();
     this.clientes1.forEach(id => this.checkbox[this.user.id]=true);
@@ -61,8 +63,19 @@ export class Tab1Page implements OnInit {
           console.log("user.id "+this.user.id);
         })
      });
-    
+     this.textoEnable();
    } 
+
+   textoDisable() {
+    console.log("deshabilitad "+this.deshabilitarTexto)
+    this.deshabilitarTexto = true;
+  }
+
+  textoEnable() {
+    console.log(this.deshabilitarTexto)
+    this.deshabilitarTexto = false;
+  }
+
   public lista(){
     this.service.todasV().subscribe(response => {
       this.clientes1 = response;
@@ -94,8 +107,6 @@ export class Tab1Page implements OnInit {
       console.log(response);
       
     });
-    
+    this.textoDisable();
   }
-    
-    
 }
