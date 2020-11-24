@@ -64,7 +64,7 @@
 
       <ion-item >
         <ion-label position="stacked">IP:</ion-label>
-        <ion-input  *ngFor="let char of user2.servicio" [(ngModel)]="char.ip" maxlength="15" [readonly]='deshabilitarTexto' ></ion-input>
+        <ion-input   name="" id="ips"  *ngFor="let char of user2.servicio" (change)="validateForm(char.ip)" [(ngModel)]="char.ip" maxlength="15" [readonly]='deshabilitarTexto' ></ion-input>
         
       </ion-item>
 
@@ -108,7 +108,7 @@
       <ion-item>
         <ion-toolbar class="centrarBoton">
           <ion-button (click)="actualizar()">Actualizar </ion-button>
-          <ion-button  (click)="textoDisable()" (click)="guardar()">Guardar</ion-button>
+          <ion-button  *ngIf = "valido" (click)="textoDisable()" (click)="guardar()">Guardar</ion-button>
         </ion-toolbar> 
       </ion-item>
 

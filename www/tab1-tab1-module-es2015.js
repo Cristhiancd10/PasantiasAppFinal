@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header [translucent]=\"true\" >\n  <ion-toolbar>\n    <ion-title>\n      Visita Técnica\n      \n    </ion-title>\n  </ion-toolbar>\n  \n</ion-header>\n\n<ion-content [fullscreen]=\"true\">\n  <!--routerLink llama al metodo 'datos' para mostar atributos -->\n  <ion-card *ngFor=\"let char of clientes1\">\n    <ion-card-header >\n      <ion-card-title >{{char.cliente.nombre}}</ion-card-title>\n    </ion-card-header>\n  \n    <ion-card-content (click)=\"actualizar(char.id)\" >\n\n      <ion-label>Dirección:</ion-label>\n      <ion-item>\n        <ion-label>{{char.cliente.direccionPrincipal}}</ion-label>\n      </ion-item>\n\n      <ion-item>\n        <ion-label>{{char.cliente.direccionSecundaria}}</ion-label>\n      </ion-item>\n\n    </ion-card-content>\n\n    <ion-card *ngIf=\"char.realizado\" name=\"trabajo\" color=\"danger\" >\n      <ion-item >\n        <ion-label  *ngIf=\"char.realizado\">Realizado</ion-label>\n\n        <ion-toggle *ngIf=\"char.realizado\" disabled=\"!char.realizado\" slot=\"end\" [(ngModel)]=\"char.realizado\"   (ionChange)=\"cambiar($event, char)\" ></ion-toggle>\n        <ion-toggle *ngIf=\"!char.realizado\" slot=\"end\" [(ngModel)]=\"char.realizado\"   (ionChange)=\"cambiar($event)\" ></ion-toggle>\n        \n       </ion-item>  \n    </ion-card>\n    <ion-card *ngIf=\"!char.realizado\" name=\"trabajo\" color=\"silver\" >\n      <ion-item >\n        \n\n        <ion-toggle *ngIf=\"char.realizado\" disabled=\"!char.realizado\" slot=\"end\" [(ngModel)]=\"char.realizado\"   (ionChange)=\"cambiar($event, char)\" ></ion-toggle>\n        <ion-toggle *ngIf=\"!char.realizado\" slot=\"end\" [(ngModel)]=\"char.realizado\"   (ionChange)=\"cambiar($event)\" ></ion-toggle>\n        \n       </ion-item>  \n    </ion-card>\n    \n  </ion-card>\n</ion-content>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header [translucent]=\"true\" >\n  <ion-toolbar>\n    <ion-title>\n      Visita Técnica\n      \n    </ion-title>\n  </ion-toolbar>\n  \n</ion-header>\n\n<ion-content [fullscreen]=\"true\">\n  <!--routerLink llama al metodo 'datos' para mostar atributos -->\n  <ion-card *ngFor=\"let char of clientes1\">\n    <ion-card-header >\n      <ion-card-title >{{char.cliente.nombre}}</ion-card-title>\n    </ion-card-header>\n    <ion-card class=\"ion\" [disabled]='deshabilitarTexto'> \n    <ion-card-content [routerLink]=\"['/visita',char.id]\" (click)=\"actualizar(char.id)\" >\n\n      <ion-label>Dirección:</ion-label>\n      <ion-item>\n        <ion-label>{{char.cliente.direccionPrincipal}}</ion-label>\n      </ion-item>\n\n      <ion-item>\n        <ion-label>{{char.cliente.direccionReferencia}}</ion-label>\n      </ion-item>\n\n    </ion-card-content>\n  </ion-card>\n    <ion-card *ngIf=\"char.realizado\" name=\"trabajo\" color=\"danger\" >\n      <ion-item >\n        <ion-label  *ngIf=\"char.realizado\">Realizado</ion-label>\n\n        <ion-toggle *ngIf=\"char.realizado\" disabled=\"!char.realizado\" slot=\"end\" [(ngModel)]=\"char.realizado\"   (ionChange)=\"cambiar($event, char)\" ></ion-toggle>\n        <ion-toggle *ngIf=\"!char.realizado\" slot=\"end\" [(ngModel)]=\"char.realizado\"   (ionChange)=\"cambiar($event)\" ></ion-toggle>\n        \n       </ion-item>  \n    </ion-card>\n    <ion-card *ngIf=\"!char.realizado\" name=\"trabajo\" color=\"silver\" >\n      <ion-item >\n        \n\n        <ion-toggle *ngIf=\"char.realizado\" disabled=\"!char.realizado\" slot=\"end\" [(ngModel)]=\"char.realizado\"   (ionChange)=\"cambiar($event, char)\" ></ion-toggle>\n        <ion-toggle *ngIf=\"!char.realizado\" slot=\"end\" [(ngModel)]=\"char.realizado\"   (ionChange)=\"cambiar($event)\" ></ion-toggle>\n        \n       </ion-item>  \n    </ion-card>\n    \n  </ion-card>\n</ion-content>");
 
 /***/ }),
 
@@ -155,6 +155,7 @@ let Tab1Page = class Tab1Page {
         this.lng1 = 0;
         this.clientes1 = [];
         this.datos = [];
+        this.deshabilitarTexto = false;
         this.lista();
         this.clientes1.forEach(id => this.checkbox[this.user.id] = true);
     }
@@ -168,6 +169,15 @@ let Tab1Page = class Tab1Page {
                 console.log("user.id " + this.user.id);
             });
         });
+        this.textoEnable();
+    }
+    textoDisable() {
+        console.log("deshabilitad " + this.deshabilitarTexto);
+        this.deshabilitarTexto = true;
+    }
+    textoEnable() {
+        console.log(this.deshabilitarTexto);
+        this.deshabilitarTexto = false;
     }
     lista() {
         this.service.todasV().subscribe(response => {
@@ -193,6 +203,7 @@ let Tab1Page = class Tab1Page {
         this.service.actualizarVisita(this.visita).subscribe(response => {
             console.log(response);
         });
+        this.textoDisable();
     }
 };
 Tab1Page.ctorParameters = () => [

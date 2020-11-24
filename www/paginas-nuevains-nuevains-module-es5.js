@@ -210,9 +210,15 @@
       var _angular_forms__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
       /*! @angular/forms */
       "3Pt+");
+      /* harmony import */
+
+
+      var _ionic_angular__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
+      /*! @ionic/angular */
+      "TEn/");
 
       var NuevainsPage = /*#__PURE__*/function () {
-        function NuevainsPage(geolocation, launchNavigator, service, storage, router) {
+        function NuevainsPage(geolocation, launchNavigator, service, storage, router, toastController) {
           var _this = this;
 
           _classCallCheck(this, NuevainsPage);
@@ -222,6 +228,7 @@
           this.service = service;
           this.storage = storage;
           this.router = router;
+          this.toastController = toastController;
           this.teclado_especial = false;
           this.cliente = new src_app_tab2_cliente__WEBPACK_IMPORTED_MODULE_7__["Cliente"]();
           this.servicio = new src_app_tab2_servicio__WEBPACK_IMPORTED_MODULE_10__["Servicio"]();
@@ -241,15 +248,18 @@
             this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormGroup"]({
               cedula: new _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormControl"](this.cliente.cedula, [_angular_forms__WEBPACK_IMPORTED_MODULE_12__["Validators"].required]),
               nombres: new _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormControl"](this.cliente.nombre, [_angular_forms__WEBPACK_IMPORTED_MODULE_12__["Validators"].pattern(/^[A-Za-z ]+$/), _angular_forms__WEBPACK_IMPORTED_MODULE_12__["Validators"].required]),
-              email: new _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormControl"](this.cliente.email, [_angular_forms__WEBPACK_IMPORTED_MODULE_12__["Validators"].pattern(/\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)/), _angular_forms__WEBPACK_IMPORTED_MODULE_12__["Validators"].required]),
+              email: new _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormControl"](this.cliente.email),
               convencional: new _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormControl"](this.cliente.convencional, [_angular_forms__WEBPACK_IMPORTED_MODULE_12__["Validators"].required]),
               celular: new _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormControl"](this.cliente.celular, [_angular_forms__WEBPACK_IMPORTED_MODULE_12__["Validators"].required]),
               principal: new _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormControl"](this.cliente.direccionPrincipal, [_angular_forms__WEBPACK_IMPORTED_MODULE_12__["Validators"].required]),
-              secundaria: new _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormControl"](this.cliente.direccionSecundaria),
-              referencia: new _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormControl"](this.cliente.direccionPrincipal, [_angular_forms__WEBPACK_IMPORTED_MODULE_12__["Validators"].required]),
-              contrato: new _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormControl"](this.cliente.direccionPrincipal, [_angular_forms__WEBPACK_IMPORTED_MODULE_12__["Validators"].required]),
-              plan: new _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormControl"](this.cliente.direccionPrincipal, [_angular_forms__WEBPACK_IMPORTED_MODULE_12__["Validators"].required]),
-              ip: new _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormControl"](this.cliente.direccionPrincipal, [_angular_forms__WEBPACK_IMPORTED_MODULE_12__["Validators"].required])
+              secundaria: new _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormControl"](),
+              referencia: new _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormControl"](this.cliente.direccionReferencia, [_angular_forms__WEBPACK_IMPORTED_MODULE_12__["Validators"].required]),
+              contrato: new _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormControl"](),
+              plan: new _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormControl"](),
+              ip: new _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormControl"](),
+              antena: new _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormControl"](),
+              password: new _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormControl"](),
+              observacion: new _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormControl"]()
             });
           }
         }, {
@@ -394,42 +404,77 @@
         }, {
           key: "validadorDeCedula",
           value: function validadorDeCedula(cedula) {
-            var cedulaCorrecta = false;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+              var cedulaCorrecta, mensaje, tercerDigito, coefValCedula, verificador, suma, digito, i, toast;
+              return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                while (1) {
+                  switch (_context2.prev = _context2.next) {
+                    case 0:
+                      cedulaCorrecta = false;
+                      mensaje = '';
 
-            if (cedula.length == 10) {
-              var tercerDigito = parseInt(cedula.substring(2, 3));
+                      if (cedula.length == 10) {
+                        tercerDigito = parseInt(cedula.substring(2, 3));
 
-              if (tercerDigito < 6) {
-                // El ultimo digito se lo considera dígito verificador
-                var coefValCedula = [2, 1, 2, 1, 2, 1, 2, 1, 2];
-                var verificador = parseInt(cedula.substring(9, 10));
-                var suma = 0;
-                var digito = 0;
+                        if (tercerDigito < 6) {
+                          // El ultimo digito se lo considera dígito verificador
+                          coefValCedula = [2, 1, 2, 1, 2, 1, 2, 1, 2];
+                          verificador = parseInt(cedula.substring(9, 10));
+                          suma = 0;
+                          digito = 0;
 
-                for (var i = 0; i < cedula.length - 1; i++) {
-                  digito = parseInt(cedula.substring(i, i + 1)) * coefValCedula[i];
-                  suma += parseInt(digito % 10 + '') + parseInt(digito / 10 + ''); //      console.log(suma+" suma"+coefValCedula[i]); 
+                          for (i = 0; i < cedula.length - 1; i++) {
+                            digito = parseInt(cedula.substring(i, i + 1)) * coefValCedula[i];
+                            suma += parseInt(digito % 10 + '') + parseInt(digito / 10 + ''); //      console.log(suma+" suma"+coefValCedula[i]); 
+                          }
+
+                          suma = Math.round(suma); //  console.log(verificador);
+                          //  console.log(suma);
+                          //  console.log(digito);
+
+                          if (Math.round(suma % 10) == 0 && Math.round(suma % 10) == verificador) {
+                            cedulaCorrecta = true;
+                          } else if (10 - Math.round(suma % 10) == verificador) {
+                            cedulaCorrecta = true;
+                          } else {
+                            mensaje = 'Cedula Incorrecta';
+                            cedulaCorrecta = false;
+                          }
+                        } else {
+                          mensaje = 'Cedula Incorrecta';
+                          cedulaCorrecta = false;
+                        }
+                      } else {
+                        mensaje = 'Cedula Incorrecta';
+                        cedulaCorrecta = false;
+                      }
+
+                      this.validador = cedulaCorrecta;
+
+                      if (this.validador) {
+                        _context2.next = 9;
+                        break;
+                      }
+
+                      _context2.next = 7;
+                      return this.toastController.create({
+                        message: mensaje,
+                        position: 'middle',
+                        color: 'danger',
+                        duration: 2000
+                      });
+
+                    case 7:
+                      toast = _context2.sent;
+                      toast.present();
+
+                    case 9:
+                    case "end":
+                      return _context2.stop();
+                  }
                 }
-
-                suma = Math.round(suma); //  console.log(verificador);
-                //  console.log(suma);
-                //  console.log(digito);
-
-                if (Math.round(suma % 10) == 0 && Math.round(suma % 10) == verificador) {
-                  cedulaCorrecta = true;
-                } else if (10 - Math.round(suma % 10) == verificador) {
-                  cedulaCorrecta = true;
-                } else {
-                  cedulaCorrecta = false;
-                }
-              } else {
-                cedulaCorrecta = false;
-              }
-            } else {
-              cedulaCorrecta = false;
-            }
-
-            this.validador = cedulaCorrecta;
+              }, _callee2, this);
+            }));
           } // llamaría validateIp a una función que valide directamente la ip que se pasa
 
         }, {
@@ -448,31 +493,104 @@
         }, {
           key: "validateForm",
           value: function validateForm(idForm) {
-            var object = document.getElementById(idForm);
-            console.log("idform " + idForm); //let valueForm = (<HTMLInputElement>object).value; // generamos un array de valores separado por el salto de linea
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+              var object, mensaje, isValid, toast;
+              return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                while (1) {
+                  switch (_context3.prev = _context3.next) {
+                    case 0:
+                      object = document.getElementById(idForm);
+                      mensaje = '';
+                      console.log("idform " + idForm); //let valueForm = (<HTMLInputElement>object).value; // generamos un array de valores separado por el salto de linea
 
-            var isValid = this.validateIp(idForm); // validamos que todos los elementos cumplan con la condición dada en validateIp
+                      isValid = this.validateIp(idForm); // validamos que todos los elementos cumplan con la condición dada en validateIp
 
-            this.valido = isValid;
-            console.log("isvalid " + isValid);
+                      this.valido = isValid;
+                      console.log("isvalid " + isValid);
 
-            if (isValid) {
-              //object.style.color = "#000"; 
-              console.log("valido " + isValid); //return; 
-            } //object.style.color = "#EC3333";
+                      if (!isValid) {
+                        _context3.next = 10;
+                        break;
+                      }
 
+                      //object.style.color = "#000"; 
+                      console.log("valido " + isValid); //return; 
 
-            console.log("no es valido " + isValid);
+                      _context3.next = 16;
+                      break;
+
+                    case 10:
+                      console.log("no es valido " + isValid);
+                      mensaje = 'IP no valida';
+                      _context3.next = 14;
+                      return this.toastController.create({
+                        message: mensaje,
+                        position: 'middle',
+                        color: 'danger',
+                        duration: 2000
+                      });
+
+                    case 14:
+                      toast = _context3.sent;
+                      toast.present();
+
+                    case 16:
+                    case "end":
+                      return _context3.stop();
+                  }
+                }
+              }, _callee3, this);
+            }));
           }
         }, {
-          key: "Validadoremail",
-          value: function Validadoremail(email) {
-            //let valor = document.getElementById(email);
-            if (!/\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)/.test(email)) {
-              this.email = false;
-            }
+          key: "esEmailValido",
+          value: function esEmailValido(email) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+              'use strict';
 
-            this.email = true;
+              var mailValido, mensaje, EMAIL_REGEX, toast;
+              return regeneratorRuntime.wrap(function _callee4$(_context4) {
+                while (1) {
+                  switch (_context4.prev = _context4.next) {
+                    case 0:
+                      mailValido = false;
+                      mensaje = '';
+                      EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+                      if (!email.match(EMAIL_REGEX)) {
+                        _context4.next = 8;
+                        break;
+                      }
+
+                      mailValido = true;
+                      console.log("email " + email.match(EMAIL_REGEX));
+                      _context4.next = 13;
+                      break;
+
+                    case 8:
+                      mensaje = 'Email no valido';
+                      _context4.next = 11;
+                      return this.toastController.create({
+                        message: mensaje,
+                        position: 'middle',
+                        color: 'danger',
+                        duration: 2000
+                      });
+
+                    case 11:
+                      toast = _context4.sent;
+                      toast.present();
+
+                    case 13:
+                      return _context4.abrupt("return", mailValido);
+
+                    case 14:
+                    case "end":
+                      return _context4.stop();
+                  }
+                }
+              }, _callee4, this);
+            }));
           }
         }]);
 
@@ -490,6 +608,8 @@
           type: src_app_servicios_storage_service__WEBPACK_IMPORTED_MODULE_9__["StorageService"]
         }, {
           type: _angular_router__WEBPACK_IMPORTED_MODULE_11__["Router"]
+        }, {
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_13__["ToastController"]
         }];
       };
 
@@ -590,7 +710,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n    <ion-title>Nueva Instalación</ion-title>\n  </ion-toolbar>\n  \n </ion-header>\n <ion-content class=\"ion-padding\"> \n  <!-- <div> -->\n  <form novalidate  (ngSubmit)=\"onSubmit()\" [formGroup]=\"form\">\n    <ion-list >\n    <ion-item > \n    <ion-label class=\"label\" position=\"stacked\" >Cédula:</ion-label>\n    <ion-item class=\"cedula\" [ngStyle]=\"{'background-color':!validador?'red':'white'}\">\n    <ion-input   name=\"cedula\" [(ngModel)]=\"cliente.cedula\" (change)=\"validador=true\" (change)=\"validadorDeCedula(cliente.cedula)\" type=\"text\" placeholder=\"0101010101\" maxlength=\"10\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"cedula\">\n      </ion-input>\n      <small class=\"small\"  *ngIf=\"!validador\" class=\"text-danger\">Cedula Invalida</small>\n    </ion-item> \n  </ion-item> \n\n      <ion-item > \n      <ion-label position=\"stacked\">Nombres Completos:</ion-label>\n      <ion-input id=\"name\" [(ngModel)]=\"cliente.nombre\" type=\"text\" placeholder=\"Apellidos Nombres\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"nombres\"></ion-input>\n    </ion-item> \n\n    <ion-item> \n      <ion-label position=\"stacked\">Correo Electrónico:</ion-label>\n      <ion-input  [ngStyle]=\"{'background-color':!email?'red':'white'}\" (change)=\"Validadoremail(cliente.email)\" [(ngModel)]=\"cliente.email\" type=\"text\" placeholder=\"Correo electrónico\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"email\"></ion-input>\n    </ion-item>\n\n    <ion-item> \n      <ion-label position=\"stacked\">Teléfonos:</ion-label>\n      <ion-input [(ngModel)]=\"cliente.convencional\" type=\"number\" placeholder=\"Convencional\" maxlength=\"7\" autocomplete=\"off\" autocorrect=\"off\"  formControlName=\"convencional\"></ion-input>\n     </ion-item>\n     \n     <ion-item> \n      <ion-input [(ngModel)]=\"cliente.celular\" type=\"number\" placeholder=\"Celular\" maxlength=\"10\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"celular\"></ion-input>\n     </ion-item>\n     \n     <ion-item> \n      <ion-label position=\"stacked\">Dirección:</ion-label>\n      <ion-input [(ngModel)]=\"cliente.direccionPrincipal\" type=\"text\" placeholder=\"Calle principal\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"principal\"></ion-input>\n     </ion-item>\n\n    <ion-item> \n      <ion-input [(ngModel)]=\"cliente.direccionSecundaria\" type=\"text\" placeholder=\"Calle secundaria\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"secundaria\"></ion-input>\n    </ion-item>\n    <ion-item> \n      <ion-input [(ngModel)]=\"cliente.direccionReferencia\" type=\"text\" placeholder=\"Referencia\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"referencia\"></ion-input>\n     </ion-item>\n\n     <ion-item> \n      <ion-label position=\"stacked\">Número Contrato:</ion-label>\n      <ion-input [(ngModel)]=\"servicio.numeroContrato\" type=\"text\" placeholder=\"Número contrato\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"contrato\"></ion-input>\n     </ion-item> \n\n    <ion-item> \n      <ion-label position=\"stacked\">Plan Adquirido:</ion-label>\n        <ion-select (ionChange)=\"detect1($event)\" ok-text=\"Seleccionar\" cancel-text=\"Cancelar\" multiple=\"false\" formControlName=\"plan\">\n          <ion-select-option value=\"Basico\">Básico</ion-select-option>\n          <ion-select-option value=\"Intermedio\">Intermedio</ion-select-option>\n          <ion-select-option value=\"Alto\">Alto</ion-select-option>\n        </ion-select>\n    </ion-item>\n\n    <ion-item  > \n      <ion-label position=\"stacked\">IP:</ion-label>\n       <ion-item class=\"ip\" [ngStyle]=\"{'background-color':!validador?'red':'white'}\">\n      <ion-input [ngStyle]=\"{'background-color':!valido?'red':'white'}\" (change)=\"validateForm(servicio.ip)\" name=\"\" id=\"ips\"   [(ngModel)]=\"servicio.ip\" type=\"text\" placeholder=\"XXX.XXX.XXX.XXX\" maxlength=\"15\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"ip\"></ion-input>\n      <small class=\"small\"  *ngIf=\"!valido\" class=\"text-danger\">IP Invalida</small>\n     </ion-item>\n    </ion-item> \n   </ion-list> \n  </form>\n        <div class=\"ion-padding ion-text-center\">\n      <ion-button *ngIf = \"!form.get('nombres').hasError('pattern') && \n      !form.get('cedula').hasError('pattern') && \n      !form.get('email').hasError('pattern') && \n      !form.get('convencional').hasError('pattern') && \n      !form.get('celular').hasError('pattern') && \n      !form.get('principal').hasError('pattern') && \n      !form.get('secundaria').hasError('pattern') && \n      !form.get('referencia').hasError('pattern') && \n      !form.get('contrato').hasError('pattern') && \n      !form.get('plan').hasError('pattern') && \n      !form.get('ip').hasError('pattern')!\"  color=\"danger\" expand=\"block\" (click)=\"crear()\">\n        Guardar\n      </ion-button>\n    </div>\n\n\n<!-- </div> -->\n </ion-content> \n\n\n\n";
+      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n    <ion-title>Nueva Instalación</ion-title>\n  </ion-toolbar>\n  \n </ion-header>\n <ion-content class=\"ion-padding\"> \n  <!-- <div> -->\n  <form novalidate  (ngSubmit)=\"onSubmit()\" [formGroup]=\"form\">\n    <ion-list >\n    <ion-item > \n    <ion-label class=\"label\" position=\"stacked\" >Cédula:</ion-label>\n       <ion-input   name=\"cedula\" [(ngModel)]=\"cliente.cedula\" (change)=\"validador=true\" (change)=\"validadorDeCedula(cliente.cedula)\" type=\"text\" placeholder=\"0101010101\" maxlength=\"10\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"cedula\">\n      </ion-input>\n    \n  </ion-item> \n\n      <ion-item > \n      <ion-label position=\"stacked\">Nombres Completos:</ion-label>\n      <ion-input id=\"name\" [(ngModel)]=\"cliente.nombre\" type=\"text\" placeholder=\"Apellidos Nombres\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"nombres\"></ion-input>\n    </ion-item> \n\n    <ion-item> \n      <ion-label position=\"stacked\">Correo Electrónico:</ion-label>\n      <ion-input  (change)=\"esEmailValido(cliente.email)\" [(ngModel)]=\"cliente.email\" type=\"text\" placeholder=\"Correo electrónico\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"email\"></ion-input>\n    </ion-item>\n\n    <ion-item> \n      <ion-label position=\"stacked\">Teléfonos:</ion-label>\n      <ion-input [(ngModel)]=\"cliente.convencional\" type=\"number\" placeholder=\"Convencional\" maxlength=\"7\" autocomplete=\"off\" autocorrect=\"off\"  formControlName=\"convencional\"></ion-input>\n     </ion-item>\n     \n     <ion-item> \n      <ion-input [(ngModel)]=\"cliente.celular\" type=\"number\" placeholder=\"Celular\" maxlength=\"10\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"celular\"></ion-input>\n     </ion-item>\n     \n     <ion-item> \n      <ion-label position=\"stacked\">Dirección:</ion-label>\n      <ion-input [(ngModel)]=\"cliente.direccionPrincipal\" type=\"text\" placeholder=\"Calle principal\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"principal\"></ion-input>\n     </ion-item>\n\n    <ion-item> \n      <ion-input [(ngModel)]=\"cliente.direccionSecundaria\" type=\"text\" placeholder=\"Calle secundaria\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"secundaria\"></ion-input>\n    </ion-item>\n    <ion-item> \n      <ion-input [(ngModel)]=\"cliente.direccionReferencia\" type=\"text\" placeholder=\"Referencia\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"referencia\"></ion-input>\n     </ion-item>\n\n     <ion-item> \n      <ion-label position=\"stacked\">Número Contrato:</ion-label>\n      <ion-input [(ngModel)]=\"servicio.numeroContrato\" type=\"text\" placeholder=\"Número contrato\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"contrato\"></ion-input>\n     </ion-item> \n\n    <ion-item> \n      <ion-label position=\"stacked\">Plan Adquirido:</ion-label>\n        <ion-select (ionChange)=\"detect1($event)\" ok-text=\"Seleccionar\" cancel-text=\"Cancelar\" multiple=\"false\" formControlName=\"plan\">\n          <ion-select-option value=\"Basico\">Básico</ion-select-option>\n          <ion-select-option value=\"Intermedio\">Intermedio</ion-select-option>\n          <ion-select-option value=\"Alto\">Alto</ion-select-option>\n        </ion-select>\n    </ion-item>\n\n    <ion-item  > \n      <ion-label position=\"stacked\">IP:</ion-label>\n      <ion-input  (change)=\"validateForm(servicio.ip)\" name=\"\" id=\"ips\"   [(ngModel)]=\"servicio.ip\" type=\"text\" placeholder=\"XXX.XXX.XXX.XXX\" maxlength=\"15\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"ip\"></ion-input>\n    </ion-item> \n\n    <ion-item> \n      <ion-label>Antenas</ion-label>\n      <ion-select (ionChange)=\"detect($event)\" ok-text=\"Seleccionar\" cancel-text=\"Cancelar\" multiple=\"false\" formControlName=\"antena\">\n          <ion-select-option *ngFor=\"let ant of antenas\" value=\"{{ant.id}}\">{{ant.modelo}}</ion-select-option>\n      </ion-select>\n  </ion-item>\n  <ion-item> \n      <ion-label position=\"stacked\">Contraseña:</ion-label>\n      <ion-input   [(ngModel)]=\"servicio.password\" type=\"text\" maxlength=\"15\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"password\"></ion-input>\n     </ion-item> \n     \n     <ion-item>    \n      <ion-label>Coordenadas:\n        <ion-buttons>\n          <ion-button>\n            {{cliente.latitud}} {{cliente.longitud}}\n          </ion-button>\n        </ion-buttons>\n      </ion-label>\n    </ion-item> \n    <ion-tab-button (click)=\"obtenerGeolocalizacion()\">\n      <ion-icon name=\"locate-outline\"></ion-icon>\n      <ion-label>Coordenadas</ion-label>\n    </ion-tab-button>\n\n    <ion-item> \n      <ion-label position=\"stacked\">Observaciones:</ion-label>\n      <ion-input   [(ngModel)]=\"servicio.observaciones\" type=\"text\" maxlength=\"15\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"observacion\"></ion-input>\n     </ion-item>   \n\n\n   </ion-list> \n  \n        <div class=\"ion-padding ion-text-center\">\n      <ion-button *ngIf = \"!form.get('nombres').hasError('pattern') && \n      !form.get('cedula').hasError('required') && \n      !form.get('convencional').hasError('required') && \n      !form.get('celular').hasError('required') && \n      !form.get('principal').hasError('required') && \n      !form.get('referencia').hasError('required') && validador && valido\"  \n      color=\"danger\" expand=\"block\" (click)=\"crear()\">\n        Guardar\n      </ion-button>\n    </div>\n\n  </form>\n<!-- </div> -->\n </ion-content> \n\n\n\n";
       /***/
     },
 

@@ -14,6 +14,7 @@ import { Antena } from 'src/app/tab2/antena';
 import { Cliente } from 'src/app/tab2/cliente';
 import { Registro } from 'src/app/tab2/registro';
 import { Agendamiento } from 'src/app/tab2/agendamiento';
+import { ToastController } from '@ionic/angular';
 
 
 const { Network } = Plugins;
@@ -32,7 +33,7 @@ export class VisitaPage implements OnInit, OnDestroy {
   networkStatus: NetworkStatus;
   networkListener: PluginListenerHandle;
   isConnected = false;
- 
+  public valido;
   user2 = {
     
       id: 0,
@@ -86,7 +87,8 @@ export class VisitaPage implements OnInit, OnDestroy {
     private storage: StorageService,
     private service: ClientesService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public toastController: ToastController
 
     ) { 
     
@@ -216,5 +218,45 @@ listar(){
 
   }
 
+  // llamaría validateIp a una función que valide directamente la ip que se pasa
+validateIp(ip) {
+  let patronIp = new RegExp("^([0-9]{1,3}).([0-9]{1,3}).([0-9]{1,3}).([0-9]{1,3})$");
+  let valores;
+
+  // early return si la ip no tiene el formato correcto.
+  if(ip.search(patronIp) !== 0) {
+    return false
+  }
+
+  valores = ip.split("."); 
+
+  return valores[0] <= 255 && valores[1] <= 255 && valores[2] <= 255 && valores[3] <= 255
+}
+
+async validateForm(idForm) {
+  let object = document.getElementById(idForm);
+  let mensaje='';
+  console.log("idform "+idForm);
+  //let valueForm = (<HTMLInputElement>object).value; // generamos un array de valores separado por el salto de linea
+  let isValid = (this.validateIp(idForm)) // validamos que todos los elementos cumplan con la condición dada en validateIp
+  this.valido=isValid;
+  console.log("isvalid "+isValid);
+  if (isValid) {
+    //object.style.color = "#000"; 
+    console.log("valido "+isValid);
+    //return; 
+  }else{
+  console.log("no es valido "+isValid);
+  mensaje='IP no valida';
+  const toast = await this.toastController.create({
+    message: mensaje,
+    position: 'middle',
+    color:'danger',
+    duration: 2000
+  });
+  toast.present();
+  }
+  
+}
 
 }
