@@ -78,9 +78,12 @@ export class Tab1Page implements OnInit {
     console.log("Hola")
     this.router.navigate(['/visita'], {
       queryParams:{
+        
         id
       }
+      
     });
+    console.log("funciona visita");
   }
    
     

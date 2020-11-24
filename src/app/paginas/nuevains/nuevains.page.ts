@@ -9,7 +9,8 @@ import { StorageService } from 'src/app/servicios/storage.service';
 import { Servicio } from 'src/app/tab2/servicio';
 import { Antena } from 'src/app/tab2/antena';
 import { Router } from '@angular/router';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ToastController } from '@ionic/angular';
 
 
 
@@ -27,7 +28,8 @@ export class NuevainsPage implements OnInit, OnDestroy {
   public email;
   public nombre;
   public teclado_especial=false;
-  form;
+ 
+  form: FormGroup;
 
   cliente:Cliente = new Cliente();
   servicio:Servicio=new Servicio();
@@ -55,13 +57,16 @@ export class NuevainsPage implements OnInit, OnDestroy {
     latitudmaps:number;
     longitudmaps:number;
 
+
+
   constructor(  
     private geolocation: Geolocation,
     private launchNavigator: LaunchNavigator,
     private service: ClientesService,
     public storage:StorageService,
     private router: Router,
-    private formBuilder: FormBuilder
+    public toastController: ToastController
+
 
   ) {
      this.service.ListarAnt().subscribe(res =>{
@@ -74,7 +79,22 @@ export class NuevainsPage implements OnInit, OnDestroy {
 
   ngOnInit() {
    
-    
+    this.form = new FormGroup({
+      cedula: new FormControl(this.cliente.cedula,[Validators.required]),
+      nombres: new FormControl(this.cliente.nombre,[Validators.pattern(/^[A-Za-z ]+$/), Validators.required]),
+      email: new FormControl(this.cliente.email),
+      convencional: new FormControl(this.cliente.convencional, [Validators.required]),
+      celular: new FormControl(this.cliente.celular, [Validators.required]),
+      principal: new FormControl(this.cliente.direccionPrincipal, [Validators.required]),
+      secundaria: new FormControl(this.cliente.direccionSecundaria ),
+      referencia: new FormControl(this.cliente.direccionReferencia, [Validators.required]),
+      contrato: new FormControl( ),
+      plan: new FormControl( ),
+      ip: new FormControl( ),
+      antena: new FormControl(),
+      password: new FormControl(),
+      observacion: new FormControl()
+    });
   }
   ngOnDestroy(): void{
     //this.networkListener.remove();
@@ -199,9 +219,9 @@ export class NuevainsPage implements OnInit, OnDestroy {
   }
 
 
-  validadorDeCedula(cedula: String) {
+  async validadorDeCedula(cedula: String) {
     let cedulaCorrecta = false;
-    
+    let mensaje='';
     if (cedula.length == 10)
     {    
         let tercerDigito = parseInt(cedula.substring(2, 3));
@@ -229,18 +249,30 @@ export class NuevainsPage implements OnInit, OnDestroy {
             } else if ((10 - (Math.round(suma % 10))) == verificador) {
                 cedulaCorrecta = true;
             } else {
+              mensaje='Cedula Incorrecta';
                 cedulaCorrecta = false;
+                
             }
         } else {
+          mensaje='Cedula Incorrecta';
             cedulaCorrecta = false;
         }
     } else {
+      mensaje='Cedula Incorrecta';
         cedulaCorrecta = false;
     }
+   this.validador= cedulaCorrecta;
+   if (!this.validador) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      position: 'middle',
+      color:'danger',
+      duration: 2000
+    });
+    toast.present();
+   }
   
-  
-  this.validador= cedulaCorrecta;
-  
+
     
   }
 // llamaría validateIp a una función que valide directamente la ip que se pasa
@@ -258,8 +290,9 @@ validateIp(ip) {
   return valores[0] <= 255 && valores[1] <= 255 && valores[2] <= 255 && valores[3] <= 255
 }
 
-validateForm(idForm) {
+async validateForm(idForm) {
   let object = document.getElementById(idForm);
+  let mensaje='';
   console.log("idform "+idForm);
   //let valueForm = (<HTMLInputElement>object).value; // generamos un array de valores separado por el salto de linea
   let isValid = (this.validateIp(idForm)) // validamos que todos los elementos cumplan con la condición dada en validateIp
@@ -269,48 +302,41 @@ validateForm(idForm) {
     //object.style.color = "#000"; 
     console.log("valido "+isValid);
     //return; 
-  }
-  //object.style.color = "#EC3333";
+  }else{
   console.log("no es valido "+isValid);
-}
-
-Validadoremail(email){
-    //let valor = document.getElementById(email);
-    
-    if( !(/\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)/.test(email)) ) {
-    this.email=false;
-    }
-    this.email=true;
-}
-
-ValidarLetras(l){
-  let patronIp = new RegExp("^[A-Z]+$', 'i");
-  let valores;
-
-  // early return si la ip no tiene el formato correcto.
-  console.log("l "+patronIp.test(this.email));
-  if(patronIp.test(this.email) ) {
-    
-    this.nombre= false;
+  mensaje='IP no valida';
+  const toast = await this.toastController.create({
+    message: mensaje,
+    position: 'middle',
+    color:'danger',
+    duration: 2000
+  });
+  toast.present();
   }
-  this.nombre= true;
   
-  
- }
- 
-//  myFunction() {
-//   let x = document.getElementById("fname");
-//   (<HTMLInputElement>x).value = (<HTMLInputElement>x).value.toUpperCase();
-// }
-
-    createForm() {
-        this.form = this.formBuilder.group({
-          nombre: ['', Validators.required],
-          lastname: ['', Validators.required],
-          email: ['', [Validators.required, Validators.email]],
-          message: ['', Validators.required],
-      });
-      console.log("funciona")
-    }
 }
 
+
+async esEmailValido(email: string) {
+  let mailValido = false;
+    'use strict';
+let mensaje='';
+    var EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  
+    if (email.match(EMAIL_REGEX)){
+      mailValido = true;
+      console.log("email "+email.match(EMAIL_REGEX));
+    }else{
+      mensaje='Email no valido';
+      const toast = await this.toastController.create({
+        message: mensaje,
+        position: 'middle',
+        color:'danger',
+        duration: 2000
+      });
+      toast.present();
+    }
+  return mailValido;
+}
+
+}

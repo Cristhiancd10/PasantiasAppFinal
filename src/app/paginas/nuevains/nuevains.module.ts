@@ -13,7 +13,6 @@ import { NuevainsPage } from './nuevains.page';
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
     IonicModule,
     ReactiveFormsModule,
     FormsModule,

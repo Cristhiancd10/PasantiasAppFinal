@@ -7,65 +7,56 @@
   </ion-toolbar>
   
  </ion-header>
+ <ion-content class="ion-padding"> 
+  <!-- <div> -->
+  <form novalidate  (ngSubmit)="onSubmit()" [formGroup]="form">
+    <ion-list >
+    <ion-item > 
+    <ion-label class="label" position="stacked" >Cédula:</ion-label>
+       <ion-input   name="cedula" [(ngModel)]="cliente.cedula" (change)="validador=true" (change)="validadorDeCedula(cliente.cedula)" type="text" placeholder="0101010101" maxlength="10" autocomplete="off" autocorrect="off" formControlName="cedula">
+      </ion-input>
+    
+  </ion-item> 
 
-<ion-content class="ion-padding">
-  
-  <ion-list > 
-   
-    <ion-item>
-      
-      <ion-label class="label" position="stacked" >Cédula:</ion-label>
-       <ion-item class="cedula" [ngStyle]="{'background-color':!validador?'red':'white'}">
-        <ion-input   name="cedula" [(ngModel)]="cliente.cedula" (change)="validador=true" (change)="validadorDeCedula(cliente.cedula)" type="text" placeholder="0101010101" maxlength="10" autocomplete="off" autocorrect="off">
-        </ion-input>
-        <small class="small"  *ngIf="!validador" class="text-danger">Cedula Invalida</small>
-      </ion-item> 
-      
-     </ion-item> 
-
-     <ion-item > 
+      <ion-item > 
       <ion-label position="stacked">Nombres Completos:</ion-label>
-      <ion-input id="name" [(ngModel)]="cliente.nombre" type="text" placeholder="Apellidos Nombres" autocomplete="off" autocorrect="off" ></ion-input>
-     
-     </ion-item> 
+      <ion-input id="name" [(ngModel)]="cliente.nombre" type="text" placeholder="Apellidos Nombres" autocomplete="off" autocorrect="off" formControlName="nombres"></ion-input>
+    </ion-item> 
 
     <ion-item> 
       <ion-label position="stacked">Correo Electrónico:</ion-label>
-      <ion-input  [ngStyle]="{'background-color':!email?'red':'white'}" (change)="Validadoremail(cliente.email)" [(ngModel)]="cliente.email" type="text" placeholder="Correo electrónico" autocomplete="off" autocorrect="off"></ion-input>
+      <ion-input  (change)="esEmailValido(cliente.email)" [(ngModel)]="cliente.email" type="text" placeholder="Correo electrónico" autocomplete="off" autocorrect="off" formControlName="email"></ion-input>
     </ion-item>
 
     <ion-item> 
       <ion-label position="stacked">Teléfonos:</ion-label>
-      <ion-input [(ngModel)]="cliente.convencional" type="text" placeholder="Convencional" maxlength="7" autocomplete="off" autocorrect="off"></ion-input>
+      <ion-input [(ngModel)]="cliente.convencional" type="number" placeholder="Convencional" maxlength="7" autocomplete="off" autocorrect="off"  formControlName="convencional"></ion-input>
      </ion-item>
-
-    <ion-item> 
-      <ion-input [(ngModel)]="cliente.celular" type="text" placeholder="Celular" maxlength="10" autocomplete="off" autocorrect="off"></ion-input>
+     
+     <ion-item> 
+      <ion-input [(ngModel)]="cliente.celular" type="number" placeholder="Celular" maxlength="10" autocomplete="off" autocorrect="off" formControlName="celular"></ion-input>
      </ion-item>
-
-    <ion-item> 
+     
+     <ion-item> 
       <ion-label position="stacked">Dirección:</ion-label>
-      <ion-input [(ngModel)]="cliente.direccionPrincipal" type="text" placeholder="Calle principal" autocomplete="off" autocorrect="off"></ion-input>
+      <ion-input [(ngModel)]="cliente.direccionPrincipal" type="text" placeholder="Calle principal" autocomplete="off" autocorrect="off" formControlName="principal"></ion-input>
      </ion-item>
 
     <ion-item> 
-      <ion-input [(ngModel)]="cliente.direccionSecundaria" type="text" placeholder="Calle secundaria" autocomplete="off" autocorrect="off"></ion-input>
+      <ion-input [(ngModel)]="cliente.direccionSecundaria" type="text" placeholder="Calle secundaria" autocomplete="off" autocorrect="off" formControlName="secundaria"></ion-input>
     </ion-item>
-
     <ion-item> 
-      <ion-input [(ngModel)]="cliente.direccionReferencia" type="text" placeholder="Referencia" autocomplete="off" autocorrect="off" ></ion-input>
+      <ion-input [(ngModel)]="cliente.direccionReferencia" type="text" placeholder="Referencia" autocomplete="off" autocorrect="off" formControlName="referencia"></ion-input>
      </ion-item>
 
-    
-
-    <ion-item> 
+     <ion-item> 
       <ion-label position="stacked">Número Contrato:</ion-label>
-      <ion-input [(ngModel)]="servicio.numeroContrato" type="text" placeholder="Número contrato" autocomplete="off" autocorrect="off"></ion-input>
+      <ion-input [(ngModel)]="servicio.numeroContrato" type="text" placeholder="Número contrato" autocomplete="off" autocorrect="off" formControlName="contrato"></ion-input>
      </ion-item> 
 
     <ion-item> 
       <ion-label position="stacked">Plan Adquirido:</ion-label>
-        <ion-select (ionChange)="detect1($event)" ok-text="Seleccionar" cancel-text="Cancelar" multiple="false">
+        <ion-select (ionChange)="detect1($event)" ok-text="Seleccionar" cancel-text="Cancelar" multiple="false" formControlName="plan">
           <ion-select-option value="Basico">Básico</ion-select-option>
           <ion-select-option value="Intermedio">Intermedio</ion-select-option>
           <ion-select-option value="Alto">Alto</ion-select-option>
@@ -74,24 +65,21 @@
 
     <ion-item  > 
       <ion-label position="stacked">IP:</ion-label>
-       <ion-item class="ip" [ngStyle]="{'background-color':!validador?'red':'white'}">
-      <ion-input [ngStyle]="{'background-color':!valido?'red':'white'}" (change)="validateForm(servicio.ip)" name="" id="ips"   [(ngModel)]="servicio.ip" type="text" placeholder="XXX.XXX.XXX.XXX" maxlength="15" autocomplete="off" autocorrect="off"></ion-input>
-      <small class="small"  *ngIf="!valido" class="text-danger">IP Invalida</small>
-     </ion-item>
+      <ion-input  (change)="validateForm(servicio.ip)" name="" id="ips"   [(ngModel)]="servicio.ip" type="text" placeholder="XXX.XXX.XXX.XXX" maxlength="15" autocomplete="off" autocorrect="off" formControlName="ip"></ion-input>
     </ion-item> 
- 
+
     <ion-item> 
       <ion-label>Antenas</ion-label>
-      <ion-select (ionChange)="detect($event)" ok-text="Seleccionar" cancel-text="Cancelar" multiple="false">
+      <ion-select (ionChange)="detect($event)" ok-text="Seleccionar" cancel-text="Cancelar" multiple="false" formControlName="antena">
           <ion-select-option *ngFor="let ant of antenas" value="{{ant.id}}">{{ant.modelo}}</ion-select-option>
       </ion-select>
   </ion-item>
   <ion-item> 
       <ion-label position="stacked">Contraseña:</ion-label>
-      <ion-input   [(ngModel)]="servicio.password" type="text" maxlength="15" autocomplete="off" autocorrect="off"></ion-input>
-     </ion-item>    
-
-    <ion-item>    
+      <ion-input   [(ngModel)]="servicio.password" type="text" maxlength="15" autocomplete="off" autocorrect="off" formControlName="password"></ion-input>
+     </ion-item> 
+     
+     <ion-item>    
       <ion-label>Coordenadas:
         <ion-buttons>
           <ion-button>
@@ -100,27 +88,35 @@
         </ion-buttons>
       </ion-label>
     </ion-item> 
+    <ion-tab-button (click)="obtenerGeolocalizacion()">
+      <ion-icon name="locate-outline"></ion-icon>
+      <ion-label>Coordenadas</ion-label>
+    </ion-tab-button>
 
-      <ion-tab-button (click)="obtenerGeolocalizacion()">
-        <ion-icon name="locate-outline"></ion-icon>
-        <ion-label>Coordenadas</ion-label>
-      </ion-tab-button>
+    <ion-item> 
+      <ion-label position="stacked">Observaciones:</ion-label>
+      <ion-input   [(ngModel)]="servicio.observaciones" type="text" maxlength="15" autocomplete="off" autocorrect="off" formControlName="observacion"></ion-input>
+     </ion-item>   
 
-       <ion-item> 
-        <ion-label position="stacked">Observaciones:</ion-label>
-        <ion-input   [(ngModel)]="servicio.observaciones" type="text" maxlength="15" autocomplete="off" autocorrect="off"></ion-input>
-       </ion-item>   
-    
+
    </ion-list> 
+  
+        <div class="ion-padding ion-text-center">
+      <ion-button *ngIf = "!form.get('nombres').hasError('pattern') && 
+      !form.get('cedula').hasError('required') && 
+      !form.get('email').hasError('required') && 
+      !form.get('convencional').hasError('required') && 
+      !form.get('celular').hasError('required') && 
+      !form.get('principal').hasError('required') && 
+      !form.get('referencia').hasError('required') "  
+      color="danger" expand="block" (click)="crear()">
+        Guardar
+      </ion-button>
+    </div>
 
-
-<div class="ion-padding ion-text-center">
-  <ion-button color="danger" expand="block" (click)="crear()">
-    Guardar
-  </ion-button>
-</div>
-
-</ion-content>
+  </form>
+<!-- </div> -->
+ </ion-content> 
 
 
 

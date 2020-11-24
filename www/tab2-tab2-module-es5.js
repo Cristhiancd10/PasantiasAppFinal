@@ -101,7 +101,7 @@
           key: "buscarV",
           value: function buscarV(id) {
             console.log("id service " + id);
-            return this.http.get("http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/buscarIdVis?id=".concat(id)); // ]return this.http.get<Registro>(`http://localhost:8080/CallCenterAstronet/srv/astronet/buscarIdVis?id=${id}`);
+            return this.http.get("http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/buscarIdVis?id=".concat(id)); // return this.http.get<Registro>(`http://localhost:8080/CallCenterAstronet/srv/astronet/buscarIdVis?id=${id}`);
           } // buscar(id:number):Observable <Cliente> {
           //   // return this.http.get<Cliente>(`http://34.95.195.201:8080/CallCenterAstronet/srv/astronet/buscarId?id=${id}`);
           //   return this.http.get<Cliente>(`http://localhost:8080/CallCenter/srv/astronet/buscarId?id=${id}`);
@@ -111,7 +111,7 @@
           key: "buscarI",
           value: function buscarI(id) {
             //  return this.http.get<Instalacion>(`http://34.95.195.201:8080/CallCenterAstronet/srv/astronet/buscarInsId?id=${id}`);
-            return this.http.get("http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/buscarInsId?id=".concat(id));
+            return this.http.get("http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/buscarInsId?id=".concat(id)); // return this.http.get<Instalacion>(`http://localhost:8080/CallCenterAstronet/srv/astronet/buscarInsId?id=${id}`);
           }
         }, {
           key: "login",
@@ -119,7 +119,7 @@
             //  return this.http.post<Empleado>('http://34.95.195.201:8080/CallCenterAstronet/srv/astronet/login', cliente, {headers: this.httpHeaders});
             return this.http.post('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/login', cliente, {
               headers: this.httpHeaders
-            });
+            }); // return this.http.post<Empleado>('http://localhost:8080/CallCenterAstronet/srv/astronet/login', cliente, {headers: this.httpHeaders});
           }
         }]);
 
