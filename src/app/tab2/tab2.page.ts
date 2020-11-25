@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { PopoverController } from '@ionic/angular';
 import { PopinfoComponent } from '../componentes/popinfo/popinfo.component';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ClientesService } from '../servicios/clientes.service';
+import { RadioService } from '../servicios/radio.service';
 import { Empleado } from './empleado';
 import { Cliente } from './cliente';
 import { Instalacion } from './instalacion';
@@ -54,7 +54,7 @@ export class Tab2Page {
     private router: Router,
     private route: ActivatedRoute,
     public httpCliente:HttpClient,
-    private service: ClientesService,
+    private service: RadioService,
     public popoverCtrl: PopoverController,
     public storage:StorageService
     

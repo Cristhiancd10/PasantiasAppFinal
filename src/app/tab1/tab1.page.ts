@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ClientesService } from '../servicios/clientes.service';
+import { ClientesService } from '../servicios/radio.service';
 import { StorageService } from '../servicios/storage.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Empleado } from '../tab2/empleado';

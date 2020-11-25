@@ -4,7 +4,7 @@ import { Geolocation, Geoposition } from '@ionic-native/geolocation/ngx';
 
 import { Network, NetworkStatus, PluginListenerHandle, Plugins } from '@capacitor/core'
 import { Cliente } from 'src/app/tab2/cliente';
-import { ClientesService } from 'src/app/servicios/clientes.service';
+import { RadioService } from 'src/app/servicios/radio.service';
 import { StorageService } from 'src/app/servicios/storage.service';
 import { Servicio } from 'src/app/tab2/servicio';
 import { Antena } from 'src/app/tab2/antena';
@@ -62,7 +62,7 @@ export class NuevainsPage implements OnInit, OnDestroy {
   constructor(  
     private geolocation: Geolocation,
     private launchNavigator: LaunchNavigator,
-    private service: ClientesService,
+    private service: RadioService,
     public storage:StorageService,
     private router: Router,
     public toastController: ToastController
@@ -140,8 +140,8 @@ export class NuevainsPage implements OnInit, OnDestroy {
       console.log("Si funciona esto "+this.networkStatus.connected);
      // this.cliente.servicio=this.servicio;
      this.servicios.push(this.servicio);
-     this.cliente.servicio = this.servicios;
-     this.cliente.antena = this.antena;
+    // this.cliente.servicio = this.servicios;
+     //this.cliente.antena = this.antena;
      
      console.log(this.cliente, "Fuera de post");
      

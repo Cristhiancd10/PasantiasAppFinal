@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { PopoverController } from '@ionic/angular';
 import { PopnuevainsComponent } from 'src/app/componentes/popnuevains/popnuevains.component';
-import { ClientesService } from 'src/app/servicios/clientes.service';
+import { RadioService } from 'src/app/servicios/radio.service';
 //import { AlmacenamientoService } from '../../servicios/almacenamiento.service';
 
 
@@ -23,14 +23,14 @@ export class InstalacionPage implements OnInit {
 
   user = {
     id : 0,
-    tipoServicio: "",
+    //tipoServicio: "",
     nombre: "",
     direccion: "",
     telefono: "",
     coordenadas: "",
     observaciones: "",
-    tecnico: "",
-    empleado: [],
+   // tecnico: "",
+    empleado: {},
     
   }
 
@@ -40,7 +40,7 @@ export class InstalacionPage implements OnInit {
     private geolocation:Geolocation,
     public popoverCtrol: PopoverController,
     private router: Router,
-    private service: ClientesService,
+    private service: RadioService,
     private route: ActivatedRoute
     //private almacenamiento:AlmacenamientoService
     ) { 

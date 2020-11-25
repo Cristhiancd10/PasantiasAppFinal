@@ -1,5 +1,7 @@
 import { Servicio } from './servicio';
-import { Antena } from './antena';
+import { Telefono } from './telefono';
+import { DatoServicio } from './datoServicio';
+//import { Registro } from './reistro';
 
 export class Cliente {
     id: number;
@@ -13,7 +15,10 @@ export class Cliente {
     direccionReferencia: string;
     latitud: string;
     longitud: string;
-    servicio: Servicio[];
-    antena:  Antena;
+    //servicio: Servicio[];
+    //registro:Registro[];
+    datoServicio:DatoServicio[];
+   // antena:  Antena;
+   telefono:Telefono[];
      
  }

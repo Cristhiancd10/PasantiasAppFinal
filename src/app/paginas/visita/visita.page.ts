@@ -7,7 +7,7 @@ import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-na
 
 import { NetworkStatus, PluginListenerHandle, Plugins } from '@capacitor/core';
 import { StorageService } from 'src/app/servicios/storage.service';
-import { ClientesService } from 'src/app/servicios/clientes.service';
+import { RadioService } from 'src/app/servicios/radio.service';
 
 import { Servicio } from 'src/app/tab2/servicio';
 import { Antena } from 'src/app/tab2/antena';
@@ -47,8 +47,10 @@ export class VisitaPage implements OnInit, OnDestroy {
       direccionReferencia: '',
       latitud: '',
       longitud: '',
-      servicio: [],
-      antena:  {}
+      //servicio: [],
+      datoServicio: [],
+     // antena:  {}
+     telefono:[],
   }
   id=0;
   cedula:String;
@@ -85,7 +87,7 @@ export class VisitaPage implements OnInit, OnDestroy {
      //private storage: Storage,
     private launchNavigator: LaunchNavigator,
     private storage: StorageService,
-    private service: ClientesService,
+    private service: RadioService,
     private router: Router,
     private route: ActivatedRoute,
     public toastController: ToastController

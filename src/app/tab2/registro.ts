@@ -7,7 +7,7 @@ export class Registro {
     fechaHora: string;
     observaciones: string;
     problema: string;
-    realizado:boolean;
+   // realizado:boolean;
     empleado: Empleado;
     cliente: Cliente;
     agendamiento: Agendamiento[]

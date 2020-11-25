@@ -12,7 +12,7 @@ import { Registro } from '../tab2/registro';
 @Injectable({
   providedIn: 'root'
 })
-export class ClientesService {
+export class RadioService {
         private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
         constructor(private http: HttpClient) { }
 
