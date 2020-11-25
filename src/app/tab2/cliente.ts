@@ -1,4 +1,3 @@
-import { Registro } from './registro';
 import { Servicio } from './servicio';
 import { Antena } from './antena';
 
