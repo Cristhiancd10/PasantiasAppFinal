@@ -1,15 +1,18 @@
 import { Cliente } from './cliente';
+import {   Plan }  from './plan'
 
 
 export class Servicio {
     id: number;
+    tipoSericio: string;
     numeroContrato: string;
     fechaContrato: string;
-    plan: string;
-    ip: string;
-    password: string;
+    routerVendido: string;
+        //ip: string;
+    //password: string;
     observaciones: string;
-    cliente: Cliente[];
-    
+    plan: Plan;
+    cliente: Cliente;
+   // servicioFibra:ServicioFibra[];
  
  }

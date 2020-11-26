@@ -83,11 +83,11 @@ export class NuevainsPage implements OnInit, OnDestroy {
       cedula: new FormControl(this.cliente.cedula,[Validators.required]),
       nombres: new FormControl(this.cliente.nombre,[Validators.pattern(/^[A-Za-z ]+$/), Validators.required]),
       email: new FormControl(this.cliente.email),
-      convencional: new FormControl(this.cliente.convencional, [Validators.required]),
-      celular: new FormControl(this.cliente.celular, [Validators.required]),
-      principal: new FormControl(this.cliente.direccionPrincipal, [Validators.required]),
+      convencional: new FormControl(this.cliente.telefono, [Validators.required]),
+      celular: new FormControl(this.cliente.telefono, [Validators.required]),
+      principal: new FormControl(this.cliente.dirPrincipal, [Validators.required]),
       secundaria: new FormControl(),
-      referencia: new FormControl(this.cliente.direccionReferencia, [Validators.required]),
+      referencia: new FormControl(this.cliente.dirReferencia, [Validators.required]),
       contrato: new FormControl( ),
       plan: new FormControl( ),
       ip: new FormControl( ),
@@ -113,7 +113,7 @@ export class NuevainsPage implements OnInit, OnDestroy {
     
     console.log(evt.detail.value);
     this.plan = (evt.detail.value);
-    this.servicio.plan = this.plan;
+    this.servicio.plan.tipoPlan = this.plan;
     
   }
   isConnected = false;
@@ -146,17 +146,38 @@ export class NuevainsPage implements OnInit, OnDestroy {
      console.log(this.cliente, "Fuera de post");
      
       this.service.crear(this.cliente).subscribe(res =>{
-        this.router.navigate(['/tabs'], {queryParams: {
+          this.router.navigate(['/tabs'], {queryParams: {
           id: this.cliente.id
         }});
             console.log(res);
           });
+
+          let mensaje='';
+        mensaje='Datos Guardados';
+      const toast = await this.toastController.create({
+        message: mensaje,
+        position: 'middle',
+        color:'danger',
+        duration: 2000
+      });
+      toast.present();
+
     }else if( aux=="false") {
       console.log("No funciona esto "+this.networkStatus.connected)
       this.storage.almacenar(this.cliente);
       console.log(" storage "+this.storage.listar());
+
+      let mensaje='';
+        mensaje='Datos se guardaran cuando haiga internet';
+      const toast = await this.toastController.create({
+        message: mensaje,
+        position: 'middle',
+        color:'danger',
+        duration: 2000
+      });
+      toast.present();
     }
-   
+   console.log("id "+this.id);
     
   }
 
@@ -262,6 +283,7 @@ export class NuevainsPage implements OnInit, OnDestroy {
         cedulaCorrecta = false;
     }
    this.validador= cedulaCorrecta;
+   console.log("validador "+this.validador);
    if (!this.validador) {
     const toast = await this.toastController.create({
       message: mensaje,
@@ -325,6 +347,7 @@ let mensaje='';
   
     if (email.match(EMAIL_REGEX)){
       mailValido = true;
+      this.email=mailValido;
       console.log("email "+email.match(EMAIL_REGEX));
     }else{
       mensaje='Email no valido';
@@ -335,6 +358,8 @@ let mensaje='';
         duration: 2000
       });
       toast.present();
+
+      this.email=false;
     }
   return mailValido;
 }

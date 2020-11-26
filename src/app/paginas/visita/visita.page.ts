@@ -40,15 +40,13 @@ export class VisitaPage implements OnInit, OnDestroy {
       cedula: '',
       nombre: '',
       email: '',
-      convencional: '',
-      celular: '',
-      direccionPrincipal: '',
-      direccionSecundaria: '',
-      direccionReferencia: '',
+      dirPrincipal: '',
+      dirSecundaria: '',
+      dirReferencia: '',
       latitud: '',
       longitud: '',
-      //servicio: [],
-      datoServicio: [],
+      servicio: [],
+      //datoServicio: [],
      // antena:  {}
      telefono:[],
   }
@@ -137,10 +135,31 @@ export class VisitaPage implements OnInit, OnDestroy {
       console.log("res "+this.user2);
       this.deshabilitarTexto = !this.deshabilitarTexto;
     });
+     let mensaje='';
+        mensaje='Datos actualizados';
+      const toast = await this.toastController.create({
+        message: mensaje,
+        position: 'middle',
+        color:'danger',
+        duration: 2000
+      });
+      toast.present();
+    
+      
     }else if( aux=="false") {
       console.log("No funciona esto "+this.networkStatus.connected)
       this.storage.almacenar(this.user1);
       console.log(" storage "+this.storage.listar());
+      let mensaje='';
+        mensaje='Datos se guardaran cuando haiga internet';
+      const toast = await this.toastController.create({
+        message: mensaje,
+        position: 'middle',
+        color:'danger',
+        duration: 2000
+      });
+      toast.present();
+    
     }
 }
 

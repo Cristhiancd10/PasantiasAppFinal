@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import {ActivatedRoute, Router} from '@angular/router';
 import { NetworkStatus, PluginListenerHandle, Plugins } from '@capacitor/core';
 import { LoadingController, ToastController } from '@ionic/angular';
-import { ClientesService } from 'src/app/servicios/radio.service';
+import { RadioService } from 'src/app/servicios/radio.service';
 import { StorageService } from 'src/app/servicios/storage.service';
 import { Antena } from 'src/app/tab2/antena';
 import { Cliente } from 'src/app/tab2/cliente';
@@ -47,7 +47,7 @@ export class LoginPage implements OnInit {
   myFormulario: FormGroup;
   emp:Empleado;
 
-  constructor(private router: Router,private route: ActivatedRoute, private formBuilder: FormBuilder, public storage:StorageService, private service: ClientesService, private toast: ToastController, private loading: LoadingController) {
+  constructor(private router: Router,private route: ActivatedRoute, private formBuilder: FormBuilder, public storage:StorageService, private service: RadioService, private toast: ToastController, private loading: LoadingController) {
 
     this.myFormulario = this.formBuilder.group({
       email: new FormControl("", Validators.compose([

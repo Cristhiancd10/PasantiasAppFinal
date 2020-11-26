@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ClientesService } from '../servicios/radio.service';
+import { RadioService } from '../servicios/radio.service';
 import { StorageService } from '../servicios/storage.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Empleado } from '../tab2/empleado';
@@ -27,7 +27,7 @@ export class Tab1Page implements OnInit {
     realizado:false,
     empleado: {},
    cliente: {},
-    agendamiento: [],
+    agendamiento: {}
   }
   checkbox={};
   color='#FFFFFF';
@@ -47,7 +47,7 @@ export class Tab1Page implements OnInit {
 
   deshabilitarTexto=false;
 
-  constructor(private router: Router, private route: ActivatedRoute, public httpCliente:HttpClient, private service: ClientesService,  public storage:StorageService) {
+  constructor(private router: Router, private route: ActivatedRoute, public httpCliente:HttpClient, private service: RadioService,  public storage:StorageService) {
     this.lista();
     this.clientes1.forEach(id => this.checkbox[this.user.id]=true);
    

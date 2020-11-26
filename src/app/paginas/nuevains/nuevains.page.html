@@ -25,7 +25,7 @@
 
     <ion-item> 
       <ion-label position="stacked">Correo Electrónico:</ion-label>
-      <ion-input  (change)="esEmailValido(cliente.email)" [(ngModel)]="cliente.email" type="text" placeholder="Correo electrónico" autocomplete="off" autocorrect="off" formControlName="email"></ion-input>
+      <ion-input  (change)="email=true" (change)="esEmailValido(cliente.email)" [(ngModel)]="cliente.email" type="text" placeholder="Correo electrónico" autocomplete="off" autocorrect="off" formControlName="email"></ion-input>
     </ion-item>
 
     <ion-item> 
@@ -102,13 +102,11 @@
    </ion-list> 
   
         <div class="ion-padding ion-text-center">
-      <ion-button *ngIf = "!form.get('nombres').hasError('pattern') && 
-      !form.get('cedula').hasError('required') && 
-      !form.get('convencional').hasError('required') && 
-      !form.get('celular').hasError('required') && 
-      !form.get('principal').hasError('required') && 
-      !form.get('referencia').hasError('required') && validador && valido"  
-      color="danger" expand="block" (click)="crear()">
+      <ion-button  [disabled]="!valido || !email || 
+      form.get('nombres').hasError('pattern') ||
+      form.get('cedula').hasError('required') || 
+      form.get('principal').hasError('required') || 
+      form.get('referencia').hasError('required')"  expand="block" (click)="crear()">
         Guardar
       </ion-button>
     </div>
