@@ -181,9 +181,9 @@
       /* harmony import */
 
 
-      var src_app_servicios_clientes_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
-      /*! src/app/servicios/clientes.service */
-      "BRvp");
+      var src_app_servicios_radio_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+      /*! src/app/servicios/radio.service */
+      "Ys19");
       /* harmony import */
 
 
@@ -218,13 +218,15 @@
             email: '',
             convencional: '',
             celular: '',
-            direccionPrincipal: '',
-            direccionSecundaria: '',
-            direccionReferencia: '',
+            dirPrincipal: '',
+            dirSecundaria: '',
+            dirReferencia: '',
             latitud: '',
             longitud: '',
             servicio: [],
-            antena: {}
+            //datoServicio: [],
+            antena: {} //telefono:[],
+
           };
           this.id = 0;
           this.clienteVisita = [];
@@ -263,6 +265,8 @@
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
               var _this2 = this;
 
+              var mensaje, toast, _mensaje, _toast;
+
               return regeneratorRuntime.wrap(function _callee$(_context) {
                 while (1) {
                   switch (_context.prev = _context.next) {
@@ -278,18 +282,56 @@
                       this.networkStatus = _context.sent;
                       aux = String(this.networkStatus.connected);
 
-                      if (aux == "true") {
-                        this.service.actualizar(this.user2).subscribe(function (res) {
-                          console.log("res " + _this2.user2);
-                          _this2.deshabilitarTexto = !_this2.deshabilitarTexto;
-                        });
-                      } else if (aux == "false") {
-                        console.log("No funciona esto " + this.networkStatus.connected);
-                        this.storage.almacenar(this.user1);
-                        console.log(" storage " + this.storage.listar());
+                      if (!(aux == "true")) {
+                        _context.next = 15;
+                        break;
                       }
 
-                    case 6:
+                      this.service.actualizar(this.user2).subscribe(function (res) {
+                        console.log("res " + _this2.user2);
+                        _this2.deshabilitarTexto = !_this2.deshabilitarTexto;
+                      });
+                      mensaje = '';
+                      mensaje = 'Datos actualizados';
+                      _context.next = 11;
+                      return this.toastController.create({
+                        message: mensaje,
+                        position: 'bottom',
+                        color: 'success',
+                        duration: 2000
+                      });
+
+                    case 11:
+                      toast = _context.sent;
+                      toast.present();
+                      _context.next = 25;
+                      break;
+
+                    case 15:
+                      if (!(aux == "false")) {
+                        _context.next = 25;
+                        break;
+                      }
+
+                      console.log("No funciona esto " + this.networkStatus.connected);
+                      this.storage.almacenar(this.user1);
+                      console.log(" storage " + this.storage.listar());
+                      _mensaje = '';
+                      _mensaje = 'Datos se guardaran cuando haiga internet';
+                      _context.next = 23;
+                      return this.toastController.create({
+                        message: _mensaje,
+                        position: 'middle',
+                        color: 'danger',
+                        duration: 2000
+                      });
+
+                    case 23:
+                      _toast = _context.sent;
+
+                      _toast.present();
+
+                    case 25:
                     case "end":
                       return _context.stop();
                   }
@@ -371,7 +413,7 @@
               app: this.launchNavigator.APP.GOOGLE_MAPS,
               start: [this.latitudMiubicacion, this.longitudMiubicacion]
             };
-            this.launchNavigator.navigate([Number(-this.user2.latitud), Number(-this.user2.longitud)], options) //this.launchNavigator.navigate([this.latitudmaps, this.longitudmaps],options)
+            this.launchNavigator.navigate([Number(this.user2.latitud), Number(this.user2.longitud)], options) //this.launchNavigator.navigate([this.latitudmaps, this.longitudmaps],options)
             .then(function (success) {
               console.log(success);
             }, function (error) {
@@ -462,7 +504,7 @@
         }, {
           type: src_app_servicios_storage_service__WEBPACK_IMPORTED_MODULE_9__["StorageService"]
         }, {
-          type: src_app_servicios_clientes_service__WEBPACK_IMPORTED_MODULE_10__["ClientesService"]
+          type: src_app_servicios_radio_service__WEBPACK_IMPORTED_MODULE_10__["RadioService"]
         }, {
           type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]
         }, {
@@ -496,7 +538,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar class=\"colorToolbar\">\n    <ion-buttons slot=\"start\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n    <ion-title>Visita Técnica</ion-title>\n\n  </ion-toolbar>\n  \n</ion-header>\n\n<ion-content class=\"ion-padding\" >\n\n     <ion-list>\n        <ion-item>\n        <ion-label position=\"stacked\">Cédula:</ion-label>\n        <ion-input  [(ngModel)]=\"user2.cedula\"  type=\"text\" readonly></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"stacked\">Nombres Completos:</ion-label>\n        <ion-input [(ngModel)]=\"user2.nombre\"  type=\"text\"  [readonly]='deshabilitarTexto'></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label position=\"stacked\">Correo Electonico:</ion-label>\n        <ion-input [(ngModel)]=\"user2.email\"  typse=\"text\"  [readonly]='deshabilitarTexto'></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"stacked\">Dirrecion:</ion-label>\n        <ion-input  [(ngModel)]=\"user2.direccionPrincipal\" type=\"text\"  [readonly]='deshabilitarTexto'></ion-input>\n      </ion-item>\n\n      \n      <ion-item>\n        <ion-label position=\"stacked\">Calle Secundaria:</ion-label>\n        <ion-input [(ngModel)]=\"user2.direccionSecundaria\" maxlength=\"15\" [readonly]='deshabilitarTexto'></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"stacked\">Referencia:</ion-label>\n        <ion-input  [(ngModel)]=\"user2.direccionReferencia\" maxlength=\"15\" [readonly]='deshabilitarTexto'></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"stacked\">Telefono Convencional:</ion-label>\n        <ion-input [(ngModel)]=\"user2.convencional\" maxlength=\"15\" [readonly]='deshabilitarTexto'></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"stacked\">Celular:</ion-label>\n        <ion-input [(ngModel)]=\"user2.celular\" maxlength=\"15\" [readonly]='deshabilitarTexto'></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"stacked\">Numero de Contrato:</ion-label>\n        <ion-input *ngFor=\"let char of user2.servicio\" [(ngModel)]=\"char.numeroContrato\" maxlength=\"15\" [readonly]='deshabilitarTexto'></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"stacked\">Plan Adquirido:</ion-label>\n        <ion-input *ngFor=\"let char of user2.servicio\" [(ngModel)]=\"char.plan\" maxlength=\"15\" [readonly]='deshabilitarTexto'></ion-input>\n      </ion-item>\n\n      <ion-item >\n        <ion-label position=\"stacked\">IP:</ion-label>\n        <ion-input   name=\"\" id=\"ips\"  *ngFor=\"let char of user2.servicio\" (change)=\"validateForm(char.ip)\" [(ngModel)]=\"char.ip\" maxlength=\"15\" [readonly]='deshabilitarTexto' ></ion-input>\n        \n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"stacked\">Antena:</ion-label>\n        <ion-input [(ngModel)]=\"user2.antena.modelo\" maxlength=\"15\" [readonly]='deshabilitarTexto'></ion-input>\n      </ion-item>\n      \n      <ion-item>\n        <ion-label position=\"stacked\">Contrasenia:</ion-label>\n        <ion-input *ngFor=\"let char of user2.servicio\" [(ngModel)]=\"char.password\" maxlength=\"15\" [readonly]='deshabilitarTexto'></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"stacked\">Obseraciones:</ion-label>\n        <ion-input *ngFor=\"let char of user2.servicio\" [(ngModel)]=\"char.observaciones\" maxlength=\"15\" [readonly]='deshabilitarTexto'></ion-input>\n      </ion-item>\n\n      <ion-item>   \n        <ion-label>Coordenadas:\n          <ion-buttons>\n            <ion-button>\n              {{-user2.latitud}} {{-user2.longitud}}\n            </ion-button>\n          </ion-buttons>\n        </ion-label>\n      </ion-item>\n   \n      <ion-item>\n        <ion-tab-button (click)=\"obtenerGeolocalizacion()\">\n          <ion-icon name=\"locate-outline\"></ion-icon>\n          <ion-label>Coordenadas</ion-label>\n        </ion-tab-button>\n\n        <ion-tab-button (click)=\"miUbicacion()\" (click)=\"navegarMapas()\">\n          <ion-icon name=\"map-outline\"></ion-icon>\n          <ion-label>Google Maps</ion-label>\n        </ion-tab-button>\n      </ion-item>\n\n      <ion-item>\n        <ion-toolbar class=\"centrarBoton\">\n          <ion-button (click)=\"actualizar()\">Actualizar </ion-button>\n          <ion-button   (click)=\"textoDisable()\" (click)=\"guardar()\">Guardar</ion-button>\n        </ion-toolbar> \n      </ion-item>\n\n    </ion-list>\n   \n\n  </ion-content>\n  \n  \n";
+      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar class=\"colorToolbar\">\n    <ion-buttons slot=\"start\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n    <ion-title>Visita Técnica</ion-title>\n\n  </ion-toolbar>\n  \n</ion-header>\n\n<ion-content class=\"ion-padding\" >\n\n     <ion-list>\n        <ion-item>\n        <ion-label position=\"stacked\">Cédula:</ion-label>\n        <ion-input  [(ngModel)]=\"user2.cedula\"  type=\"text\" readonly></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"stacked\">Nombres Completos:</ion-label>\n        <ion-input [(ngModel)]=\"user2.nombre\"  type=\"text\"  [readonly]='deshabilitarTexto'></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label position=\"stacked\">Correo Electonico:</ion-label>\n        <ion-input [(ngModel)]=\"user2.email\"  typse=\"text\"  [readonly]='deshabilitarTexto'></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"stacked\">Dirrecion:</ion-label>\n        <ion-input  [(ngModel)]=\"user2.direccionPrincipal\" type=\"text\"  [readonly]='deshabilitarTexto'></ion-input>\n      </ion-item>\n\n      \n      <ion-item>\n        <ion-label position=\"stacked\">Calle Secundaria:</ion-label>\n        <ion-input [(ngModel)]=\"user2.direccionSecundaria\" maxlength=\"15\" [readonly]='deshabilitarTexto'></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"stacked\">Referencia:</ion-label>\n        <ion-input  [(ngModel)]=\"user2.direccionReferencia\" maxlength=\"15\" [readonly]='deshabilitarTexto'></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"stacked\">Telefono Convencional:</ion-label>\n        <ion-input [(ngModel)]=\"user2.convencional\" maxlength=\"15\" [readonly]='deshabilitarTexto'></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"stacked\">Celular:</ion-label>\n        <ion-input [(ngModel)]=\"user2.celular\" maxlength=\"15\" [readonly]='deshabilitarTexto'></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"stacked\">Numero de Contrato:</ion-label>\n        <ion-input *ngFor=\"let char of user2.servicio\" [(ngModel)]=\"char.numeroContrato\" maxlength=\"15\" [readonly]='deshabilitarTexto'></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"stacked\">Plan Adquirido:</ion-label>\n        <ion-input *ngFor=\"let char of user2.servicio\" [(ngModel)]=\"char.plan\" maxlength=\"15\" [readonly]='deshabilitarTexto'></ion-input>\n      </ion-item>\n\n       <ion-item >\n        <ion-label position=\"stacked\">IP:</ion-label>\n        <ion-input   name=\"\" id=\"ips\"  *ngFor=\"let char of user2.servicio\" (change)=\"validateForm(char.ip)\" [(ngModel)]=\"char.ip\" maxlength=\"15\" [readonly]='deshabilitarTexto' ></ion-input>\n        \n      </ion-item> \n\n       <ion-item>\n        <ion-label position=\"stacked\">Antena:</ion-label>\n        <ion-input [(ngModel)]=\"user2.antena.modelo\" maxlength=\"15\" [readonly]='deshabilitarTexto'></ion-input>\n      </ion-item> \n      \n      <ion-item>\n        <ion-label position=\"stacked\">Contrasenia:</ion-label>\n        <ion-input *ngFor=\"let char of user2.servicio\" [(ngModel)]=\"char.password\" maxlength=\"15\" [readonly]='deshabilitarTexto'></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"stacked\">Obseraciones:</ion-label>\n        <ion-input *ngFor=\"let char of user2.servicio\" [(ngModel)]=\"char.observaciones\" maxlength=\"15\" [readonly]='deshabilitarTexto'></ion-input>\n      </ion-item>\n\n      <ion-item>   \n        <ion-label>Coordenadas:\n          <ion-buttons>\n            <ion-button>\n              {{user2.latitud}} {{user2.longitud}}\n            </ion-button>\n          </ion-buttons>\n        </ion-label>\n      </ion-item>\n   \n      <ion-item>\n        <ion-tab-button (click)=\"obtenerGeolocalizacion()\">\n          <ion-icon name=\"locate-outline\"></ion-icon>\n          <ion-label>Coordenadas</ion-label>\n        </ion-tab-button>\n\n        <ion-tab-button (click)=\"miUbicacion()\" (click)=\"navegarMapas()\">\n          <ion-icon name=\"map-outline\"></ion-icon>\n          <ion-label>Google Maps</ion-label>\n        </ion-tab-button>\n      </ion-item>\n\n      <ion-item>\n        <ion-toolbar class=\"centrarBoton\">\n          <ion-button (click)=\"actualizar()\">Actualizar </ion-button>\n          <ion-button   [disabled]=\"!valido\"(click)=\"textoDisable()\" (click)=\"guardar()\">Guardar</ion-button>\n        </ion-toolbar> \n      </ion-item>\n\n    </ion-list>\n   \n\n  </ion-content>\n  \n  \n";
       /***/
     },
 

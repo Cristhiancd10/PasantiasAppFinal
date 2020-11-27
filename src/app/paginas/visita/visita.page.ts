@@ -40,6 +40,8 @@ export class VisitaPage implements OnInit, OnDestroy {
       cedula: '',
       nombre: '',
       email: '',
+      convencional:'',
+      celular:'',
       dirPrincipal: '',
       dirSecundaria: '',
       dirReferencia: '',
@@ -47,8 +49,8 @@ export class VisitaPage implements OnInit, OnDestroy {
       longitud: '',
       servicio: [],
       //datoServicio: [],
-     // antena:  {}
-     telefono:[],
+      antena:  {}
+     //telefono:[],
   }
   id=0;
   cedula:String;
@@ -99,15 +101,17 @@ export class VisitaPage implements OnInit, OnDestroy {
   ngOnInit() {
     this.route.queryParams
     .subscribe(params => {
-       params.id
-       this.service.buscarV(params.id).subscribe(response => {
-        this.user2=response.cliente;
-        this.latitudmaps=Number(this.user2.latitud);
-        this.longitudmaps=Number(this.user2.longitud);
-       })
+       this.id=params.id
+       
     });
     //this.textoDisable();
     
+    this.service.buscarV(this.id).subscribe(response => {
+      console.log("response visita"+response)
+      this.user2=response.cliente;
+      this.latitudmaps=Number(this.user2.latitud);
+      this.longitudmaps=Number(this.user2.longitud);
+     })
      this.textoDisable();
 
      console.log(this.deshabilitarTexto);
@@ -139,8 +143,8 @@ export class VisitaPage implements OnInit, OnDestroy {
         mensaje='Datos actualizados';
       const toast = await this.toastController.create({
         message: mensaje,
-        position: 'middle',
-        color:'danger',
+        position: 'bottom',
+        color:'success',
         duration: 2000
       });
       toast.present();
@@ -227,7 +231,7 @@ listar(){
       start:[this.latitudMiubicacion, this.longitudMiubicacion]
       
     };
-    this.launchNavigator.navigate([Number(-this.user2.latitud), Number(-this.user2.longitud)],options)
+    this.launchNavigator.navigate([Number(this.user2.latitud), Number(this.user2.longitud)],options)
     //this.launchNavigator.navigate([this.latitudmaps, this.longitudmaps],options)
     .then(success =>{
       console.log(success);
@@ -251,7 +255,7 @@ validateIp(ip) {
 
   valores = ip.split("."); 
 
-  return valores[0] <= 255 && valores[1] <= 255 && valores[2] <= 255 && valores[3] <= 255
+  return valores[0] <= 255 && valores[1] <= 255 && valores[2] <= 255 && valores[3] <= 255 && valores[3] <= 255 && valores[3] != 0  && valores[3] != 1 && valores[3] != 255
 }
 
 async validateForm(idForm) {

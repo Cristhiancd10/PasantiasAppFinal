@@ -28,6 +28,17 @@ export class Tab2Page {
     empleado: {},
     
   }
+  user1 = {
+    id: 0,
+    cedula: '',
+    nombre: '',
+    celular: '',
+    email: '',
+    password: '',
+    departamento: '',
+    registro: [],
+    instalacion: []
+  }
 
   color1:string;
   checkbox={};
@@ -88,17 +99,10 @@ export class Tab2Page {
   }
 
   public lista(){
-    this.service.todasI().subscribe(response => {
+    this.user1=this.storage.listarE();
+    this.service.todasIs(this.user1.nombre).subscribe(response => {
       this.clientes = response;
-      this.id = Number(response[0]['id']);
-      this.tipoServicio = String(response[0]['tipoServicio']);
-      this.nombre = String(response[0]['nombre']);
-      this.direccion = String(response[0]['direccion']);
-      this.telefono = String(response[0]['telefono']);
-      this.coordenadas = String(response[0]['coordenadas']);
-      this.observaciones = String(response[0]['observaciones']);
-      this.tecnico = String(response[0]['tecnico']);
-      console.log(response[0]['tecnico']);
+      
       
 
       

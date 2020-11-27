@@ -34,8 +34,7 @@ export class Tab4Page implements OnInit {
   ngOnInit() {
     this.user1=this.storage.listarE();
     if (this.user1!=null) {
-     
-      console.log("user1 "+ this.user1.nombre);
+     console.log("user1 "+ this.user1.nombre);
     }else
     console.log("vacio")
   }

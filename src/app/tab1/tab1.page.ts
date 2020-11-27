@@ -29,6 +29,18 @@ export class Tab1Page implements OnInit {
    cliente: {},
     agendamiento: {}
   }
+
+  user1 = {
+    id: 0,
+    cedula: '',
+    nombre: '',
+    celular: '',
+    email: '',
+    password: '',
+    departamento: '',
+    registro: [],
+    instalacion: []
+  }
   checkbox={};
   color='#FFFFFF';
   id=0;
@@ -39,7 +51,7 @@ export class Tab1Page implements OnInit {
   lng1=0;
    clientes1: Registro[] = [];
    clientes: Cliente;
- 
+  visitas: Agendamiento[]= [];
   check:any;
   aux:boolean;
   datos:any=[];
@@ -54,6 +66,7 @@ export class Tab1Page implements OnInit {
       
   }
   ngOnInit(){
+    
     this.route.queryParams
      .subscribe(params => {
         params.id
@@ -64,6 +77,7 @@ export class Tab1Page implements OnInit {
         })
      });
      this.textoEnable();
+     
    } 
 
    textoDisable() {
@@ -77,9 +91,11 @@ export class Tab1Page implements OnInit {
   }
 
   public lista(){
-    this.service.todasV().subscribe(response => {
-      this.clientes1 = response;
-      console.log(this.clientes1)
+    this.user1=this.storage.listarE();
+     console.log("usuario nombre "+this.user1.nombre);
+    this.service.todasVs(this.user1.nombre).subscribe(response => {
+      this.visitas = response;
+      console.log("visitas"+this.visitas)
     },(error) => {
       console.log(error);
       

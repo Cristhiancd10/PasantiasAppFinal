@@ -140,7 +140,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "tyNb");
 /* harmony import */ var _capacitor_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @capacitor/core */ "gcOT");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
-/* harmony import */ var src_app_servicios_clientes_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/servicios/clientes.service */ "BRvp");
+/* harmony import */ var src_app_servicios_radio_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/servicios/radio.service */ "Ys19");
 /* harmony import */ var src_app_servicios_storage_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! src/app/servicios/storage.service */ "6k2k");
 /* harmony import */ var src_app_tab2_empleado__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! src/app/tab2/empleado */ "A1ZD");
 
@@ -276,7 +276,7 @@ LoginPage.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["ActivatedRoute"] },
     { type: _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormBuilder"] },
     { type: src_app_servicios_storage_service__WEBPACK_IMPORTED_MODULE_9__["StorageService"] },
-    { type: src_app_servicios_clientes_service__WEBPACK_IMPORTED_MODULE_8__["ClientesService"] },
+    { type: src_app_servicios_radio_service__WEBPACK_IMPORTED_MODULE_8__["RadioService"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__["ToastController"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__["LoadingController"] }
 ];

@@ -10,20 +10,20 @@
 
 <ion-content [fullscreen]="true">
   <!--routerLink llama al metodo 'datos' para mostar atributos -->
-  <ion-card *ngFor="let char of clientes1">
+  <ion-card *ngFor="let char of visitas">
     <ion-card-header >
-      <ion-card-title >{{char.cliente.nombre}}</ion-card-title>
+      <ion-card-title >{{char.registro.cliente.nombre}}</ion-card-title>
     </ion-card-header>
     <ion-card class="ion" [disabled]='deshabilitarTexto'> 
-    <ion-card-content [routerLink]="['/visita',char.id]" (click)="actualizar(char.id)" >
+      <ion-card-content [routerLink]="['/visita',char.registro.id]" (click)="actualizar(char.registro.id)" >
 
       <ion-label>Dirección:</ion-label>
       <ion-item>
-        <ion-label>{{char.cliente.direccionPrincipal}}</ion-label>
+        <ion-label>{{char.registro.cliente.direccionPrincipal}}</ion-label>
       </ion-item>
 
       <ion-item>
-        <ion-label>{{char.cliente.direccionReferencia}}</ion-label>
+        <ion-label>{{char.registro.cliente.direccionReferencia}}</ion-label>
       </ion-item>
 
     </ion-card-content>

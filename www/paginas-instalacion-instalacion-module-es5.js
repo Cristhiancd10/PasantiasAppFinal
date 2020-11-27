@@ -87,148 +87,6 @@
     },
 
     /***/
-    "BRvp":
-    /*!***********************************************!*\
-      !*** ./src/app/servicios/clientes.service.ts ***!
-      \***********************************************/
-
-    /*! exports provided: ClientesService */
-
-    /***/
-    function BRvp(module, __webpack_exports__, __webpack_require__) {
-      "use strict";
-
-      __webpack_require__.r(__webpack_exports__);
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "ClientesService", function () {
-        return ClientesService;
-      });
-      /* harmony import */
-
-
-      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! tslib */
-      "mrSG");
-      /* harmony import */
-
-
-      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-      /*! @angular/core */
-      "fXoL");
-      /* harmony import */
-
-
-      var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! @angular/common/http */
-      "tk/3");
-
-      var ClientesService = /*#__PURE__*/function () {
-        function ClientesService(http) {
-          _classCallCheck(this, ClientesService);
-
-          this.http = http;
-          this.httpHeaders = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
-            'Content-Type': 'application/json'
-          });
-        } // todas():Observable <Cliente[]> {
-        //   return this.http.get<Cliente[]>('http://34.95.195.201:8080/CallCenterA/Trabajo/crud/listar');
-        // }
-
-
-        _createClass(ClientesService, [{
-          key: "todasV",
-          value: function todasV() {
-            // return this.http.get<Registro[]>('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/listRgVT');
-            return this.http.get('http://localhost:8080/CallCenterAstronet/srv/astronet/listRgVT');
-          }
-        }, {
-          key: "todasI",
-          value: function todasI() {
-            // return this.http.get<Instalacion[]>('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/listInst');
-            return this.http.get('http://localhost:8080/CallCenterAstronet/srv/astronet/listInst');
-          }
-        }, {
-          key: "ListarAnt",
-          value: function ListarAnt() {
-            //  return this.http.get<Antena[]>('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/listarAn');
-            return this.http.get('http://localhost:8080/CallCenterAstronet/srv/astronet/listarAn');
-          }
-        }, {
-          key: "crear",
-          value: function crear(cliente) {
-            // return this.http.post<Response>('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/create', cliente, {headers: this.httpHeaders});
-            return this.http.post('http://localhost:8080/CallCenterAstronet/srv/astronet/create', cliente, {
-              headers: this.httpHeaders
-            });
-          }
-        }, {
-          key: "actualizar",
-          value: function actualizar(cliente) {
-            console.log("cliente actualizar " + cliente); // return this.http.put<Response>('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/actualizar',cliente);
-
-            return this.http.put('http://localhost:8080/CallCenterAstronet/srv/astronet/actualizar', cliente);
-          }
-        }, {
-          key: "actualizarVisita",
-          value: function actualizarVisita(registro) {
-            console.log("Registro actualizado " + registro); // return this.http.put<Response>('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/actualizarVisita',registro);
-
-            return this.http.put('http://localhost:8080/CallCenterAstronet/srv/astronet/actualizarVisita', registro);
-          }
-        }, {
-          key: "actualizarInstalacion",
-          value: function actualizarInstalacion(instalacion) {
-            console.log("Instalacion actualizada " + instalacion); // return this.http.put<Response>('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/actualizarInstalacion',instalacion);
-
-            return this.http.put('http://localhost:8080/CallCenterAstronet/srv/astronet/actualizarInstalacion', instalacion);
-          }
-        }, {
-          key: "buscarV",
-          value: function buscarV(id) {
-            console.log("id service " + id); //  return this.http.get<Registro>(`http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/buscarIdVis?id=${id}`);
-
-            return this.http.get("http://localhost:8080/CallCenterAstronet/srv/astronet/buscarIdVis?id=".concat(id));
-          } // buscar(id:number):Observable <Cliente> {
-          //   // return this.http.get<Cliente>(`http://34.95.195.201:8080/CallCenterAstronet/srv/astronet/buscarId?id=${id}`);
-          //   return this.http.get<Cliente>(`http://localhost:8080/CallCenter/srv/astronet/buscarId?id=${id}`);
-          // }
-
-        }, {
-          key: "buscarI",
-          value: function buscarI(id) {
-            //  return this.http.get<Instalacion>(`http://34.95.195.201:8080/CallCenterAstronet/srv/astronet/buscarInsId?id=${id}`);
-            // return this.http.get<Instalacion>(`http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/buscarInsId?id=${id}`);
-            return this.http.get("http://localhost:8080/CallCenterAstronet/srv/astronet/buscarInsId?id=".concat(id));
-          }
-        }, {
-          key: "login",
-          value: function login(cliente) {
-            //  return this.http.post<Empleado>('http://34.95.195.201:8080/CallCenterAstronet/srv/astronet/login', cliente, {headers: this.httpHeaders});
-            //  return this.http.post<Empleado>('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/login', cliente, {headers: this.httpHeaders});
-            return this.http.post('http://localhost:8080/CallCenterAstronet/srv/astronet/login', cliente, {
-              headers: this.httpHeaders
-            });
-          }
-        }]);
-
-        return ClientesService;
-      }();
-
-      ClientesService.ctorParameters = function () {
-        return [{
-          type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]
-        }];
-      };
-
-      ClientesService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-      })], ClientesService);
-      /***/
-    },
-
-    /***/
     "EBE4":
     /*!*********************************************************!*\
       !*** ./src/app/paginas/instalacion/instalacion.page.ts ***!
@@ -304,9 +162,9 @@
       /* harmony import */
 
 
-      var src_app_servicios_clientes_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
-      /*! src/app/servicios/clientes.service */
-      "BRvp"); //import { AlmacenamientoService } from '../../servicios/almacenamiento.service';
+      var src_app_servicios_radio_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+      /*! src/app/servicios/radio.service */
+      "Ys19"); //import { AlmacenamientoService } from '../../servicios/almacenamiento.service';
 
 
       var InstalacionPage = /*#__PURE__*/function () {
@@ -325,14 +183,14 @@
           this.deshabilitarTexto = false;
           this.user = {
             id: 0,
-            tipoServicio: "",
+            //tipoServicio: "",
             nombre: "",
             direccion: "",
             telefono: "",
             coordenadas: "",
             observaciones: "",
-            tecnico: "",
-            empleado: []
+            // tecnico: "",
+            empleado: {}
           };
         }
 
@@ -481,7 +339,7 @@
         }, {
           type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]
         }, {
-          type: src_app_servicios_clientes_service__WEBPACK_IMPORTED_MODULE_9__["ClientesService"]
+          type: src_app_servicios_radio_service__WEBPACK_IMPORTED_MODULE_9__["RadioService"]
         }, {
           type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["ActivatedRoute"]
         }];
@@ -512,6 +370,129 @@
 
 
       __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar class=\"colorToolbar\">\n    <ion-buttons slot=\"start\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n    <ion-title>Instalación</ion-title>\n\n    <ion-buttons slot=\"secondary\">\n      <ion-button (click)=\"mostrarPop( $event )\">\n        <ion-icon slot=\"icon-only\" md=\"ellipsis-vertical\" ></ion-icon> \n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"ion-padding\">\n  \n      <!--\n      <input type=\"text\" value=\"\" name=\"cedula\" [(ngModel)]=\"cedula\" (change)=\"validadorDeCedula(cedula)\" maxlength=\"10\">\n      <small *ngIf=\"!validador\" class=\"text-danger\">Cedula Invalida</small>\n      -->\n\n    <ion-list>\n\n      <ion-item>\n        <ion-label position=\"stacked\">Cédula:</ion-label>\n        <ion-input value={{user.id}} type=\"text\" maxlength=\"10\" placeholder=\"0101010101\" [readonly]='deshabilitarTexto'></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"stacked\">Nombres Completos:</ion-label>\n        <ion-input value={{user.nombre}} type=\"text\" placeholder=\"Apellidos Nombres\" [readonly]='deshabilitarTexto'></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"stacked\">Tipo de Servicio:</ion-label>\n        <ion-input value={{user.tipoServicio}} type=\"text\" [readonly]='deshabilitarTexto'></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"stacked\">Dirección:</ion-label>\n        <ion-input value={{user.direccion}} type=\"text\" placeholder=\"Calle principal\" [readonly]='deshabilitarTexto'></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"stacked\">Teléfonos:</ion-label>\n        <ion-input value={{user.telefono}} type=\"text\" maxlength=\"9\" [readonly]='deshabilitarTexto'></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"stacked\">Coordenadas:</ion-label>\n        <ion-input value={{user.coordenadas}} type=\"text\" maxlength=\"9\" [readonly]='deshabilitarTexto'></ion-input>\n      </ion-item>\n      \n\n      <ion-item>\n        <ion-label position=\"stacked\">Plan Adquirido:</ion-label>\n          <ion-select disabled interface=\"popover\">\n            <ion-select-option value=\"Basico\">Básico</ion-select-option>\n            <ion-select-option value=\"Intermedio\">Intermedio</ion-select-option>\n            <ion-select-option value=\"Alto\">Alto</ion-select-option>\n          </ion-select>\n          \n      </ion-item>\n      \n      <ion-item >\n        <ion-label>Observación: </ion-label>\n          <ion-input  value={{user.observaciones}} type=\"text\" maxlength=\"100\" [readonly]='deshabilitarTexto'></ion-input>\n        \n      </ion-item> \n       \n    </ion-list>\n   \n</ion-content>";
+      /***/
+    },
+
+    /***/
+    "Ys19":
+    /*!********************************************!*\
+      !*** ./src/app/servicios/radio.service.ts ***!
+      \********************************************/
+
+    /*! exports provided: RadioService */
+
+    /***/
+    function Ys19(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "RadioService", function () {
+        return RadioService;
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      "mrSG");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/core */
+      "fXoL");
+      /* harmony import */
+
+
+      var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! @angular/common/http */
+      "tk/3");
+
+      var RadioService = /*#__PURE__*/function () {
+        function RadioService(http) {
+          _classCallCheck(this, RadioService);
+
+          this.http = http;
+          this.httpHeaders = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
+            'Content-Type': 'application/json'
+          });
+        }
+
+        _createClass(RadioService, [{
+          key: "todasV",
+          value: function todasV() {
+            return this.http.get('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/listRgVT'); //  return this.http.get<Registro[]>('http://localhost:8080/CallCenterAstronet/srv/astronet/listRgVT');
+          }
+        }, {
+          key: "todasI",
+          value: function todasI() {
+            return this.http.get('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/listInst'); // return this.http.get<Instalacion[]>('http://localhost:8080/CallCenterAstronet/srv/astronet/listInst');
+          }
+        }, {
+          key: "ListarAnt",
+          value: function ListarAnt() {
+            return this.http.get('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/listarAn'); // return this.http.get<Antena[]>('http://localhost:8080/CallCenterAstronet/srv/astronet/listarAn');
+          }
+        }, {
+          key: "crear",
+          value: function crear(cliente) {
+            return this.http.post('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/create', cliente, {
+              headers: this.httpHeaders
+            }); //  return this.http.post<Response>('http://localhost:8080/CallCenterAstronet/srv/astronet/create', cliente, {headers: this.httpHeaders});
+          }
+        }, {
+          key: "actualizar",
+          value: function actualizar(cliente) {
+            console.log("cliente actualizar " + cliente);
+            return this.http.put('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/actualizar', cliente); //  return this.http.put<Response>('http://localhost:8080/CallCenterAstronet/srv/astronet/actualizar',cliente);
+          }
+        }, {
+          key: "actualizarVisita",
+          value: function actualizarVisita(registro) {
+            console.log("Registro actualizado " + registro);
+            return this.http.put('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/actualizarVisita', registro); //  return this.http.put<Response>('http://localhost:8080/CallCenterAstronet/srv/astronet/actualizarVisita', registro);
+          }
+        }, {
+          key: "actualizarInstalacion",
+          value: function actualizarInstalacion(instalacion) {
+            console.log("Instalacion actualizada " + instalacion);
+            return this.http.put('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/actualizarInstalacion', instalacion); //  return this.http.put<Response>('http://localhost:8080/CallCenterAstronet/srv/astronet/actualizarInstalacion', instalacion);
+          }
+        }, {
+          key: "buscarV",
+          value: function buscarV(id) {
+            console.log("id service " + id);
+            return this.http.get("http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/buscarIdVis?id=".concat(id)); // return this.http.get<Registro>(`http://localhost:8080/CallCenterAstronet/srv/astronet/buscarIdVis?id=${id}`);
+          }
+        }, {
+          key: "buscarI",
+          value: function buscarI(id) {
+            return this.http.get("http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/buscarInsId?id=".concat(id)); // return this.http.get<Instalacion>(`http://localhost:8080/CallCenterAstronet/srv/astronet/buscarInsId?id=${id}`);
+          }
+        }, {
+          key: "login",
+          value: function login(cliente) {
+            return this.http.post('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/login', cliente, {
+              headers: this.httpHeaders
+            }); // return this.http.post<Empleado>('http://localhost:8080/CallCenterAstronet/srv/astronet/login', cliente, {headers: this.httpHeaders});
+          }
+        }]);
+
+        return RadioService;
+      }();
+
+      RadioService.ctorParameters = function () {
+        return [{
+          type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]
+        }];
+      };
+
+      RadioService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+      })], RadioService);
       /***/
     },
 

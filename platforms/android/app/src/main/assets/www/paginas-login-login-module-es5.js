@@ -276,9 +276,9 @@
       /* harmony import */
 
 
-      var src_app_servicios_clientes_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
-      /*! src/app/servicios/clientes.service */
-      "BRvp");
+      var src_app_servicios_radio_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      /*! src/app/servicios/radio.service */
+      "Ys19");
       /* harmony import */
 
 
@@ -503,7 +503,7 @@
         }, {
           type: src_app_servicios_storage_service__WEBPACK_IMPORTED_MODULE_9__["StorageService"]
         }, {
-          type: src_app_servicios_clientes_service__WEBPACK_IMPORTED_MODULE_8__["ClientesService"]
+          type: src_app_servicios_radio_service__WEBPACK_IMPORTED_MODULE_8__["RadioService"]
         }, {
           type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__["ToastController"]
         }, {

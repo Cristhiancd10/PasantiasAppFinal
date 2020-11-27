@@ -83,8 +83,8 @@ export class NuevainsPage implements OnInit, OnDestroy {
       cedula: new FormControl(this.cliente.cedula,[Validators.required]),
       nombres: new FormControl(this.cliente.nombre,[Validators.pattern(/^[A-Za-z ]+$/), Validators.required]),
       email: new FormControl(this.cliente.email),
-      convencional: new FormControl(this.cliente.telefono, [Validators.required]),
-      celular: new FormControl(this.cliente.telefono, [Validators.required]),
+      convencional: new FormControl(this.cliente.convencional, [Validators.required]),
+      celular: new FormControl(this.cliente.celular, [Validators.required]),
       principal: new FormControl(this.cliente.dirPrincipal, [Validators.required]),
       secundaria: new FormControl(),
       referencia: new FormControl(this.cliente.dirReferencia, [Validators.required]),
@@ -113,7 +113,7 @@ export class NuevainsPage implements OnInit, OnDestroy {
     
     console.log(evt.detail.value);
     this.plan = (evt.detail.value);
-    this.servicio.plan.tipoPlan = this.plan;
+    this.servicio.plan = this.plan;
     
   }
   isConnected = false;
@@ -140,8 +140,8 @@ export class NuevainsPage implements OnInit, OnDestroy {
       console.log("Si funciona esto "+this.networkStatus.connected);
      // this.cliente.servicio=this.servicio;
      this.servicios.push(this.servicio);
-    // this.cliente.servicio = this.servicios;
-     //this.cliente.antena = this.antena;
+     this.cliente.servicio = this.servicios;
+     this.cliente.antena = this.antena;
      
      console.log(this.cliente, "Fuera de post");
      
@@ -156,8 +156,8 @@ export class NuevainsPage implements OnInit, OnDestroy {
         mensaje='Datos Guardados';
       const toast = await this.toastController.create({
         message: mensaje,
-        position: 'middle',
-        color:'danger',
+        position: 'bottom',
+        color:'success',
         duration: 2000
       });
       toast.present();
@@ -309,7 +309,8 @@ validateIp(ip) {
 
   valores = ip.split("."); 
 
-  return valores[0] <= 255 && valores[1] <= 255 && valores[2] <= 255 && valores[3] <= 255
+  
+  return valores[0] <= 255 && valores[1] <= 255 && valores[2] <= 255 && valores[3] <= 255 && valores[3] != 0  && valores[3] != 1 && valores[3] != 255
 }
 
 async validateForm(idForm) {
