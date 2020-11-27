@@ -24,10 +24,10 @@ export class Tab1Page implements OnInit {
     fechaHora: '',
     observaciones: '',
     problema: '',
-    realizado:false,
-    empleado: {},
-   cliente: {},
-    agendamiento: {}
+    accion:'',
+    //empleado: {},
+   cliente: {}
+    //agendamiento: {}
   }
 
   user1 = {
@@ -50,12 +50,12 @@ export class Tab1Page implements OnInit {
   lat1=0;
   lng1=0;
    clientes1: Registro[] = [];
-   clientes: Cliente;
-  visitas: Agendamiento[]= [];
-  check:any;
+   //clientes: Cliente;
+   clientes: Agendamiento[] = [];
+   check:any;
   aux:boolean;
   datos:any=[];
-  visita:Registro;
+  visita:Agendamiento;
 
   deshabilitarTexto=false;
 
@@ -94,8 +94,8 @@ export class Tab1Page implements OnInit {
     this.user1=this.storage.listarE();
      console.log("usuario nombre "+this.user1.nombre);
     this.service.todasVs(this.user1.nombre).subscribe(response => {
-      this.visitas = response;
-      console.log("visitas"+this.visitas)
+      this.clientes = response;
+      console.log("visitas"+this.clientes)
     },(error) => {
       console.log(error);
       

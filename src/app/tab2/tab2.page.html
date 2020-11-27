@@ -12,9 +12,9 @@
     <ion-card-header >
       <ion-card-title>{{char.nombre}}</ion-card-title>
     </ion-card-header>
-  
+    <ion-card class="ion" [disabled]='char.realizado'> 
     <ion-card-content [routerLink]="['/instalacion',char.id]" (click)="actualizar(char.id)"   >
-      <ion-card class="ion" [disabled]='deshabilitarTexto'> 
+      
       <ion-label >Dirección:</ion-label>
       <ion-item>
         <ion-label >{{char.direccion}}</ion-label>
@@ -23,9 +23,9 @@
       <ion-item>
         <ion-label  >{{char.coordenadas}}</ion-label>
       </ion-item>
-    </ion-card>
+    
     </ion-card-content>
-  
+  </ion-card>
     <ion-card *ngIf="char.realizado" name="trabajo" color="danger"   >
       <ion-item >
         <ion-label  *ngIf="char.realizado">Realizado</ion-label>

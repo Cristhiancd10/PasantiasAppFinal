@@ -7,10 +7,10 @@ export class Registro {
     fechaHora: string;
     observaciones: string;
     problema: string;
-   realizado:boolean;
-    empleado: Empleado;
+    accion:string;
+   // empleado: Empleado;
     cliente: Cliente;
-    agendamiento: Agendamiento;
+    //agendamiento: Agendamiento;
     
   
  }

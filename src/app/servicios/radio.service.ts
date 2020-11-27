@@ -51,10 +51,10 @@ export class RadioService {
          return this.http.put<Response>('http://localhost:8080/CallCenterAstronet/srv/astronet/actualizar',cliente);
     }
 
-    actualizarVisita(registro: Registro): Observable<Response> {
-      console.log("Registro actualizado " + registro)
-      // return this.http.put<Response>('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/actualizarVisita',registro);
-       return this.http.put<Response>('http://localhost:8080/CallCenterAstronet/srv/astronet/actualizarVisita', registro);
+    actualizarVisita(agendamiento: Agendamiento): Observable<Response> {
+      console.log("Registro actualizado " + agendamiento)
+      // return this.http.put<Response>('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/actualizarVisita',agendamiento);
+       return this.http.put<Response>('http://localhost:8080/CallCenterAstronet/srv/astronet/actualizarVisita', agendamiento);
     }
 
     actualizarInstalacion(instalacion: Instalacion): Observable<Response> {
