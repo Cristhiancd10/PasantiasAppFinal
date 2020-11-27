@@ -22,7 +22,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header [translucent]=\"true\" >\n  <ion-toolbar>\n    <ion-title>\n      Visita Técnica\n      \n    </ion-title>\n  </ion-toolbar>\n  \n</ion-header>\n\n<ion-content [fullscreen]=\"true\">\n  <!--routerLink llama al metodo 'datos' para mostar atributos -->\n  <ion-card *ngFor=\"let char of clientes1\">\n    <ion-card-header >\n      <ion-card-title >{{char.cliente.nombre}}</ion-card-title>\n    </ion-card-header>\n    <ion-card class=\"ion\" [disabled]='deshabilitarTexto'> \n      <ion-card-content [routerLink]=\"['/visita',char.id]\" (click)=\"actualizar(char.id)\" >\n\n      <ion-label>Dirección:</ion-label>\n      <ion-item>\n        <ion-label>{{char.cliente.direccionPrincipal}}</ion-label>\n      </ion-item>\n\n      <ion-item>\n        <ion-label>{{char.cliente.direccionReferencia}}</ion-label>\n      </ion-item>\n\n    </ion-card-content>\n  </ion-card>\n    <ion-card *ngIf=\"char.realizado\" name=\"trabajo\" color=\"danger\" >\n      <ion-item >\n        <ion-label  *ngIf=\"char.realizado\">Realizado</ion-label>\n\n        <ion-toggle *ngIf=\"char.realizado\" disabled=\"!char.realizado\" slot=\"end\" [(ngModel)]=\"char.realizado\"   (ionChange)=\"cambiar($event, char)\" ></ion-toggle>\n        <ion-toggle *ngIf=\"!char.realizado\" slot=\"end\" [(ngModel)]=\"char.realizado\"   (ionChange)=\"cambiar($event)\" ></ion-toggle>\n        \n       </ion-item>  \n    </ion-card>\n    <ion-card *ngIf=\"!char.realizado\" name=\"trabajo\" color=\"silver\" >\n      <ion-item >\n        \n\n        <ion-toggle *ngIf=\"char.realizado\" disabled=\"!char.realizado\" slot=\"end\" [(ngModel)]=\"char.realizado\"   (ionChange)=\"cambiar($event, char)\" ></ion-toggle>\n        <ion-toggle *ngIf=\"!char.realizado\" slot=\"end\" [(ngModel)]=\"char.realizado\"   (ionChange)=\"cambiar($event)\" ></ion-toggle>\n        \n       </ion-item>  \n    </ion-card>\n    \n  </ion-card>\n</ion-content>";
+      __webpack_exports__["default"] = "<ion-header [translucent]=\"true\" >\n  <ion-toolbar>\n    <ion-title>\n      Visita Técnica\n      \n    </ion-title>\n  </ion-toolbar>\n  \n</ion-header>\n\n<ion-content [fullscreen]=\"true\">\n  <!--routerLink llama al metodo 'datos' para mostar atributos -->\n  <ion-card *ngFor=\"let char of clientes\">\n    <ion-card-header >\n      <ion-card-title >{{char.registro.cliente.nombre}}</ion-card-title>\n    </ion-card-header>\n    <ion-card class=\"ion\" [disabled]='char.realizado'> \n      <ion-card-content [routerLink]=\"['/visita',char.registro.id]\" (click)=\"actualizar(char.registro.id)\" >\n        \n      <ion-label>Dirección:</ion-label>\n      <ion-item>\n        <ion-label>{{char.registro.cliente.direccionPrincipal}}</ion-label>\n      </ion-item>\n\n      <ion-item>\n        <ion-label>{{char.registro.cliente.direccionReferencia}}</ion-label>\n      </ion-item>\n    \n    </ion-card-content>\n  </ion-card>\n    <ion-card *ngIf=\"char.realizado\" name=\"trabajo\" color=\"danger\" >\n      <ion-item >\n        <ion-label  *ngIf=\"char.realizado\">Realizado</ion-label>\n\n        <ion-toggle *ngIf=\"char.realizado\" disabled=\"!char.realizado\" slot=\"end\" [(ngModel)]=\"char.realizado\"   (ionChange)=\"cambiar($event, char)\" ></ion-toggle>\n        <ion-toggle *ngIf=\"!char.realizado\" slot=\"end\" [(ngModel)]=\"char.realizado\"   (ionChange)=\"cambiar($event)\" ></ion-toggle>\n        \n       </ion-item>  \n    </ion-card>\n    <ion-card *ngIf=\"!char.realizado\" name=\"trabajo\" color=\"silver\" >\n      <ion-item >\n        \n\n        <ion-toggle *ngIf=\"char.realizado\" disabled=\"!char.realizado\" slot=\"end\" [(ngModel)]=\"char.realizado\"   (ionChange)=\"cambiar($event, char)\" ></ion-toggle>\n        <ion-toggle *ngIf=\"!char.realizado\" slot=\"end\" [(ngModel)]=\"char.realizado\"   (ionChange)=\"cambiar($event)\" ></ion-toggle>\n        \n       </ion-item>  \n    </ion-card>\n    \n  </ion-card>\n</ion-content>";
       /***/
     },
 
@@ -111,10 +111,21 @@
             fechaHora: '',
             observaciones: '',
             problema: '',
-            realizado: false,
-            empleado: {},
-            cliente: {},
-            agendamiento: {}
+            accion: '',
+            //empleado: {},
+            cliente: {} //agendamiento: {}
+
+          };
+          this.user1 = {
+            id: 0,
+            cedula: '',
+            nombre: '',
+            celular: '',
+            email: '',
+            password: '',
+            departamento: '',
+            registro: [],
+            instalacion: []
           };
           this.checkbox = {};
           this.color = '#FFFFFF';
@@ -124,7 +135,9 @@
           this.apellido = null;
           this.lat1 = 0;
           this.lng1 = 0;
-          this.clientes1 = [];
+          this.clientes1 = []; //clientes: Cliente;
+
+          this.clientes = [];
           this.datos = [];
           this.deshabilitarTexto = false;
           this.lista();
@@ -166,9 +179,11 @@
           value: function lista() {
             var _this3 = this;
 
-            this.service.todasV().subscribe(function (response) {
-              _this3.clientes1 = response;
-              console.log(_this3.clientes1);
+            this.user1 = this.storage.listarE();
+            console.log("usuario nombre " + this.user1.nombre);
+            this.service.todasVs(this.user1.nombre).subscribe(function (response) {
+              _this3.clientes = response;
+              console.log("visitas" + _this3.clientes);
             }, function (error) {
               console.log(error);
             });
@@ -341,6 +356,16 @@
             return this.http.get('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/listInst'); // return this.http.get<Instalacion[]>('http://localhost:8080/CallCenterAstronet/srv/astronet/listInst');
           }
         }, {
+          key: "todasVs",
+          value: function todasVs(nombre) {
+            return this.http.get("http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/listAG?nombre=".concat(nombre)); // return this.http.get<Agendamiento[]>(`http://localhost:8080/CallCenterAstronet/srv/astronet/listAG?nombre=${nombre}`);
+          }
+        }, {
+          key: "todasIs",
+          value: function todasIs(nombre) {
+            return this.http.get("http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/listIns?nombre=".concat(nombre)); // return this.http.get<Instalacion[]>(`http://localhost:8080/CallCenterAstronet/srv/astronet/listIns?nombre=${nombre}`);
+          }
+        }, {
           key: "ListarAnt",
           value: function ListarAnt() {
             return this.http.get('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/listarAn'); // return this.http.get<Antena[]>('http://localhost:8080/CallCenterAstronet/srv/astronet/listarAn');
@@ -360,9 +385,9 @@
           }
         }, {
           key: "actualizarVisita",
-          value: function actualizarVisita(registro) {
-            console.log("Registro actualizado " + registro);
-            return this.http.put('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/actualizarVisita', registro); //  return this.http.put<Response>('http://localhost:8080/CallCenterAstronet/srv/astronet/actualizarVisita', registro);
+          value: function actualizarVisita(agendamiento) {
+            console.log("Registro actualizado " + agendamiento);
+            return this.http.put('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/actualizarVisita', agendamiento); //  return this.http.put<Response>('http://localhost:8080/CallCenterAstronet/srv/astronet/actualizarVisita', agendamiento);
           }
         }, {
           key: "actualizarInstalacion",
@@ -373,7 +398,7 @@
         }, {
           key: "buscarV",
           value: function buscarV(id) {
-            console.log("id service " + id);
+            console.log("id service service " + id);
             return this.http.get("http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/buscarIdVis?id=".concat(id)); // return this.http.get<Registro>(`http://localhost:8080/CallCenterAstronet/srv/astronet/buscarIdVis?id=${id}`);
           }
         }, {

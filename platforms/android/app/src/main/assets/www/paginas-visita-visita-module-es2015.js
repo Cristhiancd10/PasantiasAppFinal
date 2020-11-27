@@ -133,14 +133,15 @@ let VisitaPage = class VisitaPage {
     ngOnInit() {
         this.route.queryParams
             .subscribe(params => {
-            params.id;
-            this.service.buscarV(params.id).subscribe(response => {
-                this.user2 = response.cliente;
-                this.latitudmaps = Number(this.user2.latitud);
-                this.longitudmaps = Number(this.user2.longitud);
-            });
+            this.id = params.id;
         });
         //this.textoDisable();
+        this.service.buscarV(this.id).subscribe(response => {
+            console.log("response visita" + response);
+            this.user2 = response.cliente;
+            this.latitudmaps = Number(this.user2.latitud);
+            this.longitudmaps = Number(this.user2.longitud);
+        });
         this.textoDisable();
         console.log(this.deshabilitarTexto);
         if (this.deshabilitarTexto) {
@@ -256,7 +257,7 @@ let VisitaPage = class VisitaPage {
             return false;
         }
         valores = ip.split(".");
-        return valores[0] <= 255 && valores[1] <= 255 && valores[2] <= 255 && valores[3] <= 255;
+        return valores[0] <= 255 && valores[1] <= 255 && valores[2] <= 255 && valores[3] <= 255 && valores[3] <= 255 && valores[3] != 0 && valores[3] != 1 && valores[3] != 255;
     }
     validateForm(idForm) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {

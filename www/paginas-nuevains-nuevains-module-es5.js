@@ -531,7 +531,7 @@
             }
 
             valores = ip.split(".");
-            return valores[0] <= 255 && valores[1] <= 255 && valores[2] <= 255 && valores[3] <= 255;
+            return valores[0] <= 255 && valores[1] <= 255 && valores[2] <= 255 && valores[3] <= 255 && valores[3] != 0 && valores[3] != 1 && valores[3] != 255;
           }
         }, {
           key: "validateForm",

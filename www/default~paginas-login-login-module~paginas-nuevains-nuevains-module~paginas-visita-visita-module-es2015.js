@@ -1154,6 +1154,14 @@ let RadioService = class RadioService {
         return this.http.get('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/listInst');
         // return this.http.get<Instalacion[]>('http://localhost:8080/CallCenterAstronet/srv/astronet/listInst');
     }
+    todasVs(nombre) {
+        return this.http.get(`http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/listAG?nombre=${nombre}`);
+        // return this.http.get<Agendamiento[]>(`http://localhost:8080/CallCenterAstronet/srv/astronet/listAG?nombre=${nombre}`);
+    }
+    todasIs(nombre) {
+        return this.http.get(`http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/listIns?nombre=${nombre}`);
+        // return this.http.get<Instalacion[]>(`http://localhost:8080/CallCenterAstronet/srv/astronet/listIns?nombre=${nombre}`);
+    }
     ListarAnt() {
         return this.http.get('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/listarAn');
         // return this.http.get<Antena[]>('http://localhost:8080/CallCenterAstronet/srv/astronet/listarAn');
@@ -1167,10 +1175,10 @@ let RadioService = class RadioService {
         return this.http.put('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/actualizar', cliente);
         //  return this.http.put<Response>('http://localhost:8080/CallCenterAstronet/srv/astronet/actualizar',cliente);
     }
-    actualizarVisita(registro) {
-        console.log("Registro actualizado " + registro);
-        return this.http.put('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/actualizarVisita', registro);
-        //  return this.http.put<Response>('http://localhost:8080/CallCenterAstronet/srv/astronet/actualizarVisita', registro);
+    actualizarVisita(agendamiento) {
+        console.log("Registro actualizado " + agendamiento);
+        return this.http.put('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/actualizarVisita', agendamiento);
+        //  return this.http.put<Response>('http://localhost:8080/CallCenterAstronet/srv/astronet/actualizarVisita', agendamiento);
     }
     actualizarInstalacion(instalacion) {
         console.log("Instalacion actualizada " + instalacion);
@@ -1178,7 +1186,7 @@ let RadioService = class RadioService {
         //  return this.http.put<Response>('http://localhost:8080/CallCenterAstronet/srv/astronet/actualizarInstalacion', instalacion);
     }
     buscarV(id) {
-        console.log("id service " + id);
+        console.log("id service service " + id);
         return this.http.get(`http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/buscarIdVis?id=${id}`);
         // return this.http.get<Registro>(`http://localhost:8080/CallCenterAstronet/srv/astronet/buscarIdVis?id=${id}`);
     }

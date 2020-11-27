@@ -62,6 +62,17 @@ let Tab2Page = class Tab2Page {
             //tecnico: "",
             empleado: {},
         };
+        this.user1 = {
+            id: 0,
+            cedula: '',
+            nombre: '',
+            celular: '',
+            email: '',
+            password: '',
+            departamento: '',
+            registro: [],
+            instalacion: []
+        };
         this.checkbox = {};
         this.id = 0;
         this.nombre = null;
@@ -100,17 +111,9 @@ let Tab2Page = class Tab2Page {
         this.deshabilitarTexto = false;
     }
     lista() {
-        this.service.todasI().subscribe(response => {
+        this.user1 = this.storage.listarE();
+        this.service.todasIs(this.user1.nombre).subscribe(response => {
             this.clientes = response;
-            this.id = Number(response[0]['id']);
-            this.tipoServicio = String(response[0]['tipoServicio']);
-            this.nombre = String(response[0]['nombre']);
-            this.direccion = String(response[0]['direccion']);
-            this.telefono = String(response[0]['telefono']);
-            this.coordenadas = String(response[0]['coordenadas']);
-            this.observaciones = String(response[0]['observaciones']);
-            this.tecnico = String(response[0]['tecnico']);
-            console.log(response[0]['tecnico']);
         }, (error) => {
             console.log(error);
         });
@@ -281,6 +284,14 @@ let RadioService = class RadioService {
         return this.http.get('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/listInst');
         // return this.http.get<Instalacion[]>('http://localhost:8080/CallCenterAstronet/srv/astronet/listInst');
     }
+    todasVs(nombre) {
+        return this.http.get(`http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/listAG?nombre=${nombre}`);
+        // return this.http.get<Agendamiento[]>(`http://localhost:8080/CallCenterAstronet/srv/astronet/listAG?nombre=${nombre}`);
+    }
+    todasIs(nombre) {
+        return this.http.get(`http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/listIns?nombre=${nombre}`);
+        // return this.http.get<Instalacion[]>(`http://localhost:8080/CallCenterAstronet/srv/astronet/listIns?nombre=${nombre}`);
+    }
     ListarAnt() {
         return this.http.get('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/listarAn');
         // return this.http.get<Antena[]>('http://localhost:8080/CallCenterAstronet/srv/astronet/listarAn');
@@ -294,10 +305,10 @@ let RadioService = class RadioService {
         return this.http.put('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/actualizar', cliente);
         //  return this.http.put<Response>('http://localhost:8080/CallCenterAstronet/srv/astronet/actualizar',cliente);
     }
-    actualizarVisita(registro) {
-        console.log("Registro actualizado " + registro);
-        return this.http.put('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/actualizarVisita', registro);
-        //  return this.http.put<Response>('http://localhost:8080/CallCenterAstronet/srv/astronet/actualizarVisita', registro);
+    actualizarVisita(agendamiento) {
+        console.log("Registro actualizado " + agendamiento);
+        return this.http.put('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/actualizarVisita', agendamiento);
+        //  return this.http.put<Response>('http://localhost:8080/CallCenterAstronet/srv/astronet/actualizarVisita', agendamiento);
     }
     actualizarInstalacion(instalacion) {
         console.log("Instalacion actualizada " + instalacion);
@@ -305,7 +316,7 @@ let RadioService = class RadioService {
         //  return this.http.put<Response>('http://localhost:8080/CallCenterAstronet/srv/astronet/actualizarInstalacion', instalacion);
     }
     buscarV(id) {
-        console.log("id service " + id);
+        console.log("id service service " + id);
         return this.http.get(`http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/buscarIdVis?id=${id}`);
         // return this.http.get<Registro>(`http://localhost:8080/CallCenterAstronet/srv/astronet/buscarIdVis?id=${id}`);
     }
@@ -340,7 +351,7 @@ RadioService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header [translucent]=\"true\">\n  <ion-toolbar>\n    <ion-title>\n      Instalaciones\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content [fullscreen]=\"true\" >\n  <!--routerLink llama al metodo 'datos' para mostar atributos -->\n  <ion-card *ngFor=\"let char of clientes\">\n    <ion-card-header >\n      <ion-card-title>{{char.nombre}}</ion-card-title>\n    </ion-card-header>\n  <ion-card class=\"ion\" [disabled]='deshabilitarTexto'> \n    <ion-card-content [routerLink]=\"['/instalacion',char.id]\" (click)=\"actualizar(char.id)\"   >\n\n      <ion-label >Dirección:</ion-label>\n      <ion-item>\n        <ion-label >{{char.direccion}}</ion-label>\n      </ion-item>\n\n      <ion-item>\n        <ion-label  >{{char.coordenadas}}</ion-label>\n      </ion-item>\n\n    </ion-card-content>\n  </ion-card>\n    <ion-card *ngIf=\"char.realizado\" name=\"trabajo\" color=\"danger\"   >\n      <ion-item >\n        <ion-label  *ngIf=\"char.realizado\">Realizado</ion-label>\n\n        <ion-toggle *ngIf=\"char.realizado\" disabled=\"!char.realizado\" slot=\"end\" [(ngModel)]=\"char.realizado\"   (ionChange)=\"cambiar($event, char)\" ></ion-toggle>\n        <ion-toggle *ngIf=\"!char.realizado\" slot=\"end\" [(ngModel)]=\"char.realizado\"   (ionChange)=\"cambiar($event)\" ></ion-toggle>\n        \n       </ion-item>  \n    </ion-card>\n    <ion-card *ngIf=\"!char.realizado\" name=\"trabajo\" color=\"silver\" >\n      <ion-item >\n        \n\n        <ion-toggle *ngIf=\"char.realizado\" disabled=\"!char.realizado\" slot=\"end\" [(ngModel)]=\"char.realizado\"   (ionChange)=\"cambiar($event, char)\" ></ion-toggle>\n        <ion-toggle *ngIf=\"!char.realizado\" slot=\"end\" [(ngModel)]=\"char.realizado\"   (ionChange)=\"cambiar($event)\" ></ion-toggle>\n        \n       </ion-item>  \n    </ion-card>\n    \n  </ion-card>\n</ion-content>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header [translucent]=\"true\">\n  <ion-toolbar>\n    <ion-title>\n      Instalaciones\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content [fullscreen]=\"true\" >\n  <!--routerLink llama al metodo 'datos' para mostar atributos -->\n  <ion-card *ngFor=\"let char of clientes\">\n    <ion-card-header >\n      <ion-card-title>{{char.nombre}}</ion-card-title>\n    </ion-card-header>\n    <ion-card class=\"ion\" [disabled]='char.realizado'> \n    <ion-card-content [routerLink]=\"['/instalacion',char.id]\" (click)=\"actualizar(char.id)\"   >\n      \n      <ion-label >Dirección:</ion-label>\n      <ion-item>\n        <ion-label >{{char.direccion}}</ion-label>\n      </ion-item>\n\n      <ion-item>\n        <ion-label  >{{char.coordenadas}}</ion-label>\n      </ion-item>\n    \n    </ion-card-content>\n  </ion-card>\n    <ion-card *ngIf=\"char.realizado\" name=\"trabajo\" color=\"danger\"   >\n      <ion-item >\n        <ion-label  *ngIf=\"char.realizado\">Realizado</ion-label>\n\n        <ion-toggle *ngIf=\"char.realizado\" disabled=\"!char.realizado\" slot=\"end\" [(ngModel)]=\"char.realizado\"   (ionChange)=\"cambiar($event, char)\" ></ion-toggle>\n        <ion-toggle *ngIf=\"!char.realizado\" slot=\"end\" [(ngModel)]=\"char.realizado\"   (ionChange)=\"cambiar($event)\" ></ion-toggle>\n        \n       </ion-item>  \n    </ion-card>\n    <ion-card *ngIf=\"!char.realizado\" name=\"trabajo\" color=\"silver\" >\n      <ion-item >\n        \n\n        <ion-toggle *ngIf=\"char.realizado\" disabled=\"!char.realizado\" slot=\"end\" [(ngModel)]=\"char.realizado\"   (ionChange)=\"cambiar($event, char)\" ></ion-toggle>\n        <ion-toggle *ngIf=\"!char.realizado\" slot=\"end\" [(ngModel)]=\"char.realizado\"   (ionChange)=\"cambiar($event)\" ></ion-toggle>\n        \n       </ion-item>  \n    </ion-card>\n    \n  </ion-card>\n</ion-content>");
 
 /***/ })
 

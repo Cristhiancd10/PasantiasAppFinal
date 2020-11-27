@@ -114,8 +114,7 @@ export class Tab1Page implements OnInit {
     });
     console.log("funciona visita");
   }
-   
-    
+       
   cambiar(event, char){
     this.visita=char;
     console.log("actualizar", this.visita);

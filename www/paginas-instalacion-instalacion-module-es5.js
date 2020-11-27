@@ -432,6 +432,16 @@
             return this.http.get('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/listInst'); // return this.http.get<Instalacion[]>('http://localhost:8080/CallCenterAstronet/srv/astronet/listInst');
           }
         }, {
+          key: "todasVs",
+          value: function todasVs(nombre) {
+            return this.http.get("http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/listAG?nombre=".concat(nombre)); // return this.http.get<Agendamiento[]>(`http://localhost:8080/CallCenterAstronet/srv/astronet/listAG?nombre=${nombre}`);
+          }
+        }, {
+          key: "todasIs",
+          value: function todasIs(nombre) {
+            return this.http.get("http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/listIns?nombre=".concat(nombre)); // return this.http.get<Instalacion[]>(`http://localhost:8080/CallCenterAstronet/srv/astronet/listIns?nombre=${nombre}`);
+          }
+        }, {
           key: "ListarAnt",
           value: function ListarAnt() {
             return this.http.get('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/listarAn'); // return this.http.get<Antena[]>('http://localhost:8080/CallCenterAstronet/srv/astronet/listarAn');
@@ -451,9 +461,9 @@
           }
         }, {
           key: "actualizarVisita",
-          value: function actualizarVisita(registro) {
-            console.log("Registro actualizado " + registro);
-            return this.http.put('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/actualizarVisita', registro); //  return this.http.put<Response>('http://localhost:8080/CallCenterAstronet/srv/astronet/actualizarVisita', registro);
+          value: function actualizarVisita(agendamiento) {
+            console.log("Registro actualizado " + agendamiento);
+            return this.http.put('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/actualizarVisita', agendamiento); //  return this.http.put<Response>('http://localhost:8080/CallCenterAstronet/srv/astronet/actualizarVisita', agendamiento);
           }
         }, {
           key: "actualizarInstalacion",
@@ -464,7 +474,7 @@
         }, {
           key: "buscarV",
           value: function buscarV(id) {
-            console.log("id service " + id);
+            console.log("id service service " + id);
             return this.http.get("http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/buscarIdVis?id=".concat(id)); // return this.http.get<Registro>(`http://localhost:8080/CallCenterAstronet/srv/astronet/buscarIdVis?id=${id}`);
           }
         }, {

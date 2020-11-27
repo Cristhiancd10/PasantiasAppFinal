@@ -315,7 +315,7 @@ let NuevainsPage = class NuevainsPage {
             return false;
         }
         valores = ip.split(".");
-        return valores[0] <= 255 && valores[1] <= 255 && valores[2] <= 255 && valores[3] <= 255;
+        return valores[0] <= 255 && valores[1] <= 255 && valores[2] <= 255 && valores[3] <= 255 && valores[3] != 0 && valores[3] != 1 && valores[3] != 255;
     }
     validateForm(idForm) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {

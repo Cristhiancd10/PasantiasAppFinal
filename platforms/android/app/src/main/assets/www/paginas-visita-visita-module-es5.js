@@ -241,15 +241,15 @@
             var _this = this;
 
             this.route.queryParams.subscribe(function (params) {
-              params.id;
-
-              _this.service.buscarV(params.id).subscribe(function (response) {
-                _this.user2 = response.cliente;
-                _this.latitudmaps = Number(_this.user2.latitud);
-                _this.longitudmaps = Number(_this.user2.longitud);
-              });
+              _this.id = params.id;
             }); //this.textoDisable();
 
+            this.service.buscarV(this.id).subscribe(function (response) {
+              console.log("response visita" + response);
+              _this.user2 = response.cliente;
+              _this.latitudmaps = Number(_this.user2.latitud);
+              _this.longitudmaps = Number(_this.user2.longitud);
+            });
             this.textoDisable();
             console.log(this.deshabilitarTexto);
 
@@ -433,7 +433,7 @@
             }
 
             valores = ip.split(".");
-            return valores[0] <= 255 && valores[1] <= 255 && valores[2] <= 255 && valores[3] <= 255;
+            return valores[0] <= 255 && valores[1] <= 255 && valores[2] <= 255 && valores[3] <= 255 && valores[3] <= 255 && valores[3] != 0 && valores[3] != 1 && valores[3] != 255;
           }
         }, {
           key: "validateForm",

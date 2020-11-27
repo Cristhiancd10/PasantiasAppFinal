@@ -135,7 +135,7 @@ export class VisitaPage implements OnInit, OnDestroy {
       aux=String (this.networkStatus.connected);
 
       if( aux=="true") {
-      this.service.actualizar(this.user2).subscribe(res =>{
+      this.service.actualizar1(this.user2).subscribe(res =>{
       console.log("res "+this.user2);
       this.deshabilitarTexto = !this.deshabilitarTexto;
     });
