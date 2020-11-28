@@ -277,55 +277,73 @@ let RadioService = class RadioService {
         this.httpHeaders = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' });
     }
     todasV() {
-        return this.http.get('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/listRgVT');
+        // return this.http.get<Registro[]>('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/listRgVT');
+        return this.http.get('http://35.222.54.60:8080/CallCenterAstronet/srv/astronet/listRgVT');
         //  return this.http.get<Registro[]>('http://localhost:8080/CallCenterAstronet/srv/astronet/listRgVT');
     }
     todasI() {
-        return this.http.get('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/listInst');
+        // return this.http.get<Instalacion[]>('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/listInst');
+        return this.http.get('http://35.222.54.60:8080/CallCenterAstronet/srv/astronet/listInst');
         // return this.http.get<Instalacion[]>('http://localhost:8080/CallCenterAstronet/srv/astronet/listInst');
     }
     todasVs(nombre) {
-        return this.http.get(`http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/listAG?nombre=${nombre}`);
+        // return this.http.get<Agendamiento[]>(`http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/listAG?nombre=${nombre}`);
+        return this.http.get(`http://35.222.54.60:8080/CallCenterAstronet/srv/astronet/listAG?nombre=${nombre}`);
         // return this.http.get<Agendamiento[]>(`http://localhost:8080/CallCenterAstronet/srv/astronet/listAG?nombre=${nombre}`);
     }
     todasIs(nombre) {
-        return this.http.get(`http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/listIns?nombre=${nombre}`);
+        // return this.http.get<Instalacion[]>(`http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/listIns?nombre=${nombre}`);
+        return this.http.get(`http://35.222.54.60:8080/CallCenterAstronet/srv/astronet/listIns?nombre=${nombre}`);
         // return this.http.get<Instalacion[]>(`http://localhost:8080/CallCenterAstronet/srv/astronet/listIns?nombre=${nombre}`);
     }
     ListarAnt() {
-        return this.http.get('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/listarAn');
+        //  return this.http.get<Antena[]>('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/listarAn');
+        return this.http.get('http://35.222.54.60:8080/CallCenterAstronet/srv/astronet/listarAn');
         // return this.http.get<Antena[]>('http://localhost:8080/CallCenterAstronet/srv/astronet/listarAn');
     }
     crear(cliente) {
-        return this.http.post('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/create', cliente, { headers: this.httpHeaders });
+        // return this.http.post<Response>('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/create', cliente, {headers: this.httpHeaders});
+        return this.http.post('http://35.222.54.60:8080/CallCenterAstronet/srv/astronet/create', cliente, { headers: this.httpHeaders });
         //  return this.http.post<Response>('http://localhost:8080/CallCenterAstronet/srv/astronet/create', cliente, {headers: this.httpHeaders});
     }
     actualizar(cliente) {
         console.log("cliente actualizar " + cliente);
-        return this.http.put('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/actualizar', cliente);
-        //  return this.http.put<Response>('http://localhost:8080/CallCenterAstronet/srv/astronet/actualizar',cliente);
+        // return this.http.put<Response>('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/actualizar',cliente);
+        return this.http.put('http://35.222.54.60:8080/CallCenterAstronet/srv/astronet/actualizar', cliente);
+        // return this.http.put<Response>('http://localhost:8080/CallCenterAstronet/srv/astronet/actualizar',cliente);
+    }
+    actualizar1(cliente) {
+        console.log("cliente actualizar " + cliente);
+        // return this.http.put<Response>('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/actualizarCl',cliente);
+        return this.http.put('http://35.222.54.60:8080/CallCenterAstronet/srv/astronet/actualizarCl', cliente);
+        // return this.http.put<Response>('http://localhost:8080/CallCenterAstronet/srv/astronet/actualizarCl',cliente);
     }
     actualizarVisita(agendamiento) {
         console.log("Registro actualizado " + agendamiento);
-        return this.http.put('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/actualizarVisita', agendamiento);
+        // return this.http.put<Response>('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/actualizarVisita',agendamiento);
+        return this.http.put('http://35.222.54.60:8080/CallCenterAstronet/srv/astronet/actualizarVisita', agendamiento);
         //  return this.http.put<Response>('http://localhost:8080/CallCenterAstronet/srv/astronet/actualizarVisita', agendamiento);
     }
     actualizarInstalacion(instalacion) {
         console.log("Instalacion actualizada " + instalacion);
-        return this.http.put('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/actualizarInstalacion', instalacion);
+        // return this.http.put<Response>('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/actualizarInstalacion',instalacion);
+        return this.http.put('http://35.222.54.60:8080/CallCenterAstronet/srv/astronet/actualizarInstalacion', instalacion);
         //  return this.http.put<Response>('http://localhost:8080/CallCenterAstronet/srv/astronet/actualizarInstalacion', instalacion);
     }
     buscarV(id) {
         console.log("id service service " + id);
-        return this.http.get(`http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/buscarIdVis?id=${id}`);
+        //  return this.http.get<Registro>(`http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/buscarIdVis?id=${id}`);
+        return this.http.get(`http://35.222.54.60:8080/CallCenterAstronet/srv/astronet/buscarIdVis?id=${id}`);
         // return this.http.get<Registro>(`http://localhost:8080/CallCenterAstronet/srv/astronet/buscarIdVis?id=${id}`);
     }
     buscarI(id) {
-        return this.http.get(`http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/buscarInsId?id=${id}`);
+        // return this.http.get<Instalacion>(`http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/buscarInsId?id=${id}`);
+        return this.http.get(`http://35.222.54.60:8080/CallCenterAstronet/srv/astronet/buscarInsId?id=${id}`);
         // return this.http.get<Instalacion>(`http://localhost:8080/CallCenterAstronet/srv/astronet/buscarInsId?id=${id}`);
     }
     login(cliente) {
-        return this.http.post('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/login', cliente, { headers: this.httpHeaders });
+        //  return this.http.post<Empleado>('http://35.184.60.118:8080/CallCenterAstronet/srv/astronet/login', cliente, {headers: this.httpHeaders});
+        return this.http.post('http://35.222.54.60:8080/CallCenterAstronet/srv/astronet/login', cliente, { headers: this.httpHeaders });
         // return this.http.post<Empleado>('http://localhost:8080/CallCenterAstronet/srv/astronet/login', cliente, {headers: this.httpHeaders});
     }
 };
