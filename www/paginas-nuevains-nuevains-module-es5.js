@@ -248,17 +248,18 @@
             this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormGroup"]({
               cedula: new _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormControl"](this.cliente.cedula, [_angular_forms__WEBPACK_IMPORTED_MODULE_12__["Validators"].required]),
               nombres: new _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormControl"](this.cliente.nombre, [_angular_forms__WEBPACK_IMPORTED_MODULE_12__["Validators"].pattern(/^[A-Za-z ]+$/), _angular_forms__WEBPACK_IMPORTED_MODULE_12__["Validators"].required]),
+              apellidos: new _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormControl"](this.cliente.apellido, [_angular_forms__WEBPACK_IMPORTED_MODULE_12__["Validators"].pattern(/^[A-Za-z ]+$/), _angular_forms__WEBPACK_IMPORTED_MODULE_12__["Validators"].required]),
               email: new _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormControl"](this.cliente.email),
-              convencional: new _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormControl"](this.cliente.convencional, [_angular_forms__WEBPACK_IMPORTED_MODULE_12__["Validators"].required]),
-              celular: new _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormControl"](this.cliente.celular, [_angular_forms__WEBPACK_IMPORTED_MODULE_12__["Validators"].required]),
-              principal: new _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormControl"](this.cliente.dirPrincipal, [_angular_forms__WEBPACK_IMPORTED_MODULE_12__["Validators"].required]),
+              // convencional: new FormControl(this.cliente.convencional, [Validators.required]),
+              // celular: new FormControl(this.cliente.celular, [Validators.required]),
+              principal: new _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormControl"](this.cliente.direccionPrincipal, [_angular_forms__WEBPACK_IMPORTED_MODULE_12__["Validators"].required]),
               secundaria: new _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormControl"](),
-              referencia: new _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormControl"](this.cliente.dirReferencia, [_angular_forms__WEBPACK_IMPORTED_MODULE_12__["Validators"].required]),
+              referencia: new _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormControl"](this.cliente.direccionReferencia, [_angular_forms__WEBPACK_IMPORTED_MODULE_12__["Validators"].required]),
               contrato: new _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormControl"](),
-              plan: new _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormControl"](),
-              ip: new _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormControl"](),
-              antena: new _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormControl"](),
-              password: new _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormControl"](),
+              //plan: new FormControl( ),
+              //ip: new FormControl( ),
+              // antena: new FormControl(),
+              // password: new FormControl(),
               observacion: new _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormControl"]()
             });
           }
@@ -307,15 +308,15 @@
                       aux = String(this.networkStatus.connected);
 
                       if (!(aux == "true")) {
-                        _context.next = 20;
+                        _context.next = 19;
                         break;
                       }
 
                       console.log("Si funciona esto " + this.networkStatus.connected); // this.cliente.servicio=this.servicio;
 
                       this.servicios.push(this.servicio);
-                      this.cliente.servicio = this.servicios;
-                      this.cliente.antena = this.antena;
+                      this.cliente.servicio = this.servicios; //this.cliente.antena = this.antena;
+
                       console.log(this.cliente, "Fuera de post");
                       this.service.crear(this.cliente).subscribe(function (res) {
                         _this2.router.navigate(['/tabs'], {
@@ -328,7 +329,7 @@
                       });
                       mensaje = '';
                       mensaje = 'Datos Guardados';
-                      _context.next = 16;
+                      _context.next = 15;
                       return this.toastController.create({
                         message: mensaje,
                         position: 'bottom',
@@ -336,15 +337,15 @@
                         duration: 2000
                       });
 
-                    case 16:
+                    case 15:
                       toast = _context.sent;
                       toast.present();
-                      _context.next = 30;
+                      _context.next = 29;
                       break;
 
-                    case 20:
+                    case 19:
                       if (!(aux == "false")) {
-                        _context.next = 30;
+                        _context.next = 29;
                         break;
                       }
 
@@ -353,7 +354,7 @@
                       console.log(" storage " + this.storage.listar());
                       _mensaje = '';
                       _mensaje = 'Datos se guardaran cuando haiga internet';
-                      _context.next = 28;
+                      _context.next = 27;
                       return this.toastController.create({
                         message: _mensaje,
                         position: 'middle',
@@ -361,15 +362,15 @@
                         duration: 2000
                       });
 
-                    case 28:
+                    case 27:
                       _toast = _context.sent;
 
                       _toast.present();
 
-                    case 30:
+                    case 29:
                       console.log("id " + this.id);
 
-                    case 31:
+                    case 30:
                     case "end":
                       return _context.stop();
                   }
@@ -755,7 +756,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n    <ion-title>Nueva Instalación</ion-title>\n  </ion-toolbar>\n  \n </ion-header>\n <ion-content class=\"ion-padding\"> \n  <!-- <div> -->\n  <form novalidate  (ngSubmit)=\"onSubmit()\" [formGroup]=\"form\">\n    <ion-list >\n    <ion-item > \n    <ion-label class=\"label\" position=\"stacked\" >Cédula:</ion-label>\n       <ion-input   name=\"cedula\" [(ngModel)]=\"cliente.cedula\" (change)=\"validador=true\" (change)=\"validadorDeCedula(cliente.cedula)\" type=\"text\" placeholder=\"0101010101\" maxlength=\"10\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"cedula\">\n      </ion-input>\n    \n  </ion-item> \n\n      <ion-item > \n      <ion-label position=\"stacked\">Nombres Completos:</ion-label>\n      <ion-input id=\"name\" [(ngModel)]=\"cliente.nombre\" type=\"text\" placeholder=\"Apellidos Nombres\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"nombres\"></ion-input>\n    </ion-item> \n\n    <ion-item> \n      <ion-label position=\"stacked\">Correo Electrónico:</ion-label>\n      <ion-input  (change)=\"email=true\" (change)=\"esEmailValido(cliente.email)\" [(ngModel)]=\"cliente.email\" type=\"text\" placeholder=\"Correo electrónico\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"email\"></ion-input>\n    </ion-item>\n\n    <ion-item> \n      <ion-label position=\"stacked\">Teléfonos:</ion-label>\n      <ion-input [(ngModel)]=\"cliente.convencional\" type=\"number\" placeholder=\"Convencional\" maxlength=\"7\" autocomplete=\"off\" autocorrect=\"off\"  formControlName=\"convencional\"></ion-input>\n     </ion-item>\n     \n     <ion-item> \n      <ion-input [(ngModel)]=\"cliente.celular\" type=\"number\" placeholder=\"Celular\" maxlength=\"10\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"celular\"></ion-input>\n     </ion-item>\n     \n     <ion-item> \n      <ion-label position=\"stacked\">Dirección:</ion-label>\n      <ion-input [(ngModel)]=\"cliente.direccionPrincipal\" type=\"text\" placeholder=\"Calle principal\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"principal\"></ion-input>\n     </ion-item>\n\n    <ion-item> \n      <ion-input [(ngModel)]=\"cliente.direccionSecundaria\" type=\"text\" placeholder=\"Calle secundaria\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"secundaria\"></ion-input>\n    </ion-item>\n    <ion-item> \n      <ion-input [(ngModel)]=\"cliente.direccionReferencia\" type=\"text\" placeholder=\"Referencia\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"referencia\"></ion-input>\n     </ion-item>\n\n     <ion-item> \n      <ion-label position=\"stacked\">Número Contrato:</ion-label>\n      <ion-input [(ngModel)]=\"servicio.numeroContrato\" type=\"text\" placeholder=\"Número contrato\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"contrato\"></ion-input>\n     </ion-item> \n\n    <ion-item> \n      <ion-label position=\"stacked\">Plan Adquirido:</ion-label>\n        <ion-select (ionChange)=\"detect1($event)\" ok-text=\"Seleccionar\" cancel-text=\"Cancelar\" multiple=\"false\" formControlName=\"plan\">\n          <ion-select-option value=\"Basico\">Básico</ion-select-option>\n          <ion-select-option value=\"Intermedio\">Intermedio</ion-select-option>\n          <ion-select-option value=\"Alto\">Alto</ion-select-option>\n        </ion-select>\n    </ion-item>\n\n    <ion-item  > \n      <ion-label position=\"stacked\">IP:</ion-label>\n      <ion-input  (change)=\"validateForm(servicio.ip)\" name=\"\" id=\"ips\"   [(ngModel)]=\"servicio.ip\" type=\"text\" placeholder=\"XXX.XXX.XXX.XXX\" maxlength=\"15\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"ip\"></ion-input>\n    </ion-item> \n\n    <ion-item> \n      <ion-label>Antenas</ion-label>\n      <ion-select (ionChange)=\"detect($event)\" ok-text=\"Seleccionar\" cancel-text=\"Cancelar\" multiple=\"false\" formControlName=\"antena\">\n          <ion-select-option *ngFor=\"let ant of antenas\" value=\"{{ant.id}}\">{{ant.modelo}}</ion-select-option>\n      </ion-select>\n  </ion-item>\n  <ion-item> \n      <ion-label position=\"stacked\">Contraseña:</ion-label>\n      <ion-input   [(ngModel)]=\"servicio.password\" type=\"text\" maxlength=\"15\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"password\"></ion-input>\n     </ion-item> \n     \n     <ion-item>    \n      <ion-label>Coordenadas:\n        <ion-buttons>\n          <ion-button>\n            {{cliente.latitud}} {{cliente.longitud}}\n          </ion-button>\n        </ion-buttons>\n      </ion-label>\n    </ion-item> \n    <ion-tab-button (click)=\"obtenerGeolocalizacion()\">\n      <ion-icon name=\"locate-outline\"></ion-icon>\n      <ion-label>Coordenadas</ion-label>\n    </ion-tab-button>\n\n    <ion-item> \n      <ion-label position=\"stacked\">Observaciones:</ion-label>\n      <ion-input   [(ngModel)]=\"servicio.observaciones\" type=\"text\" maxlength=\"15\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"observacion\"></ion-input>\n     </ion-item>   \n\n\n   </ion-list> \n  \n        <div class=\"ion-padding ion-text-center\">\n      <ion-button  [disabled]=\"!valido || !email || \n      form.get('nombres').hasError('pattern') ||\n      form.get('cedula').hasError('required') || \n      form.get('principal').hasError('required') || \n      form.get('referencia').hasError('required')\"  expand=\"block\" (click)=\"crear()\">\n        Guardar\n      </ion-button>\n    </div>\n\n  </form>\n<!-- </div> -->\n </ion-content> \n\n\n\n";
+      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n    <ion-title>Nueva Instalación</ion-title>\n  </ion-toolbar>\n  \n </ion-header>\n <ion-content class=\"ion-padding\"> \n  <!-- <div> -->\n  <form novalidate  (ngSubmit)=\"onSubmit()\" [formGroup]=\"form\">\n    <ion-list >\n    <ion-item > \n    <ion-label class=\"label\" position=\"stacked\" >Cédula:</ion-label>\n       <ion-input   name=\"cedula\" [(ngModel)]=\"cliente.cedula\" (change)=\"validador=true\" (change)=\"validadorDeCedula(cliente.cedula)\" type=\"text\" placeholder=\"0101010101\" maxlength=\"10\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"cedula\">\n      </ion-input>\n    \n  </ion-item> \n\n      <ion-item > \n      <ion-label position=\"stacked\">Nombres Completos:</ion-label>\n      <ion-input id=\"name\" [(ngModel)]=\"cliente.nombre\" type=\"text\" placeholder=\"Nombres Completos\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"nombres\"></ion-input>\n    </ion-item> \n\n    <ion-item > \n      <ion-label position=\"stacked\">Apellidos Completos:</ion-label>\n      <ion-input id=\"name\" [(ngModel)]=\"cliente.apellido\" type=\"text\" placeholder=\"Apellidos Completos\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"apellidos\"></ion-input>\n    </ion-item> \n\n\n    <ion-item> \n      <ion-label position=\"stacked\">Correo Electrónico:</ion-label>\n      <ion-input  (change)=\"email=true\" (change)=\"esEmailValido(cliente.email)\" [(ngModel)]=\"cliente.email\" type=\"text\" placeholder=\"Correo electrónico\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"email\"></ion-input>\n    </ion-item>\n\n    <!-- <ion-item> \n      <ion-label position=\"stacked\">Teléfonos:</ion-label>\n      <ion-input [(ngModel)]=\"cliente.convencional\" type=\"number\" placeholder=\"Convencional\" maxlength=\"7\" autocomplete=\"off\" autocorrect=\"off\"  formControlName=\"convencional\"></ion-input>\n     </ion-item>\n     \n     <ion-item> \n      <ion-input [(ngModel)]=\"cliente.celular\" type=\"number\" placeholder=\"Celular\" maxlength=\"10\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"celular\"></ion-input>\n     </ion-item> -->\n     \n     <ion-item> \n      <ion-label position=\"stacked\">Dirección:</ion-label>\n      <ion-input [(ngModel)]=\"cliente.direccionPrincipal\" type=\"text\" placeholder=\"Calle principal\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"principal\"></ion-input>\n     </ion-item>\n\n    <ion-item> \n      <ion-input [(ngModel)]=\"cliente.direccionSecundaria\" type=\"text\" placeholder=\"Calle secundaria\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"secundaria\"></ion-input>\n    </ion-item>\n    <ion-item> \n      <ion-input [(ngModel)]=\"cliente.direccionReferencia\" type=\"text\" placeholder=\"Referencia\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"referencia\"></ion-input>\n     </ion-item>\n\n     <ion-item> \n      <ion-label position=\"stacked\">Número Contrato:</ion-label>\n      <ion-input [(ngModel)]=\"servicio.numeroContrato\" type=\"text\" placeholder=\"Número contrato\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"contrato\"></ion-input>\n     </ion-item> \n\n     <ion-item> \n      <ion-label position=\"stacked\">Tipo Servicio:</ion-label>\n      <ion-input [(ngModel)]=\"servicio.tipoServicio\" type=\"text\" placeholder=\"Número contrato\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"contrato\"></ion-input>\n     </ion-item> \n\n     <ion-item> \n      <ion-label position=\"stacked\">Router Vendido:</ion-label>\n      <ion-input [(ngModel)]=\"servicio.routerVendido\" type=\"text\" placeholder=\"Número contrato\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"contrato\"></ion-input>\n     </ion-item> \n\n    <!-- <ion-item> \n      <ion-label position=\"stacked\">Plan Adquirido:</ion-label>\n        <ion-select (ionChange)=\"detect1($event)\" ok-text=\"Seleccionar\" cancel-text=\"Cancelar\" multiple=\"false\" formControlName=\"plan\">\n          <ion-select-option value=\"Basico\">Básico</ion-select-option>\n          <ion-select-option value=\"Intermedio\">Intermedio</ion-select-option>\n          <ion-select-option value=\"Alto\">Alto</ion-select-option>\n        </ion-select>\n    </ion-item> -->\n\n    <!-- <ion-item  > \n      <ion-label position=\"stacked\">IP:</ion-label>\n      <ion-input  (change)=\"validateForm(servicio.ip)\" name=\"\" id=\"ips\"   [(ngModel)]=\"servicio.ip\" type=\"text\" placeholder=\"XXX.XXX.XXX.XXX\" maxlength=\"15\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"ip\"></ion-input>\n    </ion-item> \n\n    <ion-item> \n      <ion-label>Antenas</ion-label>\n      <ion-select (ionChange)=\"detect($event)\" ok-text=\"Seleccionar\" cancel-text=\"Cancelar\" multiple=\"false\" formControlName=\"antena\">\n          <ion-select-option *ngFor=\"let ant of antenas\" value=\"{{ant.id}}\">{{ant.modelo}}</ion-select-option>\n      </ion-select> \n  </ion-item>          \n  <ion-item> \n      <ion-label position=\"stacked\">Contraseña:</ion-label>\n      <ion-input   [(ngModel)]=\"servicio.password\" type=\"text\" maxlength=\"15\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"password\"></ion-input>\n     </ion-item>     -->\n     \n     <ion-item>    \n      <ion-label>Coordenadas:\n        <ion-buttons>\n          <ion-button>\n            {{cliente.latitud}} {{cliente.longitud}}\n          </ion-button>\n        </ion-buttons>\n      </ion-label>\n    </ion-item> \n    <ion-tab-button (click)=\"obtenerGeolocalizacion()\">\n      <ion-icon name=\"locate-outline\"></ion-icon>\n      <ion-label>Coordenadas</ion-label>\n    </ion-tab-button>\n\n    <ion-item> \n      <ion-label position=\"stacked\">Observaciones:</ion-label>\n      <ion-input   [(ngModel)]=\"servicio.observaciones\" type=\"text\" maxlength=\"15\" autocomplete=\"off\" autocorrect=\"off\" formControlName=\"observacion\"></ion-input>\n     </ion-item>   \n\n\n   </ion-list> \n  \n        <div class=\"ion-padding ion-text-center\">\n      <!-- <ion-button  [disabled]=\"!valido || !email ||  -->\n        <ion-button  [disabled]=\" !email ||\n      form.get('nombres').hasError('pattern') ||\n      form.get('cedula').hasError('required') || \n      form.get('principal').hasError('required') || \n      form.get('referencia').hasError('required')\"  expand=\"block\" (click)=\"crear()\">\n        Guardar\n      </ion-button>\n    </div>\n\n  </form>\n<!-- </div> -->\n </ion-content> \n\n\n\n";
       /***/
     },
 
@@ -777,8 +778,7 @@
 
       __webpack_require__.d(__webpack_exports__, "Cliente", function () {
         return Cliente;
-      }); //import { Registro } from './reistro';
-
+      });
 
       var Cliente = function Cliente() {
         _classCallCheck(this, Cliente);

@@ -22,6 +22,10 @@
         <ion-input [(ngModel)]="user2.nombre"  type="text"  [readonly]='deshabilitarTexto'></ion-input>
       </ion-item>
       <ion-item>
+        <ion-label position="stacked">Apellidos Completos:</ion-label>
+        <ion-input [(ngModel)]="user2.apellido"  type="text"  [readonly]='deshabilitarTexto'></ion-input>
+      </ion-item>
+      <ion-item>
         <ion-label position="stacked">Correo Electonico:</ion-label>
         <ion-input [(ngModel)]="user2.email"  typse="text"  [readonly]='deshabilitarTexto'></ion-input>
       </ion-item>
@@ -42,7 +46,7 @@
         <ion-input  [(ngModel)]="user2.direccionReferencia" maxlength="15" [readonly]='deshabilitarTexto'></ion-input>
       </ion-item>
 
-      <ion-item>
+      <!-- <ion-item>
         <ion-label position="stacked">Telefono Convencional:</ion-label>
         <ion-input [(ngModel)]="user2.convencional" maxlength="15" [readonly]='deshabilitarTexto'></ion-input>
       </ion-item>
@@ -50,25 +54,25 @@
       <ion-item>
         <ion-label position="stacked">Celular:</ion-label>
         <ion-input [(ngModel)]="user2.celular" maxlength="15" [readonly]='deshabilitarTexto'></ion-input>
-      </ion-item>
+      </ion-item> -->
 
       <ion-item>
         <ion-label position="stacked">Numero de Contrato:</ion-label>
         <ion-input *ngFor="let char of user2.servicio" [(ngModel)]="char.numeroContrato" maxlength="15" [readonly]='deshabilitarTexto'></ion-input>
       </ion-item>
 
-      <ion-item>
+      <!-- <ion-item>
         <ion-label position="stacked">Plan Adquirido:</ion-label>
         <ion-input *ngFor="let char of user2.servicio" [(ngModel)]="char.plan" maxlength="15" [readonly]='deshabilitarTexto'></ion-input>
-      </ion-item>
+      </ion-item> -->
 
-       <ion-item >
+       <!-- <ion-item >
         <ion-label position="stacked">IP:</ion-label>
         <ion-input   name="" id="ips"  *ngFor="let char of user2.servicio" (change)="validateForm(char.ip)" [(ngModel)]="char.ip" maxlength="15" [readonly]='deshabilitarTexto' ></ion-input>
         
-      </ion-item> 
+      </ion-item>  -->
 
-       <ion-item>
+       <!-- <ion-item>
         <ion-label position="stacked">Antena:</ion-label>
         <ion-input [(ngModel)]="user2.antena.modelo" maxlength="15" [readonly]='deshabilitarTexto'></ion-input>
       </ion-item> 
@@ -76,7 +80,7 @@
       <ion-item>
         <ion-label position="stacked">Contrasenia:</ion-label>
         <ion-input *ngFor="let char of user2.servicio" [(ngModel)]="char.password" maxlength="15" [readonly]='deshabilitarTexto'></ion-input>
-      </ion-item>
+      </ion-item> -->
 
       <ion-item>
         <ion-label position="stacked">Obseraciones:</ion-label>

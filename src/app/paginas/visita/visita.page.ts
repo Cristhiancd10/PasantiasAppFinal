@@ -39,17 +39,18 @@ export class VisitaPage implements OnInit, OnDestroy {
       id: 0,
       cedula: '',
       nombre: '',
+      apellido:'',
       email: '',
-      convencional:'',
-      celular:'',
-      dirPrincipal: '',
-      dirSecundaria: '',
-      dirReferencia: '',
+      // convencional:'',
+      // celular:'',
+      direccionPrincipal: '',
+      direccionSecundaria: '',
+      direccionReferencia: '',
       latitud: '',
       longitud: '',
       servicio: [],
       //datoServicio: [],
-      antena:  {}
+     // antena:  {}
      //telefono:[],
   }
   id=0;

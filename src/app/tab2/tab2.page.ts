@@ -18,13 +18,13 @@ export class Tab2Page {
 
   user = {
     id : 0,
-   // tipoServicio: "",
+   tipoServicio: "",
     nombre: "",
-    telefono: "",
     direccion: "",
+    telefono: "",
     coordenadas: "",
     observaciones: "",
-    //tecnico: "",
+    tecnico: "",
     empleado: {},
     
   }

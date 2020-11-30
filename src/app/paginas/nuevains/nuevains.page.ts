@@ -82,17 +82,18 @@ export class NuevainsPage implements OnInit, OnDestroy {
     this.form = new FormGroup({
       cedula: new FormControl(this.cliente.cedula,[Validators.required]),
       nombres: new FormControl(this.cliente.nombre,[Validators.pattern(/^[A-Za-z ]+$/), Validators.required]),
+      apellidos: new FormControl(this.cliente.apellido,[Validators.pattern(/^[A-Za-z ]+$/), Validators.required]),
       email: new FormControl(this.cliente.email),
-      convencional: new FormControl(this.cliente.convencional, [Validators.required]),
-      celular: new FormControl(this.cliente.celular, [Validators.required]),
-      principal: new FormControl(this.cliente.dirPrincipal, [Validators.required]),
+      // convencional: new FormControl(this.cliente.convencional, [Validators.required]),
+      // celular: new FormControl(this.cliente.celular, [Validators.required]),
+      principal: new FormControl(this.cliente.direccionPrincipal, [Validators.required]),
       secundaria: new FormControl(),
-      referencia: new FormControl(this.cliente.dirReferencia, [Validators.required]),
+      referencia: new FormControl(this.cliente.direccionReferencia, [Validators.required]),
       contrato: new FormControl( ),
-      plan: new FormControl( ),
-      ip: new FormControl( ),
-      antena: new FormControl(),
-      password: new FormControl(),
+      //plan: new FormControl( ),
+      //ip: new FormControl( ),
+     // antena: new FormControl(),
+     // password: new FormControl(),
       observacion: new FormControl()
     });
   }
@@ -141,7 +142,7 @@ export class NuevainsPage implements OnInit, OnDestroy {
      // this.cliente.servicio=this.servicio;
      this.servicios.push(this.servicio);
      this.cliente.servicio = this.servicios;
-     this.cliente.antena = this.antena;
+     //this.cliente.antena = this.antena;
      
      console.log(this.cliente, "Fuera de post");
      

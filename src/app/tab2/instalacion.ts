@@ -3,13 +3,13 @@ import { Empleado } from './empleado';
 
 export class Instalacion {
     id: number;
-    //tipoServicio: string;
+    tipoServicio: string;
     nombre: string;
-    telefono: string;
     direccion: string;
+    telefono: string;
     observaciones: string;
     coordenadas: string;
-   //tecnico: string;
+    tecnico: string;
     empleado: Empleado;
    
   

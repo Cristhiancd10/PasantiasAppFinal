@@ -20,22 +20,28 @@
 
       <ion-item > 
       <ion-label position="stacked">Nombres Completos:</ion-label>
-      <ion-input id="name" [(ngModel)]="cliente.nombre" type="text" placeholder="Apellidos Nombres" autocomplete="off" autocorrect="off" formControlName="nombres"></ion-input>
+      <ion-input id="name" [(ngModel)]="cliente.nombre" type="text" placeholder="Nombres Completos" autocomplete="off" autocorrect="off" formControlName="nombres"></ion-input>
     </ion-item> 
+
+    <ion-item > 
+      <ion-label position="stacked">Apellidos Completos:</ion-label>
+      <ion-input id="name" [(ngModel)]="cliente.apellido" type="text" placeholder="Apellidos Completos" autocomplete="off" autocorrect="off" formControlName="apellidos"></ion-input>
+    </ion-item> 
+
 
     <ion-item> 
       <ion-label position="stacked">Correo Electrónico:</ion-label>
       <ion-input  (change)="email=true" (change)="esEmailValido(cliente.email)" [(ngModel)]="cliente.email" type="text" placeholder="Correo electrónico" autocomplete="off" autocorrect="off" formControlName="email"></ion-input>
     </ion-item>
 
-    <ion-item> 
+    <!-- <ion-item> 
       <ion-label position="stacked">Teléfonos:</ion-label>
       <ion-input [(ngModel)]="cliente.convencional" type="number" placeholder="Convencional" maxlength="7" autocomplete="off" autocorrect="off"  formControlName="convencional"></ion-input>
      </ion-item>
      
      <ion-item> 
       <ion-input [(ngModel)]="cliente.celular" type="number" placeholder="Celular" maxlength="10" autocomplete="off" autocorrect="off" formControlName="celular"></ion-input>
-     </ion-item>
+     </ion-item> -->
      
      <ion-item> 
       <ion-label position="stacked">Dirección:</ion-label>
@@ -54,16 +60,26 @@
       <ion-input [(ngModel)]="servicio.numeroContrato" type="text" placeholder="Número contrato" autocomplete="off" autocorrect="off" formControlName="contrato"></ion-input>
      </ion-item> 
 
-    <ion-item> 
+     <ion-item> 
+      <ion-label position="stacked">Tipo Servicio:</ion-label>
+      <ion-input [(ngModel)]="servicio.tipoServicio" type="text" placeholder="Tipo Servicio" autocomplete="off" autocorrect="off" formControlName="contrato"></ion-input>
+     </ion-item> 
+
+     <ion-item> 
+      <ion-label position="stacked">Router Vendido:</ion-label>
+      <ion-input [(ngModel)]="servicio.routerVendido" type="text" placeholder="Router Vendido" autocomplete="off" autocorrect="off" formControlName="contrato"></ion-input>
+     </ion-item> 
+
+    <!-- <ion-item> 
       <ion-label position="stacked">Plan Adquirido:</ion-label>
         <ion-select (ionChange)="detect1($event)" ok-text="Seleccionar" cancel-text="Cancelar" multiple="false" formControlName="plan">
           <ion-select-option value="Basico">Básico</ion-select-option>
           <ion-select-option value="Intermedio">Intermedio</ion-select-option>
           <ion-select-option value="Alto">Alto</ion-select-option>
         </ion-select>
-    </ion-item>
+    </ion-item> -->
 
-    <ion-item  > 
+    <!-- <ion-item  > 
       <ion-label position="stacked">IP:</ion-label>
       <ion-input  (change)="validateForm(servicio.ip)" name="" id="ips"   [(ngModel)]="servicio.ip" type="text" placeholder="XXX.XXX.XXX.XXX" maxlength="15" autocomplete="off" autocorrect="off" formControlName="ip"></ion-input>
     </ion-item> 
@@ -72,12 +88,12 @@
       <ion-label>Antenas</ion-label>
       <ion-select (ionChange)="detect($event)" ok-text="Seleccionar" cancel-text="Cancelar" multiple="false" formControlName="antena">
           <ion-select-option *ngFor="let ant of antenas" value="{{ant.id}}">{{ant.modelo}}</ion-select-option>
-      </ion-select>
-  </ion-item>
+      </ion-select> 
+  </ion-item>          
   <ion-item> 
       <ion-label position="stacked">Contraseña:</ion-label>
       <ion-input   [(ngModel)]="servicio.password" type="text" maxlength="15" autocomplete="off" autocorrect="off" formControlName="password"></ion-input>
-     </ion-item> 
+     </ion-item>     -->
      
      <ion-item>    
       <ion-label>Coordenadas:
@@ -102,7 +118,8 @@
    </ion-list> 
   
         <div class="ion-padding ion-text-center">
-      <ion-button  [disabled]="!valido || !email || 
+      <!-- <ion-button  [disabled]="!valido || !email ||  -->
+        <ion-button  [disabled]=" !email ||
       form.get('nombres').hasError('pattern') ||
       form.get('cedula').hasError('required') || 
       form.get('principal').hasError('required') || 

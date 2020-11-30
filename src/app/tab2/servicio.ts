@@ -8,12 +8,13 @@ export class Servicio {
     numeroContrato: string;
     fechaContrato: string;
     plan: string;
-    //routerVendido: string;
-    ip: string;
-    password: string;
+    tipoServicio:string;
+    routerVendido: string;
+    //ip: string;
+    //password: string;
     observaciones: string;
     //plan: Plan;
-    cliente: Cliente;
+    //cliente: Cliente;
    // servicioFibra:ServicioFibra[];
  
  }
