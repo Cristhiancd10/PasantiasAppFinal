@@ -76,7 +76,7 @@ export class LoginPage implements OnInit {
     console.log("Listado Tabs")
    console.log("lista ffff "+this.storage.listar());
   }
-
+//verifica si existe almacenado informacin en el localstorage y lo guarda en la base de datos
   async guardar(){
     console.log(this.storage.listar())
     this.networkListener = Network.addListener('networkStatusChange', status => {
@@ -102,6 +102,7 @@ export class LoginPage implements OnInit {
       }
   }
 
+  // metodo para loguearse
   login() {
     this.service.login(this.cliente1).subscribe(response => {
       this.empleado=response;

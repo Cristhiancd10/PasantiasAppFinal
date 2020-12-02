@@ -90,6 +90,7 @@ export class Tab1Page implements OnInit {
     this.deshabilitarTexto = false;
   }
 
+  //lista todas las visitas tecnicas de un tecnico
   public lista(){
     this.user1=this.storage.listarE();
      console.log("usuario nombre "+this.user1.nombre);
@@ -102,6 +103,7 @@ export class Tab1Page implements OnInit {
     });
    }
 
+   //nos redirigimos al cliente de una especifica visita tecnica
    actualizar(id: number) {
     //this.navCtrl.push("Tab5Page");
     console.log("Hola")
@@ -114,7 +116,7 @@ export class Tab1Page implements OnInit {
     });
     console.log("funciona visita");
   }
-       
+     //nos permite guardar en agendamiento un true para decir que ya hemos realizado esa actividad  
   cambiar(event, char){
     this.visita=char;
     console.log("actualizar", this.visita);

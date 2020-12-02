@@ -101,6 +101,7 @@ export class NuevainsPage implements OnInit, OnDestroy {
     //this.networkListener.remove();
   }
 
+  //elegir la antena que se usa
   detect(evt){
     
     let pos = this.antenas.findIndex(({ id }) => id >=  evt.detail.value);
@@ -108,7 +109,7 @@ export class NuevainsPage implements OnInit, OnDestroy {
     console.log("Cambio", evt.detail.value, pos, this.antenas[pos]);
     
   }
-
+//elegir plan que se usa
   detect1(evt){
     
     
@@ -125,7 +126,9 @@ export class NuevainsPage implements OnInit, OnDestroy {
 
 
  
-
+//crear al nueo cliente si hay conexion
+//si no hay se guarda en un localstorage y cuando haiga
+// conexion se guarda en la base
   async crear() {
 
     this.networkListener = Network.addListener('networkStatusChange', status => {
@@ -191,7 +194,7 @@ export class NuevainsPage implements OnInit, OnDestroy {
     this.storage.limpiar();
     console.log('LocalStorage Vacio');
   }
-
+//obtiene las coordenadas del lugar que estamos en ese momento
   obtenerGeolocalizacion(){
     this.geolocation.getCurrentPosition().then((geoposition: Geoposition)=>{
       this.latitud = String(geoposition.coords.latitude);
@@ -204,6 +207,7 @@ export class NuevainsPage implements OnInit, OnDestroy {
     }); 
   }
 
+  //refrescamos la localizacion 
   doRefresh(event){
     setTimeout(() => {
       this.obtenerGeolocalizacion();
@@ -211,6 +215,7 @@ export class NuevainsPage implements OnInit, OnDestroy {
     },1500);
   }
 
+//mostramos la ubicacion actual del tecnico
   miUbicacion(){
     this.geolocation.getCurrentPosition().then(position => {
       this.latitudMiubicacion = position.coords.latitude;
@@ -222,6 +227,7 @@ export class NuevainsPage implements OnInit, OnDestroy {
     });
   }
 
+  
   navegarMapas(){
     let options: LaunchNavigatorOptions = {
       app: this.launchNavigator.APP.GOOGLE_MAPS,
@@ -240,7 +246,7 @@ export class NuevainsPage implements OnInit, OnDestroy {
 
   }
 
-
+//metodo validador de la cedula
   async validadorDeCedula(cedula: String) {
     let cedulaCorrecta = false;
     let mensaje='';
@@ -303,7 +309,7 @@ validateIp(ip) {
   let patronIp = new RegExp("^([0-9]{1,3}).([0-9]{1,3}).([0-9]{1,3}).([0-9]{1,3})$");
   let valores;
 
-  // early return si la ip no tiene el formato correcto.
+  // regresaria return si la ip no tiene el formato correcto.
   if(ip.search(patronIp) !== 0) {
     return false
   }
@@ -313,7 +319,7 @@ validateIp(ip) {
   
   return valores[0] <= 255 && valores[1] <= 255 && valores[2] <= 255 && valores[3] <= 255 && valores[3] != 0  && valores[3] != 1 && valores[3] != 255
 }
-
+//validamos la ip
 async validateForm(idForm) {
   let object = document.getElementById(idForm);
   let mensaje='';
@@ -340,7 +346,7 @@ async validateForm(idForm) {
   
 }
 
-
+//metodo para validar la cedula
 async esEmailValido(email: string) {
   let mailValido = false;
     'use strict';

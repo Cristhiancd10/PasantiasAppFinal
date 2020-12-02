@@ -97,7 +97,7 @@ export class Tab2Page {
     console.log(this.deshabilitarTexto)
     this.deshabilitarTexto = false;
   }
-
+//lista todas las instalaciones de un tecnico
   public lista(){
     this.user1=this.storage.listarE();
     this.service.todasIs(this.user1.nombre).subscribe(response => {
@@ -111,7 +111,7 @@ export class Tab2Page {
       
     });
    }
-
+//nos redirigimos al cliente de una especifica instalacion
   actualizar(id: number) {
     //this.navCtrl.push("Tab5Page");
     console.log("Hola")
@@ -140,7 +140,7 @@ export class Tab2Page {
     const { data } = await popover.onWillDismiss();
     console.log('Padre:', data);
  }
-
+//nos permite guardar en instalacion un true para decir que ya hemos realizado esa actividad  
   cambiar(event, char) {
     this.instalacion = char;
     console.log("actualizar", this.instalacion);
