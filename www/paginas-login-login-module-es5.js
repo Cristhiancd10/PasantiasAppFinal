@@ -347,7 +347,8 @@
           value: function listar() {
             console.log("Listado Tabs");
             console.log("lista ffff " + this.storage.listar());
-          }
+          } //verifica si existe almacenado informacin en el localstorage y lo guarda en la base de datos
+
         }, {
           key: "guardar",
           value: function guardar() {
@@ -391,7 +392,8 @@
                 }
               }, _callee, this);
             }));
-          }
+          } // metodo para loguearse
+
         }, {
           key: "login",
           value: function login() {

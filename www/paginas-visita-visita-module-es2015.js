@@ -134,6 +134,7 @@ let VisitaPage = class VisitaPage {
             this.id = params.id;
         });
         //this.textoDisable();
+        //buscar una visit tecnica por medo del id
         this.service.buscarV(this.id).subscribe(response => {
             console.log("response visita" + response);
             this.user2 = response.cliente;
@@ -148,6 +149,9 @@ let VisitaPage = class VisitaPage {
     ngOnDestroy() {
         //this.networkListener.remove();
     }
+    //actualizar al nueo cliente si hay conexion
+    //si no hay se guarda en un localstorage y cuando haiga
+    // conexion se actualiza en la base
     guardar() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             this.networkListener = Network.addListener('networkStatusChange', status => {
@@ -187,14 +191,17 @@ let VisitaPage = class VisitaPage {
             }
         });
     }
+    //deshabilitar los campos para no poder modificar
     textoDisable() {
         console.log(this.deshabilitarTexto);
         this.deshabilitarTexto = !this.deshabilitarTexto;
     }
+    //habilitar los campos para poder modificar
     textoEnable() {
         console.log(this.deshabilitarTexto);
         this.deshabilitarTexto = false;
     }
+    // nos permite poder modificar en los campos de los datos del cliente
     actualizar() {
         this.textoEnable();
     }
@@ -205,6 +212,7 @@ let VisitaPage = class VisitaPage {
     cambioEstado() {
         this.realizado = !this.realizado;
     }
+    //obtiene las coordenadas del lugar que estamos en ese momento
     obtenerGeolocalizacion() {
         this.geolocation.getCurrentPosition().then((geoposition) => {
             this.latitud = geoposition.coords.latitude;
@@ -221,6 +229,7 @@ let VisitaPage = class VisitaPage {
             event.target.complete();
         }, 1500);
     }
+    //ubicacion actual del cliente
     miUbicacion() {
         this.geolocation.getCurrentPosition().then(position => {
             this.latitudMiubicacion = position.coords.latitude;
@@ -231,11 +240,13 @@ let VisitaPage = class VisitaPage {
             console.log('error', error);
         });
     }
+    //nos permite ir al google maps para ver las coordenadas
     navegarMapas() {
         let options = {
             app: this.launchNavigator.APP.GOOGLE_MAPS,
             start: [this.latitudMiubicacion, this.longitudMiubicacion]
         };
+        //coordenadas que pertenecen al cliente quese va a realizar la vsita tecnica
         this.launchNavigator.navigate([Number(this.user2.latitud), Number(this.user2.longitud)], options)
             //this.launchNavigator.navigate([this.latitudmaps, this.longitudmaps],options)
             .then(success => {
@@ -250,13 +261,14 @@ let VisitaPage = class VisitaPage {
     validateIp(ip) {
         let patronIp = new RegExp("^([0-9]{1,3}).([0-9]{1,3}).([0-9]{1,3}).([0-9]{1,3})$");
         let valores;
-        // early return si la ip no tiene el formato correcto.
+        // regresaria return si la ip no tiene el formato correcto.
         if (ip.search(patronIp) !== 0) {
             return false;
         }
         valores = ip.split(".");
         return valores[0] <= 255 && valores[1] <= 255 && valores[2] <= 255 && valores[3] <= 255 && valores[3] <= 255 && valores[3] != 0 && valores[3] != 1 && valores[3] != 255;
     }
+    //metodo que sse llama desde la pagina html
     validateForm(idForm) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             let object = document.getElementById(idForm);

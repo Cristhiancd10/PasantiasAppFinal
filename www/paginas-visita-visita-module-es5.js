@@ -241,6 +241,7 @@
             this.route.queryParams.subscribe(function (params) {
               _this.id = params.id;
             }); //this.textoDisable();
+            //buscar una visit tecnica por medo del id
 
             this.service.buscarV(this.id).subscribe(function (response) {
               console.log("response visita" + response);
@@ -256,7 +257,10 @@
         }, {
           key: "ngOnDestroy",
           value: function ngOnDestroy() {//this.networkListener.remove();
-          }
+          } //actualizar al nueo cliente si hay conexion
+          //si no hay se guarda en un localstorage y cuando haiga
+          // conexion se actualiza en la base
+
         }, {
           key: "guardar",
           value: function guardar() {
@@ -336,19 +340,22 @@
                 }
               }, _callee, this);
             }));
-          }
+          } //deshabilitar los campos para no poder modificar
+
         }, {
           key: "textoDisable",
           value: function textoDisable() {
             console.log(this.deshabilitarTexto);
             this.deshabilitarTexto = !this.deshabilitarTexto;
-          }
+          } //habilitar los campos para poder modificar
+
         }, {
           key: "textoEnable",
           value: function textoEnable() {
             console.log(this.deshabilitarTexto);
             this.deshabilitarTexto = false;
-          }
+          } // nos permite poder modificar en los campos de los datos del cliente
+
         }, {
           key: "actualizar",
           value: function actualizar() {
@@ -364,7 +371,8 @@
           key: "cambioEstado",
           value: function cambioEstado() {
             this.realizado = !this.realizado;
-          }
+          } //obtiene las coordenadas del lugar que estamos en ese momento
+
         }, {
           key: "obtenerGeolocalizacion",
           value: function obtenerGeolocalizacion() {
@@ -389,7 +397,8 @@
 
               event.target.complete();
             }, 1500);
-          }
+          } //ubicacion actual del cliente
+
         }, {
           key: "miUbicacion",
           value: function miUbicacion() {
@@ -403,14 +412,16 @@
             }, function (error) {
               console.log('error', error);
             });
-          }
+          } //nos permite ir al google maps para ver las coordenadas
+
         }, {
           key: "navegarMapas",
           value: function navegarMapas() {
             var options = {
               app: this.launchNavigator.APP.GOOGLE_MAPS,
               start: [this.latitudMiubicacion, this.longitudMiubicacion]
-            };
+            }; //coordenadas que pertenecen al cliente quese va a realizar la vsita tecnica
+
             this.launchNavigator.navigate([Number(this.user2.latitud), Number(this.user2.longitud)], options) //this.launchNavigator.navigate([this.latitudmaps, this.longitudmaps],options)
             .then(function (success) {
               console.log(success);
@@ -424,7 +435,7 @@
           key: "validateIp",
           value: function validateIp(ip) {
             var patronIp = new RegExp("^([0-9]{1,3}).([0-9]{1,3}).([0-9]{1,3}).([0-9]{1,3})$");
-            var valores; // early return si la ip no tiene el formato correcto.
+            var valores; // regresaria return si la ip no tiene el formato correcto.
 
             if (ip.search(patronIp) !== 0) {
               return false;
@@ -432,7 +443,8 @@
 
             valores = ip.split(".");
             return valores[0] <= 255 && valores[1] <= 255 && valores[2] <= 255 && valores[3] <= 255 && valores[3] <= 255 && valores[3] != 0 && valores[3] != 1 && valores[3] != 255;
-          }
+          } //metodo que sse llama desde la pagina html
+
         }, {
           key: "validateForm",
           value: function validateForm(idForm) {

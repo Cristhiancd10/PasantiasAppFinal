@@ -203,6 +203,7 @@ let LoginPage = class LoginPage {
         console.log("Listado Tabs");
         console.log("lista ffff " + this.storage.listar());
     }
+    //verifica si existe almacenado informacin en el localstorage y lo guarda en la base de datos
     guardar() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             console.log(this.storage.listar());
@@ -227,6 +228,7 @@ let LoginPage = class LoginPage {
             }
         });
     }
+    // metodo para loguearse
     login() {
         this.service.login(this.cliente1).subscribe(response => {
             this.empleado = response;

@@ -266,7 +266,8 @@
         }, {
           key: "ngOnDestroy",
           value: function ngOnDestroy() {//this.networkListener.remove();
-          }
+          } //elegir la antena que se usa
+
         }, {
           key: "detect",
           value: function detect(evt) {
@@ -276,14 +277,18 @@
             });
             this.antena = this.antenas[pos];
             console.log("Cambio", evt.detail.value, pos, this.antenas[pos]);
-          }
+          } //elegir plan que se usa
+
         }, {
           key: "detect1",
           value: function detect1(evt) {
             console.log(evt.detail.value);
             this.plan = evt.detail.value;
             this.servicio.plan = this.plan;
-          }
+          } //crear al nueo cliente si hay conexion
+          //si no hay se guarda en un localstorage y cuando haiga
+          // conexion se guarda en la base
+
         }, {
           key: "crear",
           value: function crear() {
@@ -389,7 +394,8 @@
           value: function limpiar() {
             this.storage.limpiar();
             console.log('LocalStorage Vacio');
-          }
+          } //obtiene las coordenadas del lugar que estamos en ese momento
+
         }, {
           key: "obtenerGeolocalizacion",
           value: function obtenerGeolocalizacion() {
@@ -403,7 +409,8 @@
               _this3.cliente.latitud = _this3.latitud;
               _this3.cliente.longitud = _this3.longitud;
             });
-          }
+          } //refrescamos la localizacion 
+
         }, {
           key: "doRefresh",
           value: function doRefresh(event) {
@@ -414,7 +421,8 @@
 
               event.target.complete();
             }, 1500);
-          }
+          } //mostramos la ubicacion actual del tecnico
+
         }, {
           key: "miUbicacion",
           value: function miUbicacion() {
@@ -443,7 +451,8 @@
               console.log(error);
             }); //console.log('mapas', this.latitudmaps);
             //console.log('mapas', this.longitudmaps);
-          }
+          } //metodo validador de la cedula
+
         }, {
           key: "validadorDeCedula",
           value: function validadorDeCedula(cedula) {
@@ -525,7 +534,7 @@
           key: "validateIp",
           value: function validateIp(ip) {
             var patronIp = new RegExp("^([0-9]{1,3}).([0-9]{1,3}).([0-9]{1,3}).([0-9]{1,3})$");
-            var valores; // early return si la ip no tiene el formato correcto.
+            var valores; // regresaria return si la ip no tiene el formato correcto.
 
             if (ip.search(patronIp) !== 0) {
               return false;
@@ -533,7 +542,8 @@
 
             valores = ip.split(".");
             return valores[0] <= 255 && valores[1] <= 255 && valores[2] <= 255 && valores[3] <= 255 && valores[3] != 0 && valores[3] != 1 && valores[3] != 255;
-          }
+          } //validamos la ip
+
         }, {
           key: "validateForm",
           value: function validateForm(idForm) {
@@ -585,7 +595,8 @@
                 }
               }, _callee3, this);
             }));
-          }
+          } //metodo para validar la cedula
+
         }, {
           key: "esEmailValido",
           value: function esEmailValido(email) {

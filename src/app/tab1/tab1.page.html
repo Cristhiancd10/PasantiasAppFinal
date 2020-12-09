@@ -16,7 +16,10 @@
     </ion-card-header>
     <ion-card class="ion" [disabled]='char.realizado'> 
       <ion-card-content [routerLink]="['/visita',char.registro.id]" (click)="actualizar(char.registro.id)" >
-        
+        <ion-label>Tarea a realizar:</ion-label>
+        <ion-item>
+          <ion-label>{{char.observaciones}}</ion-label>
+        </ion-item>
       <ion-label>Dirección:</ion-label>
       <ion-item>
         <ion-label>{{char.registro.cliente.direccionPrincipal}}</ion-label>

@@ -146,16 +146,21 @@ let NuevainsPage = class NuevainsPage {
     ngOnDestroy() {
         //this.networkListener.remove();
     }
+    //elegir la antena que se usa
     detect(evt) {
         let pos = this.antenas.findIndex(({ id }) => id >= evt.detail.value);
         this.antena = this.antenas[pos];
         console.log("Cambio", evt.detail.value, pos, this.antenas[pos]);
     }
+    //elegir plan que se usa
     detect1(evt) {
         console.log(evt.detail.value);
         this.plan = (evt.detail.value);
         this.servicio.plan = this.plan;
     }
+    //crear al nueo cliente si hay conexion
+    //si no hay se guarda en un localstorage y cuando haiga
+    // conexion se guarda en la base
     crear() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             this.networkListener = _capacitor_core__WEBPACK_IMPORTED_MODULE_6__["Network"].addListener('networkStatusChange', status => {
@@ -212,6 +217,7 @@ let NuevainsPage = class NuevainsPage {
         this.storage.limpiar();
         console.log('LocalStorage Vacio');
     }
+    //obtiene las coordenadas del lugar que estamos en ese momento
     obtenerGeolocalizacion() {
         this.geolocation.getCurrentPosition().then((geoposition) => {
             this.latitud = String(geoposition.coords.latitude);
@@ -222,12 +228,14 @@ let NuevainsPage = class NuevainsPage {
             this.cliente.longitud = this.longitud;
         });
     }
+    //refrescamos la localizacion 
     doRefresh(event) {
         setTimeout(() => {
             this.obtenerGeolocalizacion();
             event.target.complete();
         }, 1500);
     }
+    //mostramos la ubicacion actual del tecnico
     miUbicacion() {
         this.geolocation.getCurrentPosition().then(position => {
             this.latitudMiubicacion = position.coords.latitude;
@@ -253,6 +261,7 @@ let NuevainsPage = class NuevainsPage {
         //console.log('mapas', this.latitudmaps);
         //console.log('mapas', this.longitudmaps);
     }
+    //metodo validador de la cedula
     validadorDeCedula(cedula) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             let cedulaCorrecta = false;
@@ -311,13 +320,14 @@ let NuevainsPage = class NuevainsPage {
     validateIp(ip) {
         let patronIp = new RegExp("^([0-9]{1,3}).([0-9]{1,3}).([0-9]{1,3}).([0-9]{1,3})$");
         let valores;
-        // early return si la ip no tiene el formato correcto.
+        // regresaria return si la ip no tiene el formato correcto.
         if (ip.search(patronIp) !== 0) {
             return false;
         }
         valores = ip.split(".");
         return valores[0] <= 255 && valores[1] <= 255 && valores[2] <= 255 && valores[3] <= 255 && valores[3] != 0 && valores[3] != 1 && valores[3] != 255;
     }
+    //validamos la ip
     validateForm(idForm) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             let object = document.getElementById(idForm);
@@ -345,6 +355,7 @@ let NuevainsPage = class NuevainsPage {
             }
         });
     }
+    //metodo para validar la cedula
     esEmailValido(email) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             let mailValido = false;

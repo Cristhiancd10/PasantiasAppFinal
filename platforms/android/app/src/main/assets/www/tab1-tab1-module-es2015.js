@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header [translucent]=\"true\" >\n  <ion-toolbar>\n    <ion-title>\n      Visita Técnica\n      \n    </ion-title>\n  </ion-toolbar>\n  \n</ion-header>\n\n<ion-content [fullscreen]=\"true\">\n  <!--routerLink llama al metodo 'datos' para mostar atributos -->\n  <ion-card *ngFor=\"let char of clientes\">\n    <ion-card-header >\n      <ion-card-title >{{char.registro.cliente.nombre}}</ion-card-title>\n    </ion-card-header>\n    <ion-card class=\"ion\" [disabled]='char.realizado'> \n      <ion-card-content [routerLink]=\"['/visita',char.registro.id]\" (click)=\"actualizar(char.registro.id)\" >\n        \n      <ion-label>Dirección:</ion-label>\n      <ion-item>\n        <ion-label>{{char.registro.cliente.direccionPrincipal}}</ion-label>\n      </ion-item>\n\n      <ion-item>\n        <ion-label>{{char.registro.cliente.direccionReferencia}}</ion-label>\n      </ion-item>\n    \n    </ion-card-content>\n  </ion-card>\n    <ion-card *ngIf=\"char.realizado\" name=\"trabajo\" color=\"danger\" >\n      <ion-item >\n        <ion-label  *ngIf=\"char.realizado\">Realizado</ion-label>\n\n        <ion-toggle *ngIf=\"char.realizado\" disabled=\"!char.realizado\" slot=\"end\" [(ngModel)]=\"char.realizado\"   (ionChange)=\"cambiar($event, char)\" ></ion-toggle>\n        <ion-toggle *ngIf=\"!char.realizado\" slot=\"end\" [(ngModel)]=\"char.realizado\"   (ionChange)=\"cambiar($event)\" ></ion-toggle>\n        \n       </ion-item>  \n    </ion-card>\n    <ion-card *ngIf=\"!char.realizado\" name=\"trabajo\" color=\"silver\" >\n      <ion-item >\n        \n\n        <ion-toggle *ngIf=\"char.realizado\" disabled=\"!char.realizado\" slot=\"end\" [(ngModel)]=\"char.realizado\"   (ionChange)=\"cambiar($event, char)\" ></ion-toggle>\n        <ion-toggle *ngIf=\"!char.realizado\" slot=\"end\" [(ngModel)]=\"char.realizado\"   (ionChange)=\"cambiar($event)\" ></ion-toggle>\n        \n       </ion-item>  \n    </ion-card>\n    \n  </ion-card>\n</ion-content>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header [translucent]=\"true\" >\n  <ion-toolbar>\n    <ion-title>\n      Visita Técnica\n      \n    </ion-title>\n  </ion-toolbar>\n  \n</ion-header>\n\n<ion-content [fullscreen]=\"true\">\n  <!--routerLink llama al metodo 'datos' para mostar atributos -->\n  <ion-card *ngFor=\"let char of clientes\">\n    <ion-card-header >\n      <ion-card-title >{{char.registro.cliente.nombre}}</ion-card-title>\n    </ion-card-header>\n    <ion-card class=\"ion\" [disabled]='char.realizado'> \n      <ion-card-content [routerLink]=\"['/visita',char.registro.id]\" (click)=\"actualizar(char.registro.id)\" >\n        <ion-label>Tarea a realizar:</ion-label>\n        <ion-item>\n          <ion-label>{{char.observaciones}}</ion-label>\n        </ion-item>\n      <ion-label>Dirección:</ion-label>\n      <ion-item>\n        <ion-label>{{char.registro.cliente.direccionPrincipal}}</ion-label>\n      </ion-item>\n\n      <ion-item>\n        <ion-label>{{char.registro.cliente.direccionReferencia}}</ion-label>\n      </ion-item>\n    \n    </ion-card-content>\n  </ion-card>\n    <ion-card *ngIf=\"char.realizado\" name=\"trabajo\" color=\"danger\" >\n      <ion-item >\n        <ion-label  *ngIf=\"char.realizado\">Realizado</ion-label>\n\n        <ion-toggle *ngIf=\"char.realizado\" disabled=\"!char.realizado\" slot=\"end\" [(ngModel)]=\"char.realizado\"   (ionChange)=\"cambiar($event, char)\" ></ion-toggle>\n        <ion-toggle *ngIf=\"!char.realizado\" slot=\"end\" [(ngModel)]=\"char.realizado\"   (ionChange)=\"cambiar($event)\" ></ion-toggle>\n        \n       </ion-item>  \n    </ion-card>\n    <ion-card *ngIf=\"!char.realizado\" name=\"trabajo\" color=\"silver\" >\n      <ion-item >\n        \n\n        <ion-toggle *ngIf=\"char.realizado\" disabled=\"!char.realizado\" slot=\"end\" [(ngModel)]=\"char.realizado\"   (ionChange)=\"cambiar($event, char)\" ></ion-toggle>\n        <ion-toggle *ngIf=\"!char.realizado\" slot=\"end\" [(ngModel)]=\"char.realizado\"   (ionChange)=\"cambiar($event)\" ></ion-toggle>\n        \n       </ion-item>  \n    </ion-card>\n    \n  </ion-card>\n</ion-content>");
 
 /***/ }),
 
@@ -104,6 +104,7 @@ let Tab1Page = class Tab1Page {
         console.log(this.deshabilitarTexto);
         this.deshabilitarTexto = false;
     }
+    //lista todas las visitas tecnicas de un tecnico
     lista() {
         this.user1 = this.storage.listarE();
         console.log("usuario nombre " + this.user1.nombre);
@@ -114,6 +115,7 @@ let Tab1Page = class Tab1Page {
             console.log(error);
         });
     }
+    //nos redirigimos al cliente de una especifica visita tecnica
     actualizar(id) {
         //this.navCtrl.push("Tab5Page");
         console.log("Hola");
@@ -124,6 +126,7 @@ let Tab1Page = class Tab1Page {
         });
         console.log("funciona visita");
     }
+    //nos permite guardar en agendamiento un true para decir que ya hemos realizado esa actividad  
     cambiar(event, char) {
         this.visita = char;
         console.log("actualizar", this.visita);
@@ -210,65 +213,77 @@ let RadioService = class RadioService {
         this.http = http;
         this.httpHeaders = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' });
     }
+    //webservices para listar los registros
     todasV() {
         return this.http.get('http://35.184.60.118:8080/CallCenter/srv/astronet/listRgVT');
         // return this.http.get<Registro[]>('http://35.222.54.60:8080/CallCenter/srv/astronet/listRgVT');
         //  return this.http.get<Registro[]>('http://localhost:8080/CallCenter/srv/astronet/listRgVT');
     }
+    //Webservices para listar las instalaciones
     todasI() {
         return this.http.get('http://35.184.60.118:8080/CallCenter/srv/astronet/listInst');
         // return this.http.get<Instalacion[]>('http://35.222.54.60:8080/CallCenter/srv/astronet/listInst');
         // return this.http.get<Instalacion[]>('http://localhost:8080/CallCenter/srv/astronet/listInst');
     }
+    //webservices para listar las visitas tecnicas de cada tecnico
     todasVs(nombre) {
         return this.http.get(`http://35.184.60.118:8080/CallCenter/srv/astronet/listAG?nombre=${nombre}`);
         // return this.http.get<Agendamiento[]>(`http://35.222.54.60:8080/CallCenter/srv/astronet/listAG?nombre=${nombre}`);
         // return this.http.get<Agendamiento[]>(`http://localhost:8080/CallCenter/srv/astronet/listAG?nombre=${nombre}`);
     }
+    //listar todas las instalaciones de cada tecnico
     todasIs(nombre) {
         return this.http.get(`http://35.184.60.118:8080/CallCenter/srv/astronet/listIns?nombre=${nombre}`);
         // return this.http.get<Instalacion[]>(`http://35.222.54.60:8080/CallCenter/srv/astronet/listIns?nombre=${nombre}`);
         // return this.http.get<Instalacion[]>(`http://localhost:8080/CallCenter/srv/astronet/listIns?nombre=${nombre}`);
     }
+    //Listar las antenas
     ListarAnt() {
         return this.http.get('http://35.184.60.118:8080/CallCenter/srv/astronet/listarAn');
         //  return this.http.get<Antena[]>('http://35.222.54.60:8080/CallCenter/srv/astronet/listarAn');
         // return this.http.get<Antena[]>('http://localhost:8080/CallCenter/srv/astronet/listarAn');
     }
+    //Crear un nuevo clinete desde la instalacion del servicio
     crear(cliente) {
         return this.http.post('http://35.184.60.118:8080/CallCenter/srv/astronet/create', cliente, { headers: this.httpHeaders });
         // return this.http.post<Response>('http://35.222.54.60:8080/CallCenter/srv/astronet/create', cliente, {headers: this.httpHeaders});
         //  return this.http.post<Response>('http://localhost:8080/CallCenter/srv/astronet/create', cliente, {headers: this.httpHeaders});
     }
+    //actualizar los datos del cliente desde la visita tecnica
     actualizar1(cliente) {
         console.log("cliente actualizar " + cliente);
         return this.http.put('http://35.184.60.118:8080/CallCenter/srv/astronet/actualizarCl', cliente);
         // return this.http.put<Response>('http://35.222.54.60:8080/CallCenter/srv/astronet/actualizarCl',cliente);
         // return this.http.put<Response>('http://localhost:8080/CallCenter/srv/astronet/actualizarCl',cliente);
     }
+    //actualizar la visita tecnica
     actualizarVisita(agendamiento) {
         console.log("Registro actualizado " + agendamiento);
         return this.http.put('http://35.184.60.118:8080/CallCenter/srv/astronet/actualizarVisita', agendamiento);
         // return this.http.put<Response>('http://35.222.54.60:8080/CallCenter/srv/astronet/actualizarVisita',agendamiento);
         //  return this.http.put<Response>('http://localhost:8080/CallCenter/srv/astronet/actualizarVisita', agendamiento);
     }
+    //actualizar la instalaciion
     actualizarInstalacion(instalacion) {
         console.log("Instalacion actualizada " + instalacion);
         return this.http.put('http://35.184.60.118:8080/CallCenter/srv/astronet/actualizarInstalacion', instalacion);
         // return this.http.put<Response>('http://35.222.54.60:8080/CallCenter/srv/astronet/actualizarInstalacion',instalacion);
         //  return this.http.put<Response>('http://localhost:8080/CallCenter/srv/astronet/actualizarInstalacion', instalacion);
     }
+    //buscar una visita tecnica
     buscarV(id) {
         console.log("id service service " + id);
         return this.http.get(`http://35.184.60.118:8080/CallCenter/srv/astronet/buscarIdVis?id=${id}`);
         //  return this.http.get<Registro>(`http://35.222.54.60:8080/CallCenter/srv/astronet/buscarIdVis?id=${id}`);
         // return this.http.get<Registro>(`http://localhost:8080/CallCenter/srv/astronet/buscarIdVis?id=${id}`);
     }
+    //buscar una instalacion
     buscarI(id) {
         return this.http.get(`http://35.184.60.118:8080/CallCenter/srv/astronet/buscarInsId?id=${id}`);
         // return this.http.get<Instalacion>(`http://35.222.54.60:8080/CallCenter/srv/astronet/buscarInsId?id=${id}`);
         // return this.http.get<Instalacion>(`http://localhost:8080/CallCenter/srv/astronet/buscarInsId?id=${id}`);
     }
+    //login para la app movil
     login(cliente) {
         return this.http.post('http://35.184.60.118:8080/CallCenter/srv/astronet/login', cliente, { headers: this.httpHeaders });
         //  return this.http.post<Empleado>('http://35.222.54.60:8080/CallCenter/srv/astronet/login', cliente, {headers: this.httpHeaders});
