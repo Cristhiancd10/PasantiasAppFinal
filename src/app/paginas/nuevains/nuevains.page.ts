@@ -319,7 +319,7 @@ validateIp(ip) {
   
   return valores[0] <= 255 && valores[1] <= 255 && valores[2] <= 255 && valores[3] <= 255 && valores[3] != 0  && valores[3] != 1 && valores[3] != 255
 }
-//validamos la ip
+//validamos la ip desde el html
 async validateForm(idForm) {
   let object = document.getElementById(idForm);
   let mensaje='';
